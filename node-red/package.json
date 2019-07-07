@@ -9,7 +9,7 @@
     "url": "https://github.com/lunchbox-lambda/node-red.git"
   },
   "dependencies": {
-    "node-red-contrib-lunchbox": "^1.0.5",
+    "node-red-contrib-lunchbox": "file:../node-red-contrib",
     "node-red-dashboard": "^2.13.2"
   }
 }

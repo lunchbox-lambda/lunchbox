@@ -49,6 +49,16 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.1.7"
 
+"@lunchbox-lambda/client@file:client":
+  version "1.0.5"
+  dependencies:
+    inversify "^4.11.1"
+    lodash "^4.17.11"
+    redux "^3.7.2"
+    reflect-metadata "^0.1.12"
+    rxjs "^5.5.8"
+    socket.io-client "^2.0.4"
+
 "@serialport/parser-byte-length@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@serialport/parser-byte-length/-/parser-byte-length-1.0.5.tgz#3ea84d47cb259165f9e4911fbbcb98a46550dd0e"
@@ -5497,6 +5507,11 @@ node-pre-gyp@^0.12.0:
     rimraf "^2.6.1"
     semver "^5.3.0"
     tar "^4"
+
+"node-red-contrib-lunchbox@file:node-red-contrib":
+  version "1.0.5"
+  dependencies:
+    "@lunchbox-lambda/client" "file:../../../.cache/yarn/v4/npm-node-red-contrib-lunchbox-1.0.5-e95996ad-c1c3-4a0f-9467-d15c45b81b78-1562518804297/node_modules/client"
 
 node-red-dashboard@^2.13.2:
   version "2.15.5"
