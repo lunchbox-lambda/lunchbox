@@ -2,7 +2,7 @@
  "nodes": {
   "node-red": {
    "name": "node-red",
-   "version": "0.18.4",
+   "version": "0.19.6",
    "local": false,
    "nodes": {
     "sentiment": {
@@ -13,7 +13,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/analysis/72-sentiment.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/analysis/72-sentiment.js"
     },
     "inject": {
      "name": "inject",
@@ -23,7 +23,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/core/20-inject.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/core/20-inject.js"
     },
     "catch": {
      "name": "catch",
@@ -33,7 +33,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/core/25-catch.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/core/25-catch.js"
     },
     "status": {
      "name": "status",
@@ -43,7 +43,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/core/25-status.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/core/25-status.js"
     },
     "debug": {
      "name": "debug",
@@ -53,7 +53,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/core/58-debug.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/core/58-debug.js"
     },
     "link": {
      "name": "link",
@@ -64,7 +64,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/core/60-link.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/core/60-link.js"
     },
     "exec": {
      "name": "exec",
@@ -74,7 +74,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/core/75-exec.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/core/75-exec.js"
     },
     "function": {
      "name": "function",
@@ -84,7 +84,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/core/80-function.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/core/80-function.js"
     },
     "template": {
      "name": "template",
@@ -94,7 +94,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/core/80-template.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/core/80-template.js"
     },
     "delay": {
      "name": "delay",
@@ -104,7 +104,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/core/89-delay.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/core/89-delay.js"
     },
     "trigger": {
      "name": "trigger",
@@ -114,7 +114,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/core/89-trigger.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/core/89-trigger.js"
     },
     "comment": {
      "name": "comment",
@@ -124,7 +124,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/core/90-comment.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/core/90-comment.js"
     },
     "unknown": {
      "name": "unknown",
@@ -134,7 +134,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/core/98-unknown.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/core/98-unknown.js"
     },
     "rpi-gpio": {
      "name": "rpi-gpio",
@@ -147,7 +147,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/hardware/36-rpi-gpio.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/hardware/36-rpi-gpio.js"
     },
     "tls": {
      "name": "tls",
@@ -157,7 +157,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/io/05-tls.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/io/05-tls.js"
     },
     "mqtt": {
      "name": "mqtt",
@@ -169,7 +169,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/io/10-mqtt.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/io/10-mqtt.js"
     },
     "httpin": {
      "name": "httpin",
@@ -180,7 +180,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/io/21-httpin.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/io/21-httpin.js"
     },
     "httprequest": {
      "name": "httprequest",
@@ -190,7 +190,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/io/21-httprequest.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/io/21-httprequest.js"
     },
     "websocket": {
      "name": "websocket",
@@ -203,7 +203,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/io/22-websocket.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/io/22-websocket.js"
     },
     "watch": {
      "name": "watch",
@@ -213,7 +213,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/io/23-watch.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/io/23-watch.js"
     },
     "tcpin": {
      "name": "tcpin",
@@ -225,7 +225,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/io/31-tcpin.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/io/31-tcpin.js"
     },
     "udp": {
      "name": "udp",
@@ -236,7 +236,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/io/32-udp.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/io/32-udp.js"
     },
     "switch": {
      "name": "switch",
@@ -246,7 +246,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/logic/10-switch.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/logic/10-switch.js"
     },
     "change": {
      "name": "change",
@@ -256,7 +256,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/logic/15-change.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/logic/15-change.js"
     },
     "range": {
      "name": "range",
@@ -266,7 +266,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/logic/16-range.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/logic/16-range.js"
     },
     "split": {
      "name": "split",
@@ -277,7 +277,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/logic/17-split.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/logic/17-split.js"
     },
     "sort": {
      "name": "sort",
@@ -287,7 +287,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/logic/18-sort.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/logic/18-sort.js"
     },
     "batch": {
      "name": "batch",
@@ -297,7 +297,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/logic/19-batch.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/logic/19-batch.js"
     },
     "CSV": {
      "name": "CSV",
@@ -307,7 +307,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/parsers/70-CSV.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/parsers/70-CSV.js"
     },
     "HTML": {
      "name": "HTML",
@@ -317,7 +317,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/parsers/70-HTML.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/parsers/70-HTML.js"
     },
     "JSON": {
      "name": "JSON",
@@ -327,7 +327,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/parsers/70-JSON.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/parsers/70-JSON.js"
     },
     "XML": {
      "name": "XML",
@@ -337,7 +337,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/parsers/70-XML.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/parsers/70-XML.js"
     },
     "YAML": {
      "name": "YAML",
@@ -347,7 +347,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/parsers/70-YAML.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/parsers/70-YAML.js"
     },
     "tail": {
      "name": "tail",
@@ -357,7 +357,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/storage/28-tail.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/storage/28-tail.js"
     },
     "file": {
      "name": "file",
@@ -368,14 +368,14 @@
      "enabled": true,
      "local": false,
      "module": "node-red",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red/nodes/core/storage/50-file.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red/nodes/core/storage/50-file.js"
     }
    }
   },
   "node-red-contrib-lunchbox": {
    "name": "node-red-contrib-lunchbox",
-   "version": "1.0.3",
-   "local": false,
+   "version": "1.0.5",
+   "local": true,
    "nodes": {
     "lunchbox": {
      "name": "lunchbox",
@@ -383,15 +383,15 @@
       "lunchbox"
      ],
      "enabled": true,
-     "local": false,
+     "local": true,
      "module": "node-red-contrib-lunchbox",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-contrib-lunchbox/src/lunchbox.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node-red/node_modules/node-red-contrib-lunchbox/src/lunchbox.js"
     }
    }
   },
   "node-red-dashboard": {
    "name": "node-red-dashboard",
-   "version": "2.8.2",
+   "version": "2.15.5",
    "local": false,
    "nodes": {
     "ui_base": {
@@ -402,7 +402,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_base.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_base.js"
     },
     "ui_button": {
      "name": "ui_button",
@@ -412,7 +412,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_button.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_button.js"
     },
     "ui_dropdown": {
      "name": "ui_dropdown",
@@ -422,7 +422,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_dropdown.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_dropdown.js"
     },
     "ui_switch": {
      "name": "ui_switch",
@@ -432,7 +432,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_switch.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_switch.js"
     },
     "ui_slider": {
      "name": "ui_slider",
@@ -442,7 +442,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_slider.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_slider.js"
     },
     "ui_numeric": {
      "name": "ui_numeric",
@@ -452,7 +452,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_numeric.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_numeric.js"
     },
     "ui_text_input": {
      "name": "ui_text_input",
@@ -462,7 +462,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_text_input.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_text_input.js"
     },
     "ui_date_picker": {
      "name": "ui_date_picker",
@@ -472,7 +472,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_date_picker.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_date_picker.js"
     },
     "ui_colour_picker": {
      "name": "ui_colour_picker",
@@ -482,7 +482,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_colour_picker.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_colour_picker.js"
     },
     "ui_form": {
      "name": "ui_form",
@@ -492,7 +492,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_form.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_form.js"
     },
     "ui_text": {
      "name": "ui_text",
@@ -502,7 +502,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_text.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_text.js"
     },
     "ui_gauge": {
      "name": "ui_gauge",
@@ -512,7 +512,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_gauge.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_gauge.js"
     },
     "ui_chart": {
      "name": "ui_chart",
@@ -522,7 +522,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_chart.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_chart.js"
     },
     "ui_audio": {
      "name": "ui_audio",
@@ -532,7 +532,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_audio.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_audio.js"
     },
     "ui_toast": {
      "name": "ui_toast",
@@ -542,7 +542,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_toast.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_toast.js"
     },
     "ui_ui_control": {
      "name": "ui_ui_control",
@@ -552,7 +552,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_ui_control.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_ui_control.js"
     },
     "ui_template": {
      "name": "ui_template",
@@ -562,7 +562,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_template.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_template.js"
     },
     "ui_link": {
      "name": "ui_link",
@@ -572,7 +572,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_link.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_link.js"
     },
     "ui_tab": {
      "name": "ui_tab",
@@ -582,7 +582,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_tab.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_tab.js"
     },
     "ui_group": {
      "name": "ui_group",
@@ -592,13 +592,23 @@
      "enabled": true,
      "local": false,
      "module": "node-red-dashboard",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-dashboard/nodes/ui_group.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_group.js"
+    },
+    "ui_spacer": {
+     "name": "ui_spacer",
+     "types": [
+      "ui_spacer"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red-dashboard",
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-dashboard/nodes/ui_spacer.js"
     }
    }
   },
   "node-red-node-rbe": {
    "name": "node-red-node-rbe",
-   "version": "0.2.1",
+   "version": "0.2.4",
    "local": false,
    "nodes": {
     "rbe": {
@@ -609,13 +619,13 @@
      "enabled": true,
      "local": false,
      "module": "node-red-node-rbe",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-node-rbe/rbe.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-node-rbe/rbe.js"
     }
    }
   },
   "node-red-node-email": {
    "name": "node-red-node-email",
-   "version": "0.1.24",
+   "version": "0.1.29",
    "local": false,
    "nodes": {
     "email": {
@@ -627,13 +637,13 @@
      "enabled": true,
      "local": false,
      "module": "node-red-node-email",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-node-email/61-email.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-node-email/61-email.js"
     }
    }
   },
   "node-red-node-feedparser": {
    "name": "node-red-node-feedparser",
-   "version": "0.1.10",
+   "version": "0.1.14",
    "local": false,
    "nodes": {
     "feedparse": {
@@ -644,13 +654,13 @@
      "enabled": true,
      "local": false,
      "module": "node-red-node-feedparser",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-node-feedparser/32-feedparse.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-node-feedparser/32-feedparse.js"
     }
    }
   },
   "node-red-node-twitter": {
    "name": "node-red-node-twitter",
-   "version": "0.1.12",
+   "version": "1.1.5",
    "local": false,
    "nodes": {
     "twitter": {
@@ -663,7 +673,7 @@
      "enabled": true,
      "local": false,
      "module": "node-red-node-twitter",
-     "file": "/home/lynx/Projects/lunchbox-lambda/brain/node_modules/node-red-node-twitter/27-twitter.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-node-twitter/27-twitter.js"
     }
    }
   }
