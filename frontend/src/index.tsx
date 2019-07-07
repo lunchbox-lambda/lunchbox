@@ -1,5 +1,5 @@
-import '../node_modules/normalize.css/normalize.css'
-import '../node_modules/@blueprintjs/core/dist/blueprint.css'
+import 'normalize.css/normalize.css'
+import '@blueprintjs/core/dist/blueprint.css'
 
 import 'lib/font-awesome'
 import * as React from 'react'
