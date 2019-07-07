@@ -1,0 +1,26 @@
+{
+  "$id": "http://lunchbox.local/schemas/variable.json",
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "description",
+    "unit"
+  ]
+}

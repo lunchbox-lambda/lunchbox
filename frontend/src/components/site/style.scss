@@ -1,0 +1,113 @@
+@import '~styles/variables';
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Nunito Regular'), local('Nunito-Regular'), url('../../../assets/Nunito-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Nunito Bold'), local('Nunito-Bold'), url('../../../assets/Nunito-Bold.ttf') format('truetype');
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: $color-site-background;
+  overflow: hidden;
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th,
+td,
+pre,
+body,
+table,
+input,
+select,
+textarea {
+  color: $text-dark-normal !important;
+}
+
+div {
+  flex: 1 1 auto;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  position: absolute;
+  height: calc(100% - 50px);
+  width: 100%;
+  padding: 15px;
+  display: flex;
+}
+
+.divider {
+  flex: 0;
+  flex-basis: 1px;
+  background: lightgray;
+  margin: 0 15px;
+}
+
+.content-wrap {
+  flex: auto;
+  display: flex;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.action-bar {
+  text-align: right;
+  margin-top: -5px;
+}
+
+.action-bar button {
+  margin-left: 10px;
+}
+
+button>svg {
+  color: $text-dark-medium;
+}
+
+table {
+  width: 100%;
+}
+
+tr.disabled div {
+  opacity: 0.2;
+}
+
+tr p {
+  margin: 0;
+}
+
+textarea {
+  font-family: monospace;
+  line-height: 1.1em;
+  padding: 5px 10px;
+  resize: none;
+  flex: 1 1 auto;
+}

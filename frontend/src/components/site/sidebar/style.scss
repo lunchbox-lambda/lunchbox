@@ -1,0 +1,32 @@
+@import '~styles/variables';
+.sidebar {
+  flex: 0 0 175px;
+  >label {
+    font-weight: bold;
+    margin: 0 0 5px;
+    &:not(:first-child) {
+      margin-top: 15px;
+    }
+  }
+  >a {
+    >button {
+      width: 100%;
+      text-align: left;
+      >svg {
+        margin-right: 7px;
+      }
+    }
+    &.active {
+      >button {
+        background: $color-primary;
+        color: white !important;
+        &:hover {
+          background: darken($color-primary, 5%);
+        }
+        >svg {
+          color: white;
+        }
+      }
+    }
+  }
+}

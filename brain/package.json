@@ -1,0 +1,62 @@
+{
+  "name": "@lunchbox-lambda/brain",
+  "version": "1.2.0",
+  "description": "Lunchbox Brain",
+  "author": "Zoltan Ujvary",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lunchbox-lambda/brain.git"
+  },
+  "files": [
+    "dist/",
+    "npm-shrinkwrap.json"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "tsc": "tsc -p .",
+    "clean": "rm -rf dist",
+    "copy": "cp -r src/schemas dist",
+    "build": "npm run clean && tsc -p . && npm run copy",
+    "release": "npm run build && npm publish && npm run clean"
+  },
+  "dependencies": {
+    "@lunchbox-lambda/frontend": "^1.0.5",
+    "@lunchbox-lambda/node-red": "^1.0.5",
+    "ajv": "^5.5.0",
+    "amqplib": "^0.5.2",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "cron-parser": "^2.4.3",
+    "debug": "^3.1.0",
+    "express": "^4.16.2",
+    "firmata": "^0.19.1",
+    "ini": "^1.3.5",
+    "inversify": "^4.5.2",
+    "johnny-five": "^0.15.0",
+    "level": "^2.0.1",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.21.0",
+    "node-red": "^0.19.5",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "^5.5.2",
+    "socket.io": "^2.0.4",
+    "uuid": "^3.1.0",
+    "uuid-1345": "^0.99.6"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.5.5",
+    "@types/body-parser": "^1.16.8",
+    "@types/compression": "0.0.35",
+    "@types/debug": "0.0.30",
+    "@types/express": "^4.0.39",
+    "@types/ini": "^1.3.29",
+    "@types/johnny-five": "0.0.32",
+    "@types/mkdirp": "^0.5.1",
+    "@types/reflect-metadata": "0.0.5",
+    "@types/socket.io": "^1.4.31",
+    "@types/uuid": "^3.4.3",
+    "@types/uuid-1345": "^0.99.21",
+    "typescript": "^2.6.1"
+  }
+}

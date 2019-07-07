@@ -1,0 +1,17 @@
+.content-architecture {
+  .environment-section {
+    flex-grow: 0;
+    margin-top: 25px;
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+  }
+  .description-container {
+    margin-top: 30px;
+    padding: 0px 25px;
+  }
+  .board-image-container {
+    margin-top: 30px;
+    text-align: center;
+  }
+}

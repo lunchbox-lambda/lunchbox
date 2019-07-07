@@ -1,0 +1,35 @@
+{
+  "name": "@lunchbox-lambda/client",
+  "version": "1.0.5",
+  "description": "Lunchbox Client",
+  "author": "Zoltan Ujvary",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lunchbox-lambda/client.git"
+  },
+  "files": [
+    "dist/"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc -p .",
+    "release": "npm run build && npm publish && npm run clean"
+  },
+  "dependencies": {
+    "inversify": "^4.11.1",
+    "lodash": "^4.17.11",
+    "redux": "^3.7.2",
+    "reflect-metadata": "^0.1.12",
+    "rxjs": "^5.5.8",
+    "socket.io-client": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.121",
+    "@types/node": "^9.4.6",
+    "@types/socket.io-client": "^1.4.32",
+    "typescript": "^2.7.2"
+  }
+}

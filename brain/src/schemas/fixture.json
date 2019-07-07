@@ -1,0 +1,83 @@
+{
+  "$id": "http://lunchbox.local/schemas/fixture.json",
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "pin": {
+      "type": [
+        "string",
+        "integer"
+      ]
+    },
+    "dev": {
+      "type": "string"
+    },
+    "env": {
+      "type": "string"
+    },
+    "disabled": {
+      "type": "boolean"
+    },
+    "params": {
+      "type": "object",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "cron": {
+              "type": "string",
+              "_type": "cron"
+            },
+            "duration": {
+              "type": "string",
+              "_type": "duration"
+            }
+          },
+          "required": [
+            "cron",
+            "duration"
+          ]
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "always": {
+              "type": "string",
+              "enum": [
+                "on",
+                "off"
+              ]
+            }
+          },
+          "required": [
+            "always"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "env"
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "pin"
+      ]
+    },
+    {
+      "required": [
+        "dev"
+      ]
+    }
+  ]
+}

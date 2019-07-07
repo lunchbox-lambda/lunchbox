@@ -1,0 +1,70 @@
+{
+  "$id": "http://lunchbox.local/schemas/recipe.json",
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "phases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "cycles": {
+            "type": "integer"
+          },
+          "dayparts": {
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+              "^(dawn|day|dusk|night)$": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "duration": {
+                    "type": "string",
+                    "_type": "duration"
+                  },
+                  "variables": {
+                    "type": "object",
+                    "patternProperties": {
+                      ".+": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "duration",
+                  "variables"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "name",
+          "cycles",
+          "dayparts"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "phases"
+  ]
+}

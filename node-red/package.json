@@ -1,0 +1,15 @@
+{
+  "name": "@lunchbox-lambda/node-red",
+  "version": "1.0.5",
+  "description": "A Node-RED Project",
+  "author": "Zoltan Ujvary",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lunchbox-lambda/node-red.git"
+  },
+  "dependencies": {
+    "node-red-contrib-lunchbox": "^1.0.5",
+    "node-red-dashboard": "^2.13.2"
+  }
+}

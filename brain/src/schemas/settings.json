@@ -1,0 +1,26 @@
+{
+  "$id": "http://lunchbox.local/schemas/settings.json",
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "interval": {
+      "type": "object",
+      "properties": {
+        "persistenceFrequency": {
+          "type": "integer"
+        },
+        "cameraPersistenceFrequency": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "persistenceFrequency",
+        "cameraPersistenceFrequency"
+      ]
+    }
+  },
+  "required": [
+    "interval"
+  ]
+}

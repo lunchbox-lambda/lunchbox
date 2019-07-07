@@ -1,0 +1,26 @@
+<script type="text/javascript">
+  RED.nodes.registerType('lunchbox', {
+    category: 'lunchbox',
+    color: '#87A980',
+    defaults: {
+      serverHost: { value: '' }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'lunchbox.png',
+    label: 'lunchbox'
+  });
+</script>
+
+<script type="text/x-red" data-template-name="lunchbox">
+  <div class="form-row">
+      <label for="node-input-serverHost">
+        <i class="icon-globe"></i> Server Host
+      </label>
+      <input type="text" id="node-input-serverHost" placeholder="" />
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="lunchbox">
+  <p>A node to connect to your lunchbox.</p>
+</script>

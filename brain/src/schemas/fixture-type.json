@@ -1,0 +1,57 @@
+{
+  "$id": "http://lunchbox.local/schemas/fixture-type.json",
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "sensor",
+        "actuator",
+        "regulator",
+        "camera"
+      ]
+    },
+    "inputs": {
+      "type": "array"
+    },
+    "outputs": {
+      "type": "array"
+    },
+    "params": {
+      "type": "null"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "type"
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "inputs"
+      ]
+    },
+    {
+      "required": [
+        "outputs"
+      ]
+    },
+    {
+      "required": [
+        "params"
+      ]
+    }
+  ]
+}
