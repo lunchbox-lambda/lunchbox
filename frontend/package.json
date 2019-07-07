@@ -8,14 +8,10 @@
     "type": "git",
     "url": "https://github.com/lunchbox-lambda/frontend.git"
   },
-  "files": [
-    "dist/"
-  ],
   "scripts": {
     "start": "webpack-dev-server",
     "clean": "rm -rf dist",
-    "build": "npm run clean && webpack --config webpack.config.js --mode=production",
-    "release": "npm run build && npm publish && npm run clean"
+    "build": "npm run clean && webpack --config webpack.config.js --mode=production"
   },
   "devDependencies": {
     "@blueprintjs/core": "^1.35.7",

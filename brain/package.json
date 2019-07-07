@@ -8,17 +8,12 @@
     "type": "git",
     "url": "https://github.com/lunchbox-lambda/brain.git"
   },
-  "files": [
-    "dist/",
-    "npm-shrinkwrap.json"
-  ],
   "main": "dist/index.js",
   "scripts": {
     "tsc": "tsc -p .",
     "clean": "rm -rf dist",
     "copy": "cp -r src/schemas dist",
-    "build": "npm run clean && tsc -p . && npm run copy",
-    "release": "npm run build && npm publish && npm run clean"
+    "build": "npm run clean && tsc -p . && npm run copy"
   },
   "dependencies": {
     "@lunchbox-lambda/frontend": "^1.0.5",
