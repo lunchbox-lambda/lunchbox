@@ -8,15 +8,11 @@
     "type": "git",
     "url": "https://github.com/lunchbox-lambda/client.git"
   },
-  "files": [
-    "dist/"
-  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run clean && tsc -p .",
-    "release": "npm run build && npm publish && npm run clean"
+    "build": "npm run clean && tsc -p ."
   },
   "dependencies": {
     "inversify": "^4.11.1",
