@@ -16,8 +16,6 @@
     "build": "npm run clean && tsc -p . && npm run copy"
   },
   "dependencies": {
-    "@lunchbox-lambda/frontend": "^1.0.5",
-    "@lunchbox-lambda/node-red": "^1.0.5",
     "ajv": "^5.5.0",
     "amqplib": "^0.5.2",
     "body-parser": "^1.18.2",
