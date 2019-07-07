@@ -1,17 +1,20 @@
 {
   "name": "node-red-contrib-lunchbox",
   "version": "1.0.5",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Lunchbox Node-RED contribution",
+  "author": "Zoltan Ujvary",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/lunchbox-lambda/node-red-contrib-lunchbox.git"
   },
-  "author": "Zoltan Ujvary",
-  "license": "MIT",
+  "files": [
+    "src/"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "release": "npm publish"
+  },
   "bugs": {
     "url": "https://github.com/lunchbox-lambda/node-red-contrib-lunchbox/issues"
   },
