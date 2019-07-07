@@ -5511,7 +5511,7 @@ node-pre-gyp@^0.12.0:
 "node-red-contrib-lunchbox@file:node-red-contrib":
   version "1.0.5"
   dependencies:
-    "@lunchbox-lambda/client" "file:../../../.cache/yarn/v4/npm-node-red-contrib-lunchbox-1.0.5-e95996ad-c1c3-4a0f-9467-d15c45b81b78-1562518804297/node_modules/client"
+    "@lunchbox-lambda/client" "file:../../../.cache/yarn/v4/npm-node-red-contrib-lunchbox-1.0.5-7c2dc8fc-3477-4380-abea-f101f1d0ea0c-1562519470210/node_modules/client"
 
 node-red-dashboard@^2.13.2:
   version "2.15.5"
