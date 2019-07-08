@@ -12,9 +12,10 @@ deploy:
   provider: script
   script:
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build --build-arg BUILD_VERSION=$DOCKER_TAG -t travis-ci-build-stages-demo .
-  - docker push $DOCKER_USERNAME/travis-ci-build-stages-demo
+  - docker build --build-arg BUILD_VERSION=$TRAVIS_TAG -t lunchbox .
+  # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  # - docker push $DOCKER_USERNAME/travis-ci-build-stages-demo
   on:
     tags: true
+    branch: master
     condition: tag =~ ^[0-9.]+
