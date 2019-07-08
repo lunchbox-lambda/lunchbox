@@ -9,7 +9,6 @@
     "url": "https://github.com/lunchbox-lambda/node-red-contrib-lunchbox.git"
   },
   "main": "index.js",
-  "scripts": {},
   "bugs": {
     "url": "https://github.com/lunchbox-lambda/node-red-contrib-lunchbox/issues"
   },
