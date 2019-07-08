@@ -2,27 +2,19 @@ dist: xenial
 
 language: node_js
 
-node_js:
-  - "10"
+node_js: "10"
 
-jobs:
-  include:
-    - stage: install
-      script: yarn install
+install: yarn install
 
-    - stage: build
-      script:
-      - cd client && yarn build
-      - cd frontend && yarn build
-      - cd brain && yarn build
-      
-    # - stage: test
-    #   script: yarn test
+script: yarn workspaces run build
 
-    - stage: docker
-      if: tag =~ ^[0-9.]+
-      script:
-      - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build --build-arg BUILD_VERSION=$DOCKER_TAG -t travis-ci-build-stages-demo .
-      - docker push $DOCKER_USERNAME/travis-ci-build-stages-demo
+deploy:
+  provider: script
+  script:
+  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build --build-arg BUILD_VERSION=$DOCKER_TAG -t travis-ci-build-stages-demo .
+  - docker push $DOCKER_USERNAME/travis-ci-build-stages-demo
+  on:
+    tags: true
+    condition: tag =~ ^[0-9.]+
