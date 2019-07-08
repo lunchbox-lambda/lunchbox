@@ -1,13 +1,10 @@
-FROM resin/armv7hf-debian:jessie
-
-RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+FROM balenalib/raspberrypi3-node:10.16.0-stretch-build
 
 RUN apt-get update && apt-get install -y \
-    build-essential \
     fswebcam \
     git \
-    nodejs \
-    python-pip
+    python-pip \
+    python-setuptools
 
 RUN pip install -U pip
 
@@ -32,11 +29,19 @@ ARG BUILD_VERSION
 
 WORKDIR /app
 
+COPY brain/dist brain/dist/
+COPY brain/package.json brain/
+COPY client/dist client/dist/
+COPY client/package.json client/
+COPY frontend/dist frontend/dist/
+COPY frontend/package.json frontend/
+COPY node-red node-red/
+COPY node-red-contrib node-red-contrib/
+COPY package.json yarn.lock ./
+
 ENV NODE_ENV=production
-ENV NODE_PATH=/app/node_modules/@lunchbox-lambda/brain/dist
-RUN npm install @lunchbox-lambda/brain@${BUILD_VERSION}
-RUN ln -s /app/node_modules/@lunchbox-lambda/brain/node_modules/@lunchbox-lambda/node-red /node-red
-RUN echo "require('@lunchbox-lambda/brain')" >> index.js
+ENV NODE_PATH=/app/brain/dist
+RUN yarn install
 
 VOLUME /data
 
@@ -52,7 +57,7 @@ ENV LBOX_VERSION=${BUILD_VERSION}
 ENV DEBUG="backend:*, firmware:*, kernel:*, webapi:*, lib:*, service:*"
 
 RUN echo "#!/bin/bash" >> /start.sh && \
-    echo "node /app |& tee /data/stdout.log" >> /start.sh
+    echo "node /app/brain |& tee /data/stdout.log" >> /start.sh
 
 RUN chmod 755 /start.sh
 
