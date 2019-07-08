@@ -12,6 +12,7 @@ jobs:
 
     - stage: build
       script:
+      - cd client && yarn build
       - cd frontend && yarn build
       - cd brain && yarn build
       
