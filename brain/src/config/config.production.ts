@@ -16,7 +16,7 @@ export default {
 
   server: {
     port: 80,
-    public: '/app/node_modules/@lunchbox-lambda/brain/node_modules/@lunchbox-lambda/frontend/dist'
+    public: path.resolve(__dirname, '../../../frontend/dist'),
   },
 
   platformio: {
@@ -31,7 +31,7 @@ export default {
     httpAdminRoot: '/red',
     httpNodeRoot: '/red/dashboard',
     ui: { path: '' },
-    userDir: '/node-red',
+    userDir: path.resolve(__dirname, '../../../node-red'),
     flowFile: 'flows.json',
     functionGlobalContext: {
       serverHost: 'http://localhost:80'
