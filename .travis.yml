@@ -1,8 +1,27 @@
+dist: xenial
+
 language: node_js
 
-deploy:
-  provider: script
-  script: bash scripts/deploy.sh
-  on:
-    tags: true
-    condition: $TRAVIS_TAG =~ ^[0-9.]+
+node_js:
+  - "10"
+
+jobs:
+  include:
+    - stage: install
+      script: yarn install
+
+    - stage: build
+      script:
+      - cd frontend && yarn build
+      - cd brain && yarn build
+      
+    # - stage: test
+    #   script: yarn test
+
+    - stage: docker
+      if: tag =~ ^[0-9.]+
+      script:
+      - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build --build-arg BUILD_VERSION=$DOCKER_TAG -t travis-ci-build-stages-demo .
+      - docker push $DOCKER_USERNAME/travis-ci-build-stages-demo
