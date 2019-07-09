@@ -34,11 +34,11 @@ ENV NODE_PATH=/app/brain/dist
 
 COPY */*.tgz package.json yarn.lock ./
 
-RUN tar zxf lunchbox-lambda-brain-v*.tgz && mv package brain && \
-    tar zxf lunchbox-lambda-client-v*.tgz && mv package client && \
-    tar zxf lunchbox-lambda-frontend-v*.tgz && mv package frontend && \
-    tar zxf lunchbox-lambda-node-red-v*.tgz && mv package node-red && \
-    tar zxf node-red-contrib-lunchbox-v*.tgz && mv package node-red-contrib
+RUN tar zxf lunchbox-lambda-brain-v1.0.0.tgz && mv package brain && \
+    tar zxf lunchbox-lambda-client-v1.0.0.tgz && mv package client && \
+    tar zxf lunchbox-lambda-frontend-v1.0.0.tgz && mv package frontend && \
+    tar zxf lunchbox-lambda-node-red-v1.0.0.tgz && mv package node-red && \
+    tar zxf node-red-contrib-lunchbox-v1.0.0.tgz && mv package node-red-contrib
 
 RUN rm *.tgz
 
