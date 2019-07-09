@@ -8,6 +8,11 @@
     "type": "git",
     "url": "https://github.com/lunchbox-lambda/node-red.git"
   },
+  "files": [
+    "lib/",
+    ".config.json",
+    "flows.json"
+  ],
   "scripts": {
     "build": "true"
   },

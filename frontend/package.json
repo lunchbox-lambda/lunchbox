@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/lunchbox-lambda/frontend.git"
   },
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "start": "webpack-dev-server",
     "clean": "rm -rf dist",

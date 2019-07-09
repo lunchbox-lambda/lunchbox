@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/lunchbox-lambda/node-red-contrib-lunchbox.git"
   },
+  "files": [
+    "src/"
+  ],
   "scripts": {
     "build": "true"
   },
