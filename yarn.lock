@@ -50,7 +50,7 @@
     "@fortawesome/fontawesome-common-types" "^0.1.7"
 
 "@lunchbox-lambda/client@file:client":
-  version "1.0.5"
+  version "1.0.0"
   dependencies:
     inversify "^4.11.1"
     lodash "^4.17.11"
@@ -5509,9 +5509,9 @@ node-pre-gyp@^0.12.0:
     tar "^4"
 
 "node-red-contrib-lunchbox@file:node-red-contrib":
-  version "1.0.5"
+  version "1.0.0"
   dependencies:
-    "@lunchbox-lambda/client" "file:../../../.cache/yarn/v4/npm-node-red-contrib-lunchbox-1.0.5-7c2dc8fc-3477-4380-abea-f101f1d0ea0c-1562519470210/node_modules/client"
+    "@lunchbox-lambda/client" "file:../../../.cache/yarn/v4/npm-node-red-contrib-lunchbox-1.0.0-7ea74349-1fe8-4b70-8c81-4dfeabfe36c5-1562701214481/node_modules/client"
 
 node-red-dashboard@^2.13.2:
   version "2.15.5"
