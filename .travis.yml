@@ -4,18 +4,20 @@ language: node_js
 
 node_js: "10"
 
-install: yarn install
+install: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-script: yarn workspaces run build
+# script:
+#   - yarn workspaces run build
+#   - yarn workspaces run pack
 
-deploy:
-  provider: script
-  script:
-  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  - docker build --build-arg BUILD_VERSION=$TRAVIS_TAG -t lunchbox .
-  # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  # - docker push $DOCKER_USERNAME/travis-ci-build-stages-demo
-  on:
-    tags: true
-    branch: master
-    condition: tag =~ ^[0-9.]+
+# deploy:
+#   provider: script
+#   script:
+#   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+#   - docker build --build-arg BUILD_VERSION=$TRAVIS_TAG -t lunchbox .
+#   # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+#   # - docker push $DOCKER_USERNAME/travis-ci-build-stages-demo
+#   on:
+#     tags: true
+#     branch: master
+#     condition: tag =~ ^[0-9.]+
