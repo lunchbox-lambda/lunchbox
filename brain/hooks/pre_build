@@ -1,2 +1,0 @@
-#!/bin/bash
-docker run --privileged multiarch/qemu-user-static:register
