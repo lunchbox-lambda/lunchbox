@@ -1,6 +1,6 @@
 {
   "name": "@lunchbox-lambda/frontend",
-  "version": "1.0.5",
+  "version": "1.0.0",
   "description": "Lunchbox Frontend",
   "author": "Zoltan Ujvary",
   "license": "MIT",

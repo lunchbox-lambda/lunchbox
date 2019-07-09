@@ -1,6 +1,6 @@
 {
   "name": "@lunchbox-lambda/node-red",
-  "version": "1.0.5",
+  "version": "1.0.0",
   "description": "A Node-RED Project",
   "author": "Zoltan Ujvary",
   "license": "MIT",
