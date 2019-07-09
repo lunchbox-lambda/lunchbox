@@ -15,7 +15,7 @@ deploy:
   provider: script
   script: bash scripts/deploy.sh
   skip_cleanup: true
-  # on:
-  #   tags: true
-  #   branch: master
-  #   condition: tag =~ ^[0-9.]+
+  on:
+    tags: true
+    branch: master
+    condition: tag =~ ^[0-9.]+
