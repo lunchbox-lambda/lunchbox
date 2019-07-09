@@ -4,7 +4,6 @@ import { TYPES, inject, injectable } from 'lib/inversify'
 import { ComputerInit } from 'lib/computer-init'
 import { Repository } from 'lib/repository'
 import { Computer } from 'models'
-const packageConfig = require('../../../package.json')
 
 const log = logger('lib:computer-init')
 
@@ -33,7 +32,7 @@ export class DefaultComputerInit implements ComputerInit {
 
   private async updateComputerProperties() {
     const { name, organization, uuid } = await this.resolveComputerProperties()
-    const version = packageConfig['version']
+    const version = process.env.LBOX_VERSION
 
     const properties = {
       name, organization, uuid, version,
