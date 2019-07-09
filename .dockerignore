@@ -1,1 +1,8 @@
-**/node_modules
+**
+!brain/*.tgz
+!client/*.tgz
+!frontend/*.tgz
+!node-red/*.tgz
+!node-red-contrib/*.tgz
+!package.json
+!yarn.lock

@@ -29,18 +29,19 @@ ARG BUILD_VERSION
 
 WORKDIR /app
 
-COPY brain/dist brain/dist/
-COPY brain/package.json brain/
-COPY client/dist client/dist/
-COPY client/package.json client/
-COPY frontend/dist frontend/dist/
-COPY frontend/package.json frontend/
-COPY node-red node-red/
-COPY node-red-contrib node-red-contrib/
-COPY package.json yarn.lock ./
-
 ENV NODE_ENV=production
 ENV NODE_PATH=/app/brain/dist
+
+COPY */*.tgz package.json yarn.lock ./
+
+RUN tar zxf lunchbox-lambda-brain-v*.tgz && mv package brain && \
+    tar zxf lunchbox-lambda-client-v*.tgz && mv package client && \
+    tar zxf lunchbox-lambda-frontend-v*.tgz && mv package frontend && \
+    tar zxf lunchbox-lambda-node-red-v*.tgz && mv package node-red && \
+    tar zxf node-red-contrib-lunchbox-v*.tgz && mv package node-red-contrib
+
+RUN rm *.tgz
+
 RUN yarn install
 
 VOLUME /data
