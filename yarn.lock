@@ -16,7 +16,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@blueprintjs/core@^1.35.7":
+"@blueprintjs/core@^1.40.0":
   version "1.40.0"
   resolved "https://registry.yarnpkg.com/@blueprintjs/core/-/core-1.40.0.tgz#72db1bc2f161d34b7f4ab270bd84979b25f703ca"
   integrity sha512-5qXiFLOZwKzKZFi+IVgiMictOfZPpkclgdpzte2BpZ4ptlNitFiK79aRmDu1O7rnA1iiR0EJRrE8p9gr95USRw==
@@ -5510,7 +5510,7 @@ node-pre-gyp@0.12.0, node-pre-gyp@^0.12.0:
 "node-red-contrib-lunchbox@file:node-red-contrib":
   version "1.0.0"
   dependencies:
-    "@lunchbox-lambda/client" "file:../../../.cache/yarn/v4/npm-node-red-contrib-lunchbox-1.0.0-d3a82728-8c91-45f7-9216-2957eb0aec8d-1562957173145/node_modules/client"
+    "@lunchbox-lambda/client" "file:../../../.cache/yarn/v4/npm-node-red-contrib-lunchbox-1.0.0-e22026b3-e68d-497a-9d98-8b556ba75e17-1562957811412/node_modules/client"
 
 node-red-dashboard@^2.13.2:
   version "2.15.5"

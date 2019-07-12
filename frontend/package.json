@@ -17,7 +17,7 @@
     "build": "npm run clean && webpack --config webpack.config.js --mode=production"
   },
   "devDependencies": {
-    "@blueprintjs/core": "^1.35.7",
+    "@blueprintjs/core": "^1.40.0",
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-regular": "^5.0.13",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
