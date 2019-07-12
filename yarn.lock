@@ -60,7 +60,7 @@
   version "1.0.0"
   dependencies:
     inversify "^4.11.1"
-    lodash "^4.17.11"
+    lodash "^4.17.14"
     redux "^3.7.2"
     reflect-metadata "^0.1.12"
     rxjs "^5.5.8"
@@ -4845,6 +4845,11 @@ lodash@^4.0.0, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.5, lodash@^4.2.1, l
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
 
+lodash@^4.17.14:
+  version "4.17.14"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
+  integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
+
 log-ok@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/log-ok/-/log-ok-0.1.1.tgz#bea3dd36acd0b8a7240d78736b5b97c65444a334"
@@ -5510,7 +5515,7 @@ node-pre-gyp@0.12.0, node-pre-gyp@^0.12.0:
 "node-red-contrib-lunchbox@file:node-red-contrib":
   version "1.0.0"
   dependencies:
-    "@lunchbox-lambda/client" "file:../../../.cache/yarn/v4/npm-node-red-contrib-lunchbox-1.0.0-e22026b3-e68d-497a-9d98-8b556ba75e17-1562957811412/node_modules/client"
+    "@lunchbox-lambda/client" "file:../../../.cache/yarn/v4/npm-node-red-contrib-lunchbox-1.0.0-1364a378-e4d7-46d6-a838-99e393136822-1562959451454/node_modules/client"
 
 node-red-dashboard@^2.13.2:
   version "2.15.5"
