@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
 RUN pip install -U pip
 
 RUN pip install -U \
-    platformio 
+    platformio==3.6.7
 
 
 
