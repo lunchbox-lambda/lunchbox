@@ -5,7 +5,7 @@ import { createStore, Action } from 'redux'
 import { IStore, IStoreState } from './store'
 import reducers from './reducers'
 
-const store = createStore<IStoreState>(reducers)
+const store = createStore<IStoreState, any, any, any>(reducers)
 const subject = new Subject<IStoreState>()
 const observable = subject.asObservable()
 
