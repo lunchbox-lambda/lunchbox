@@ -27,7 +27,7 @@ export abstract class Camera<T> {
   init() { }
 
   protected takeSnapshot(): Promise<Buffer> {
-    return new Promise((resolve, reject) => {
+    return new Promise<Buffer>((resolve, reject) => {
       const variable = synthesizeVariable(this.env, this.variable)
       const command = `fswebcam -d ${this.dev} -r 800x600 -S 25 -q --gmt --title "${variable}" --save '-'`
       exec(command, { encoding: 'buffer', maxBuffer: 512 * 2048 }, (error, stdout, stderr) => {
