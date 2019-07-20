@@ -72,16 +72,6 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.1.7"
 
-"@lunchbox-lambda/client@file:client":
-  version "1.0.0"
-  dependencies:
-    inversify "^4.11.1"
-    lodash "^4.17.14"
-    redux "^4.0.4"
-    reflect-metadata "^0.1.12"
-    rxjs "^5.5.8"
-    socket.io-client "^2.0.4"
-
 "@node-red/editor-api@0.20.7":
   version "0.20.7"
   resolved "https://registry.yarnpkg.com/@node-red/editor-api/-/editor-api-0.20.7.tgz#3459cbfad5207036eafeff5925cb7ea9b425b171"
@@ -5769,11 +5759,6 @@ node-pre-gyp@0.12.0, node-pre-gyp@^0.12.0:
     rimraf "^2.6.1"
     semver "^5.3.0"
     tar "^4"
-
-"node-red-contrib-lunchbox@file:node-red-contrib":
-  version "1.0.0"
-  dependencies:
-    "@lunchbox-lambda/client" "file:../../../.cache/yarn/v4/npm-node-red-contrib-lunchbox-1.0.0-7312eed3-144c-4d8c-9209-f3c3dac0a081-1563101444223/node_modules/client"
 
 node-red-dashboard@^2.13.2:
   version "2.15.5"

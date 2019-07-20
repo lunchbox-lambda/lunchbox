@@ -17,7 +17,7 @@
     "build": "true"
   },
   "dependencies": {
-    "node-red-contrib-lunchbox": "file:../node-red-contrib",
+    "node-red-contrib-lunchbox": "",
     "node-red-dashboard": "^2.13.2"
   }
 }

@@ -25,6 +25,6 @@
     }
   },
   "dependencies": {
-    "@lunchbox-lambda/client": "file:../client"
+    "@lunchbox-lambda/client": ""
   }
 }
