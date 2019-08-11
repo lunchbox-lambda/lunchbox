@@ -15,7 +15,7 @@
   "scripts": {
     "tsc": "tsc -p .",
     "clean": "rm -rf dist",
-    "eslint": "eslint **/*/*.ts",
+    "eslint": "eslint \"**/*.ts\"",
     "copy": "cp -r src/schemas dist",
     "build": "npm run clean && tsc -p . && npm run copy"
   },
@@ -57,6 +57,8 @@
     "@typescript-eslint/eslint-plugin": "^1.12.0",
     "@typescript-eslint/parser": "^1.12.0",
     "eslint": "^6.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
     "typescript": "^3.5.3"
   }
 }
