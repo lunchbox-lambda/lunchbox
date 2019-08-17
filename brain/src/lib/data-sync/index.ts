@@ -1,3 +1,3 @@
 export interface DataSync {
-  sync(): Promise<void>
+  sync(): Promise<void>;
 }

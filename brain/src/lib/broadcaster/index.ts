@@ -6,7 +6,7 @@ export type BroadcastEvent =
   | 'recipe-context'
 
 export interface Broadcaster {
-  start(): Promise<void>
-  register(event: BroadcastEvent, provider: () => Promise<any> | Promise<any>[])
-  broadcast(event: BroadcastEvent, data?: any)
+  start(): Promise<void>;
+  register(event: BroadcastEvent, provider: () => Promise<any> | Promise<any>[]);
+  broadcast(event: BroadcastEvent, data?: any);
 }

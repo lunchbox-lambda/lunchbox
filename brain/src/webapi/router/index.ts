@@ -1,5 +1,5 @@
-import { Express } from 'express'
+import { Express } from 'express';
 
 export interface Router {
-  config(app: Express): Promise<void>
+  config(app: Express): Promise<void>;
 }

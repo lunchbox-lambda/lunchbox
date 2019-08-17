@@ -1,14 +1,14 @@
-import logger from 'lib/logger'
-import { Controllers } from 'kernel/controllers'
-import { TYPES, inject, injectable } from 'lib/inversify'
-import { Scheduler } from 'lib/scheduler'
-import { Controller } from './controller'
-import { Peripherals } from 'kernel/peripherals'
-import { Environment } from 'kernel/environment'
-import { PIDControllers } from './pid-controllers'
-import { RegulatorControllers } from './regulator-controllers'
+import logger from 'lib/logger';
+import { Controllers } from 'kernel/controllers';
+import { TYPES, inject, injectable } from 'lib/inversify';
+import { Scheduler } from 'lib/scheduler';
+import { Controller } from './controller';
+import { Peripherals } from 'kernel/peripherals';
+import { Environment } from 'kernel/environment';
+import { PIDControllers } from './pid-controllers';
+import { RegulatorControllers } from './regulator-controllers';
 
-const log = logger('kernel:controllers')
+const log = logger('kernel:controllers');
 
 @injectable()
 export class DefaultControllers implements Controllers {
@@ -20,36 +20,36 @@ export class DefaultControllers implements Controllers {
   private controllers: Controller[] = []
 
   async init() {
-    log(`init`)
+    log(`init`);
 
-    const pidControllers = new PIDControllers(this.peripherals, this.environment)
-    const regulatorControllers = new RegulatorControllers(this.peripherals, this.scheduler)
+    const pidControllers = new PIDControllers(this.peripherals, this.environment);
+    const regulatorControllers = new RegulatorControllers(this.peripherals, this.scheduler);
 
-    this.controllers.push(... await pidControllers.init())
-    this.controllers.push(... await regulatorControllers.init())
+    this.controllers.push(... await pidControllers.init());
+    this.controllers.push(... await regulatorControllers.init());
 
-    this.scheduler.interval(() => this.spin(), 1000)
+    this.scheduler.interval(() => this.spin(), 1000);
   }
 
   turnOn(id: string) {
-    this.controllers.find(x => x.id === id).turnOn()
+    this.controllers.find(x => x.id === id).turnOn();
   }
 
   turnOff(id?: string) {
-    if (id) this.controllers.find(x => x.id === id).turnOff()
-    else this.controllers.forEach(x => x.turnOff.call(x))
+    if (id) this.controllers.find(x => x.id === id).turnOff();
+    else this.controllers.forEach(x => x.turnOff.call(x));
   }
 
   reset(id?: string) {
-    if (id) this.controllers.find(x => x.id === id).reset()
-    else this.controllers.forEach(x => x.reset.call(x))
+    if (id) this.controllers.find(x => x.id === id).reset();
+    else this.controllers.forEach(x => x.reset.call(x));
   }
 
   status() {
-    return this.controllers.map(x => x.status())
+    return this.controllers.map(x => x.status());
   }
 
   private spin() {
-    this.controllers.forEach(x => x.spin.call(x))
+    this.controllers.forEach(x => x.spin.call(x));
   }
 }

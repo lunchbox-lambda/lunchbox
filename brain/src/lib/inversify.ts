@@ -30,6 +30,6 @@ export const TYPES = {
 
   WebApi: Symbol('WebApi'),
   Router: Symbol('Router')
-}
+};
 
-export { inject, injectable } from 'inversify'
+export { inject, injectable } from 'inversify';

@@ -1,5 +1,5 @@
-import { Subject, Observable } from 'rxjs'
-import { synthesizeVariable } from 'lib/tools'
+import { Subject, Observable } from 'rxjs';
+import { synthesizeVariable } from 'lib/tools';
 
 export abstract class Sensor<T> {
 
@@ -17,33 +17,33 @@ export abstract class Sensor<T> {
     public pin: number | string,
     public env: string
   ) {
-    this.data = {}
-    this.subject = new Subject<SensorEvent>()
-    this.observable = this.subject as Observable<SensorEvent>
+    this.data = {};
+    this.subject = new Subject<SensorEvent>();
+    this.observable = this.subject as Observable<SensorEvent>;
   }
 
   init() { }
 
   protected onSensorData(data: object) {
-    this.data = data
+    this.data = data;
     for (const [key, value] of Object.entries(data)) {
       const event = new SensorEvent(
         this.id,
         synthesizeVariable(this.env, key),
         value
-      )
-      this.subject.next(event)
+      );
+      this.subject.next(event);
     }
   }
 
   get outputs() {
-    return this._outputs
+    return this._outputs;
   }
 
   set outputs(outputs: string[]) {
     this._outputs = outputs.map(variable =>
       synthesizeVariable(this.env, variable)
-    )
+    );
   }
 }
 

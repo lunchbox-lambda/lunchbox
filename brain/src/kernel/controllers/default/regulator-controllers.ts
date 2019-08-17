@@ -1,14 +1,14 @@
-import logger from 'lib/logger'
-import * as moment from 'moment'
-import * as parser from 'cron-parser'
-import { Subscription } from 'rxjs'
-import { ControllerState } from 'models'
-import { Scheduler } from 'lib/scheduler'
-import { Controller } from './controller'
-import { Peripherals } from 'kernel/peripherals'
-import { Regulator, RegulatorState } from 'firmware/fixture-modules/_regulator'
+import logger from 'lib/logger';
+import * as moment from 'moment';
+import * as parser from 'cron-parser';
+import { Subscription } from 'rxjs';
+import { ControllerState } from 'models';
+import { Scheduler } from 'lib/scheduler';
+import { Controller } from './controller';
+import { Peripherals } from 'kernel/peripherals';
+import { Regulator, RegulatorState } from 'firmware/fixture-modules/_regulator';
 
-const log = logger('kernel:controllers')
+const log = logger('kernel:controllers');
 
 export class RegulatorControllers {
 
@@ -18,40 +18,40 @@ export class RegulatorControllers {
   ) { }
 
   async init() {
-    const controllers: RegulatorController[] = []
+    const controllers: RegulatorController[] = [];
 
-    const regulators = this.peripherals.regulators
+    const regulators = this.peripherals.regulators;
 
     regulators.forEach(regulator => {
       try {
-        const { params } = regulator
+        const { params } = regulator;
 
         if (!params)
-          throw new Error(`Missing regulator params for ${regulator.id}.`)
+          throw new Error(`Missing regulator params for ${regulator.id}.`);
 
-        const { cron, duration, always } = params
+        const { cron, duration, always } = params;
 
-        let controller = null
+        let controller = null;
 
         if (cron && duration)
-          controller = new PeriodicController(regulator, this.scheduler)
+          controller = new PeriodicController(regulator, this.scheduler);
 
         else if (always)
-          controller = new StaticController(regulator)
+          controller = new StaticController(regulator);
 
-        else throw new Error(`Invalid regulator params for ${regulator.id}.`)
+        else throw new Error(`Invalid regulator params for ${regulator.id}.`);
 
-        controllers.push(controller)
-        controller.reset()
+        controllers.push(controller);
+        controller.reset();
 
-        log(`created regulator ctrl ${controller.id}`)
+        log(`created regulator ctrl ${controller.id}`);
       }
       catch (error) {
-        log(`failed to create regulator ctrl ${regulator.id} - ${error.message}`, 'error')
+        log(`failed to create regulator ctrl ${regulator.id} - ${error.message}`, 'error');
       }
-    })
+    });
 
-    return controllers
+    return controllers;
   }
 }
 
@@ -59,34 +59,34 @@ abstract class RegulatorController extends Controller {
 
   constructor(
     public regulator: Regulator<any>
-  ) { super('regulator') }
+  ) { super('regulator'); }
 
   turnOn() {
-    super.turnOn()
+    super.turnOn();
 
-    const regulatorState = new RegulatorState('on')
-    this.regulator.subject.next(regulatorState)
+    const regulatorState = new RegulatorState('on');
+    this.regulator.subject.next(regulatorState);
   }
 
   turnOff() {
-    super.turnOff()
+    super.turnOff();
 
-    const regulatorState = new RegulatorState('off')
-    this.regulator.subject.next(regulatorState)
+    const regulatorState = new RegulatorState('off');
+    this.regulator.subject.next(regulatorState);
   }
 
   reset() {
-    super.reset()
+    super.reset();
 
-    const regulatorState = new RegulatorState('off')
-    this.regulator.subject.next(regulatorState)
+    const regulatorState = new RegulatorState('off');
+    this.regulator.subject.next(regulatorState);
   }
 
   status() {
     return super.status({
       active: [this.regulator].some(x => x.active),
       regulators: [this.regulator].map(x => x.id)
-    })
+    });
   }
 }
 
@@ -95,19 +95,19 @@ class StaticController extends RegulatorController {
   private initialized: boolean
 
   spin() {
-    if (this.initialized) return
-    this.initialized = true
+    if (this.initialized) return;
+    this.initialized = true;
   }
 
   private setRegulatorState() {
-    const { always } = this.regulator.params
-    const regulatorState = new RegulatorState(always)
-    this.regulator.subject.next(regulatorState)
+    const { always } = this.regulator.params;
+    const regulatorState = new RegulatorState(always);
+    this.regulator.subject.next(regulatorState);
   }
 
   reset() {
-    super.reset()
-    this.setRegulatorState()
+    super.reset();
+    this.setRegulatorState();
   }
 }
 
@@ -119,55 +119,55 @@ class PeriodicController extends RegulatorController {
   constructor(
     regulator: Regulator<any>,
     private scheduler: Scheduler
-  ) { super(regulator) }
+  ) { super(regulator); }
 
   spin() {
-    if (this.cronSubscription) return
-    this.initCronJob()
+    if (this.cronSubscription) return;
+    this.initCronJob();
   }
 
   private initCronJob() {
-    const { cron, duration } = this.regulator.params
+    const { cron, duration } = this.regulator.params;
     this.cronSubscription = this.scheduler.cron(() => {
-      if (this.state != ControllerState.AUTOMATIC) return
-      this.setDurationTimer(moment.duration(duration).asMilliseconds())
-      this.setRegulatorStateOn()
-    }, cron)
+      if (this.state != ControllerState.AUTOMATIC) return;
+      this.setDurationTimer(moment.duration(duration).asMilliseconds());
+      this.setRegulatorStateOn();
+    }, cron);
   }
 
   private resumeCronJob() {
-    const { cron, duration } = this.regulator.params
-    const now = new Date()
-    const interval = parser.parseExpression(cron, { currentDate: now })
-    const previous = interval.prev().toDate()
-    const difference = now.getTime() - previous.getTime()
-    const duration_ = moment.duration(duration).asMilliseconds()
-    const left = duration_ - difference
+    const { cron, duration } = this.regulator.params;
+    const now = new Date();
+    const interval = parser.parseExpression(cron, { currentDate: now });
+    const previous = interval.prev().toDate();
+    const difference = now.getTime() - previous.getTime();
+    const duration_ = moment.duration(duration).asMilliseconds();
+    const left = duration_ - difference;
 
     if (left > 0) {
-      this.setDurationTimer(left)
-      this.setRegulatorStateOn()
+      this.setDurationTimer(left);
+      this.setRegulatorStateOn();
     }
   }
 
   private setDurationTimer(ms: number) {
     if (this.durationSubscription)
-      this.durationSubscription.unsubscribe()
+      this.durationSubscription.unsubscribe();
 
     this.durationSubscription = this.scheduler.timeout(() => {
-      if (this.state != ControllerState.AUTOMATIC) return
-      const regulatorState = new RegulatorState('off')
-      this.regulator.subject.next(regulatorState)
-    }, ms)
+      if (this.state != ControllerState.AUTOMATIC) return;
+      const regulatorState = new RegulatorState('off');
+      this.regulator.subject.next(regulatorState);
+    }, ms);
   }
 
   private setRegulatorStateOn() {
-    const regulatorState = new RegulatorState('on')
-    this.regulator.subject.next(regulatorState)
+    const regulatorState = new RegulatorState('on');
+    this.regulator.subject.next(regulatorState);
   }
 
   reset() {
-    super.reset()
-    this.resumeCronJob()
+    super.reset();
+    this.resumeCronJob();
   }
 }

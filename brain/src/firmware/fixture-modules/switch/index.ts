@@ -1,21 +1,21 @@
-import { Switch } from 'johnny-five'
-import { Sensor } from '../_sensor'
+import { Switch } from 'johnny-five';
+import { Sensor } from '../_sensor';
 
 export = class Default extends Sensor<Switch> {
 
   init() {
-    super.init()
+    super.init();
 
     this.sensor = new Switch({
       pin: this.pin
-    })
+    });
 
     setInterval(() => {
-      const isOpen = this.sensor.isOpen
+      const isOpen = this.sensor.isOpen;
       super.onSensorData({
         switch_status: isOpen ? 1 : 0
-      })
-    }, Sensor.readFrequency)
+      });
+    }, Sensor.readFrequency);
 
   }
 

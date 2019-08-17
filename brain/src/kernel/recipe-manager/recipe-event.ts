@@ -1,4 +1,4 @@
-import { RecipeContext } from './recipe-context'
+import { RecipeContext } from './recipe-context';
 
 export enum RecipeEventType {
   NO_RECIPE_LOADED,

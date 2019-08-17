@@ -1,6 +1,6 @@
-import { Entity } from './entity'
-import { Fixture } from './fixture'
-import { ISerializable } from './serializable'
+import { Entity } from './entity';
+import { Fixture } from './fixture';
+import { ISerializable } from './serializable';
 
 export class Computer extends Entity implements ISerializable {
   createdAt: Date

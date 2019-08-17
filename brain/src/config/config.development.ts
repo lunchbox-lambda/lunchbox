@@ -1,6 +1,6 @@
-import * as path from 'path'
+import * as path from 'path';
 
-const dataPath = `/data/${process.env.LBOX_COMPUTER_NAME}`
+const dataPath = `/data/${process.env.LBOX_COMPUTER_NAME}`;
 
 export default {
 
@@ -47,4 +47,4 @@ export default {
     baseUrl: 'https://github.com/lunchbox-lambda'
   }
 
-}
+};

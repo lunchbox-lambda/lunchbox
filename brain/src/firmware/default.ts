@@ -1,22 +1,22 @@
-import * as fs from 'fs'
-import * as ini from 'ini'
-import * as util from 'util'
-import config from 'config'
-import logger from 'lib/logger'
-import { Firmware } from 'firmware'
-import { Board } from 'johnny-five'
-import { exec } from 'child_process'
-import { Broadcaster } from 'lib/broadcaster'
-import { Sensor } from 'firmware/fixture-modules/_sensor'
-import { TYPES, inject, injectable } from 'lib/inversify'
+import * as fs from 'fs';
+import * as ini from 'ini';
+import * as util from 'util';
+import config from 'config';
+import logger from 'lib/logger';
+import { Firmware } from 'firmware';
+import { Board } from 'johnny-five';
+import { exec } from 'child_process';
+import { Broadcaster } from 'lib/broadcaster';
+import { Sensor } from 'firmware/fixture-modules/_sensor';
+import { TYPES, inject, injectable } from 'lib/inversify';
 
-const logPlatformio = logger('firmware:platformio')
-const logBoard = logger('firmware:board')
+const logPlatformio = logger('firmware:platformio');
+const logBoard = logger('firmware:board');
 
 interface PlatformioEnv {
-  platform: string
-  board: string
-  framework: string
+  platform: string;
+  board: string;
+  framework: string;
 }
 
 @injectable()
@@ -27,130 +27,130 @@ export class DefaultFirmware implements Firmware {
   @inject(TYPES.Broadcaster) private broadcaster: Broadcaster
 
   get status() {
-    return this._status
+    return this._status;
   }
 
   set status(value: boolean) {
-    this._status = value
-    this.broadcaster.broadcast('connectivity')
+    this._status = value;
+    this.broadcaster.broadcast('connectivity');
   }
 
   async init() {
     if (!process.env.PLATFORMIO_BOARD_ID) {
-      logBoard(`init skipped`)
+      logBoard(`init skipped`);
     } else {
-      logBoard(`init ${config.board.port}`)
+      logBoard(`init ${config.board.port}`);
       return new Promise<void>(async resolve => {
         try {
-          await this.initPlatformio()
-          await this.initFirmata()
-          await this.initBoard()
+          await this.initPlatformio();
+          await this.initFirmata();
+          await this.initBoard();
         } catch (error) {
-          this.board = null
-          logBoard(`ERROR: ${error.message}`)
+          this.board = null;
+          logBoard(`ERROR: ${error.message}`);
         } finally {
-          this.status = !!this.board
-          resolve()
+          this.status = !!this.board;
+          resolve();
         }
-      })
+      });
     }
   }
 
   private async initPlatformio() {
-    const boardId = process.env.PLATFORMIO_BOARD_ID
-    const filePath = `${config.platformio.path}/platformio.ini`
-    const readFile = util.promisify(fs.readFile)
-    const content = await readFile(filePath, 'utf8')
-    const platformioConfig = ini.parse(content)
+    const boardId = process.env.PLATFORMIO_BOARD_ID;
+    const filePath = `${config.platformio.path}/platformio.ini`;
+    const readFile = util.promisify(fs.readFile);
+    const content = await readFile(filePath, 'utf8');
+    const platformioConfig = ini.parse(content);
 
-    let platformioEnv: PlatformioEnv = null
+    let platformioEnv: PlatformioEnv = null;
     for (let key in platformioConfig) {
       if (key.includes('env:')) {
-        const value = platformioConfig[key] as PlatformioEnv
+        const value = platformioConfig[key] as PlatformioEnv;
         if (value.board === boardId) {
-          platformioEnv = value
-          break
+          platformioEnv = value;
+          break;
         }
       }
     }
 
     if (platformioEnv) {
-      const { platform, board, framework } = platformioEnv
-      logPlatformio(`${board} ${framework} ${platform}`)
+      const { platform, board, framework } = platformioEnv;
+      logPlatformio(`${board} ${framework} ${platform}`);
     } else {
-      logPlatformio(`init environment ${boardId}`)
+      logPlatformio(`init environment ${boardId}`);
 
       return new Promise((resolve, reject) => {
 
-        const board = `--board ${boardId}`
-        const projectDir = `--project-dir ${config.platformio.path}`
-        const command = `platformio init ${board} ${projectDir}`
+        const board = `--board ${boardId}`;
+        const projectDir = `--project-dir ${config.platformio.path}`;
+        const command = `platformio init ${board} ${projectDir}`;
         exec(command, { cwd: __dirname }, (error, stdout, stderr) => {
-          if (error) reject(error)
-          else resolve()
-        })
+          if (error) reject(error);
+          else resolve();
+        });
 
-      })
+      });
     }
   }
 
   private async initFirmata() {
-    logBoard(`firmata preflight`)
+    logBoard(`firmata preflight`);
 
     return new Promise((resolve, reject) => {
 
-      const command = 'node ./firmata-preflight'
+      const command = 'node ./firmata-preflight';
       exec(command, { cwd: __dirname }, (error, stdout, stderr) => {
-        if (!error) resolve()
+        if (!error) resolve();
         else {
-          if (stderr) logBoard(stderr)
+          if (stderr) logBoard(stderr);
 
-          logBoard(`compile and install firmata`)
+          logBoard(`compile and install firmata`);
 
-          const boardId = process.env.PLATFORMIO_BOARD_ID
-          const environment = `--environment ${boardId}`
-          const target = `--target upload`
-          const uploadPort = `--upload-port ${config.board.port}`
-          const projectDir = `--project-dir ${config.platformio.path}`
-          const command = `platformio run ${environment} ${target} ${uploadPort} ${projectDir}`
+          const boardId = process.env.PLATFORMIO_BOARD_ID;
+          const environment = `--environment ${boardId}`;
+          const target = `--target upload`;
+          const uploadPort = `--upload-port ${config.board.port}`;
+          const projectDir = `--project-dir ${config.platformio.path}`;
+          const command = `platformio run ${environment} ${target} ${uploadPort} ${projectDir}`;
           exec(command, { cwd: __dirname }, (error, stdout, stderr) => {
-            if (error) reject(error)
-            else resolve()
-          })
+            if (error) reject(error);
+            else resolve();
+          });
         }
-      })
+      });
 
-    })
+    });
   }
 
   private async initBoard() {
-    logBoard(`connecting to the board`)
+    logBoard(`connecting to the board`);
 
     this.board = new Board({
       port: config.board.port,
       debug: false,
       repl: false
-    })
+    });
 
     this.board.on('close', () => {
-      logBoard(`close`)
-      this.board = null
-      this.status = false
-    })
+      logBoard(`close`);
+      this.board = null;
+      this.status = false;
+    });
 
     return new Promise((resolve, reject) => {
 
       this.board.on('ready', () => {
-        this.board.samplingInterval(Sensor.readFrequency)
-        logBoard(`ready`)
-        resolve()
-      })
+        this.board.samplingInterval(Sensor.readFrequency);
+        logBoard(`ready`);
+        resolve();
+      });
 
       this.board.on('error', (event?) => {
-        reject(event)
-      })
+        reject(event);
+      });
 
-    })
+    });
 
   }
 

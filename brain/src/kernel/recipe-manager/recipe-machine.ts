@@ -1,52 +1,52 @@
-import * as uuid from 'uuid'
-import * as moment from 'moment'
-import { Subscription } from 'rxjs'
-import { RecipeStatus } from 'models'
-import { RecipeEventType } from './recipe-event'
-import { RecipeContext } from './recipe-context'
-import { synthesizeVariable } from 'lib/tools'
+import * as uuid from 'uuid';
+import * as moment from 'moment';
+import { Subscription } from 'rxjs';
+import { RecipeStatus } from 'models';
+import { RecipeEventType } from './recipe-event';
+import { RecipeContext } from './recipe-context';
+import { synthesizeVariable } from 'lib/tools';
 
 export class RecipeMachine {
 
   public async start(context: RecipeContext) {
-    let state: RecipeState
+    let state: RecipeState;
 
     switch (context.status) {
 
       case RecipeStatus.NO_RECIPE:
-        state = new NoRecipeState()
-        break
+        state = new NoRecipeState();
+        break;
 
       case RecipeStatus.STARTED:
       case RecipeStatus.RESUMED:
       case RecipeStatus.RUNNING:
-        state = new RecipeRunningState()
-        break
+        state = new RecipeRunningState();
+        break;
 
       case RecipeStatus.PAUSED:
-        state = new RecipePausedState()
-        break
+        state = new RecipePausedState();
+        break;
 
       case RecipeStatus.STOPPED:
-        state = new RecipeStoppedState()
-        break
+        state = new RecipeStoppedState();
+        break;
 
       case RecipeStatus.FINISHED:
-        state = new RecipeFinishedState()
-        break
+        state = new RecipeFinishedState();
+        break;
 
       case RecipeStatus.ERROR:
-        state = new RecipeErrorState(context.error)
-        break
+        state = new RecipeErrorState(context.error);
+        break;
     }
 
     try {
-      await context.loadRecipeInstance()
+      await context.loadRecipeInstance();
     } catch (error) {
-      state = new RecipeErrorState(error.message)
+      state = new RecipeErrorState(error.message);
     }
 
-    context.recipeState = state
+    context.recipeState = state;
   }
 
 }
@@ -58,42 +58,42 @@ export abstract class RecipeState {
   protected async onStateEnter(): Promise<void | RecipeState> { }
 
   public async handle(context: RecipeContext) {
-    if (this.isLocked) return
+    if (this.isLocked) return;
 
-    this.isLocked = true
-    this.context = context
+    this.isLocked = true;
+    this.context = context;
 
-    const recipeEvent = Reflect.getMetadata('RecipeEvent', this.constructor)
-    const recipeStatus = Reflect.getMetadata('RecipeStatus', this.constructor)
+    const recipeEvent = Reflect.getMetadata('RecipeEvent', this.constructor);
+    const recipeStatus = Reflect.getMetadata('RecipeStatus', this.constructor);
 
     // Don't re-execute the state when RecipeMachine starts
     const shouldExecuteState =
       this.context.status !== recipeStatus ||
-      this.context.status === RecipeStatus.RUNNING
+      this.context.status === RecipeStatus.RUNNING;
 
-    this.context.status = recipeStatus
-    const nextState = shouldExecuteState && await this.onStateEnter()
-    await this.saveRecipeState()
-    this.context.publishEvent(recipeEvent)
+    this.context.status = recipeStatus;
+    const nextState = shouldExecuteState && await this.onStateEnter();
+    await this.saveRecipeState();
+    this.context.publishEvent(recipeEvent);
 
-    this.isLocked = false
+    this.isLocked = false;
 
     if (nextState)
-      this.context.recipeState = nextState
+      this.context.recipeState = nextState;
   }
 
-  public startRecipe(recipeId?: string) { this.rejectState() }
-  public pauseRecipe() { this.rejectState() }
-  public resumeRecipe() { this.rejectState() }
-  public stopRecipe() { this.rejectState() }
-  public ejectRecipe() { this.rejectState() }
+  public startRecipe(recipeId?: string) { this.rejectState(); }
+  public pauseRecipe() { this.rejectState(); }
+  public resumeRecipe() { this.rejectState(); }
+  public stopRecipe() { this.rejectState(); }
+  public ejectRecipe() { this.rejectState(); }
 
   private rejectState() {
-    throw new Error('Invalid command')
+    throw new Error('Invalid command');
   }
 
   protected async saveRecipeState() {
-    this.context.repository.upsertRecipeContext(this.context.serialize())
+    this.context.repository.upsertRecipeContext(this.context.serialize());
   }
 }
 
@@ -101,11 +101,11 @@ export abstract class RecipeState {
 class NoRecipeState extends RecipeState {
 
   protected async onStateEnter() {
-    this.context.reset()
+    this.context.reset();
   }
 
   public startRecipe(recipeId: string) {
-    this.context.recipeState = new RecipeStartedState(recipeId)
+    this.context.recipeState = new RecipeStartedState(recipeId);
   }
 }
 
@@ -113,15 +113,15 @@ class NoRecipeState extends RecipeState {
 class RecipeStartedState extends RecipeState {
 
   constructor(private recipeId: string) {
-    super()
+    super();
   }
 
   protected async onStateEnter() {
-    await this.context.loadRecipeInstance(this.recipeId)
-    this.context.recipeId = this.recipeId
-    this.context.instanceId = uuid.v4()
-    this.context.startedAt = new Date()
-    return new RecipeRunningState()
+    await this.context.loadRecipeInstance(this.recipeId);
+    this.context.recipeId = this.recipeId;
+    this.context.instanceId = uuid.v4();
+    this.context.startedAt = new Date();
+    return new RecipeRunningState();
   }
 }
 
@@ -129,8 +129,8 @@ class RecipeStartedState extends RecipeState {
 class RecipeResumedState extends RecipeState {
 
   protected async onStateEnter() {
-    this.context.resumedAt = new Date()
-    return new RecipeRunningState()
+    this.context.resumedAt = new Date();
+    return new RecipeRunningState();
   }
 }
 
@@ -143,87 +143,87 @@ class RecipeRunningState extends RecipeState {
   protected async onStateEnter() {
 
     this.subscription = this.context.scheduler.interval(() => {
-      this.advanceRecipePosition()
-    }, 1000)
+      this.advanceRecipePosition();
+    }, 1000);
 
-    this.offsetIndex = -1
+    this.offsetIndex = -1;
   }
 
   public pauseRecipe() {
-    this.context.recipeState = new RecipePausedState()
+    this.context.recipeState = new RecipePausedState();
   }
 
   public stopRecipe() {
-    this.context.recipeState = new RecipeStoppedState()
+    this.context.recipeState = new RecipeStoppedState();
   }
 
   private advanceRecipePosition() {
-    const { environment, recipeInstance } = this.context
+    const { environment, recipeInstance } = this.context;
 
     // Clear the timer if the status changed
     if (this.context.status != RecipeStatus.RUNNING) {
-      this.subscription.unsubscribe()
-      return
+      this.subscription.unsubscribe();
+      return;
     }
 
-    const { duration } = recipeInstance
-    const currentPosition = this.resolveRecipePosition()
+    const { duration } = recipeInstance;
+    const currentPosition = this.resolveRecipePosition();
 
     // Update the progress indicator
-    this.updateProgress(duration, currentPosition)
+    this.updateProgress(duration, currentPosition);
 
     // Check if the recipe finished
     if (currentPosition >= duration) {
-      this.context.recipeState = new RecipeFinishedState()
-      return
+      this.context.recipeState = new RecipeFinishedState();
+      return;
     }
 
     // Check if the recipe advanced to the next offset in the time series
-    const offsetIndex = this.resolveOffsetIndex(currentPosition)
+    const offsetIndex = this.resolveOffsetIndex(currentPosition);
 
     if (this.offsetIndex !== offsetIndex) {
-      this.offsetIndex = offsetIndex
+      this.offsetIndex = offsetIndex;
 
-      const offset = recipeInstance.offsets[offsetIndex]
-      const recipePoint = recipeInstance.timeSeries.get(offset)
-      const variableValues = recipePoint.variableValues
+      const offset = recipeInstance.offsets[offsetIndex];
+      const recipePoint = recipeInstance.timeSeries.get(offset);
+      const variableValues = recipePoint.variableValues;
 
       this.context.publishEvent(
         RecipeEventType.OFFSET_CHANGED,
         new Map(Array.from(variableValues, ([key, value]) => {
-          const variable = synthesizeVariable(environment, key)
-          return [variable, value] as [string, number]
+          const variable = synthesizeVariable(environment, key);
+          return [variable, value] as [string, number];
         }))
-      )
+      );
     }
   }
 
   private resolveRecipePosition() {
-    const { startedAt } = this.context
-    const started = moment(startedAt)
-    return moment().diff(started, 'seconds')
+    const { startedAt } = this.context;
+    const started = moment(startedAt);
+    return moment().diff(started, 'seconds');
   }
 
   private resolveOffsetIndex(currentPosition: number): number {
-    const { offsets } = this.context.recipeInstance
+    const { offsets } = this.context.recipeInstance;
 
     if (this.offsetIndex === -1) {
-      let index = offsets.length
+      let index = offsets.length;
       while (index--) {
         if (offsets[index] <= currentPosition)
-          break
+          break;
       }
-      return index
+      return index;
     } else {
-      const nextOffsetIndex = this.offsetIndex + 1
-      const nextOffset = offsets[nextOffsetIndex]
-      return nextOffset <= currentPosition ? nextOffsetIndex : this.offsetIndex
+      const nextOffsetIndex = this.offsetIndex + 1;
+      const nextOffset = offsets[nextOffsetIndex];
+      return nextOffset <= currentPosition ? nextOffsetIndex : this.offsetIndex;
     }
   }
 
   private updateProgress(duration, currentPosition) {
-    const position = Math.min(duration, currentPosition)
-    this.context.progress = position / duration
+    const position = Math.min(duration, currentPosition);
+    this.context.progress = position / duration;
   }
 }
 
@@ -231,15 +231,15 @@ class RecipeRunningState extends RecipeState {
 class RecipePausedState extends RecipeState {
 
   protected async onStateEnter() {
-    this.context.pausedAt = new Date()
+    this.context.pausedAt = new Date();
   }
 
   public stopRecipe() {
-    this.context.recipeState = new RecipeStoppedState()
+    this.context.recipeState = new RecipeStoppedState();
   }
 
   public resumeRecipe() {
-    this.context.recipeState = new RecipeResumedState()
+    this.context.recipeState = new RecipeResumedState();
   }
 }
 
@@ -247,16 +247,16 @@ class RecipePausedState extends RecipeState {
 class RecipeStoppedState extends RecipeState {
 
   protected async onStateEnter() {
-    this.context.stoppedAt = new Date()
+    this.context.stoppedAt = new Date();
   }
 
   public startRecipe(recipeId: string) {
-    this.context.recipeState = new RecipeStartedState(recipeId)
+    this.context.recipeState = new RecipeStartedState(recipeId);
   }
 
   public ejectRecipe() {
-    this.context.recipeState = new NoRecipeState()
-    this.context.publishEvent(RecipeEventType.RECIPE_EJECTED)
+    this.context.recipeState = new NoRecipeState();
+    this.context.publishEvent(RecipeEventType.RECIPE_EJECTED);
   }
 }
 
@@ -264,16 +264,16 @@ class RecipeStoppedState extends RecipeState {
 class RecipeFinishedState extends RecipeState {
 
   protected async onStateEnter() {
-    this.context.finishedAt = new Date()
+    this.context.finishedAt = new Date();
   }
 
   public startRecipe(recipeId: string) {
-    this.context.recipeState = new RecipeStartedState(recipeId)
+    this.context.recipeState = new RecipeStartedState(recipeId);
   }
 
   public ejectRecipe() {
-    this.context.recipeState = new NoRecipeState()
-    this.context.publishEvent(RecipeEventType.RECIPE_EJECTED)
+    this.context.recipeState = new NoRecipeState();
+    this.context.publishEvent(RecipeEventType.RECIPE_EJECTED);
   }
 }
 
@@ -281,27 +281,27 @@ class RecipeFinishedState extends RecipeState {
 class RecipeErrorState extends RecipeState {
 
   constructor(private error: string) {
-    super()
+    super();
   }
 
   protected async onStateEnter() {
-    this.context.error = this.error
-    this.context.errorAt = new Date()
+    this.context.error = this.error;
+    this.context.errorAt = new Date();
   }
 
   public startRecipe(recipeId: string) {
-    this.context.recipeState = new RecipeStartedState(recipeId)
+    this.context.recipeState = new RecipeStartedState(recipeId);
   }
 
   public ejectRecipe() {
-    this.context.recipeState = new NoRecipeState()
-    this.context.publishEvent(RecipeEventType.RECIPE_EJECTED)
+    this.context.recipeState = new NoRecipeState();
+    this.context.publishEvent(RecipeEventType.RECIPE_EJECTED);
   }
 }
 
 function RecipeStateStatus(recipeStatus: RecipeStatus, recipeEvent: RecipeEventType) {
   return function (target: Function) {
-    Reflect.defineMetadata('RecipeStatus', recipeStatus, target)
-    Reflect.defineMetadata('RecipeEvent', recipeEvent, target)
-  }
+    Reflect.defineMetadata('RecipeStatus', recipeStatus, target);
+    Reflect.defineMetadata('RecipeEvent', recipeEvent, target);
+  };
 }

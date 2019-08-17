@@ -1,20 +1,20 @@
-import { Entity, EntityOption } from './entity'
-import { ISerializable } from './serializable'
+import { Entity, EntityOption } from './entity';
+import { ISerializable } from './serializable';
 
 export class Recipe extends Entity {
   name: string
   description?: string
   phases: {
-    name: string
-    cycles: number
+    name: string;
+    cycles: number;
     dayparts: {
       [K in 'dawn' | 'day' | 'dusk' | 'night']: {
-        duration: string
+        duration: string;
         variables: {
-          [variable: string]: number
-        }
+          [variable: string]: number;
+        };
       }
-    }
+    };
   }[]
 }
 

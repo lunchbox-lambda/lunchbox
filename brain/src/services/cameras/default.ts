@@ -1,7 +1,7 @@
-import { TYPES, inject, injectable } from 'lib/inversify'
-import { CameraService } from 'services/cameras'
-import { Environment } from 'kernel/environment'
-import { Service } from '../service'
+import { TYPES, inject, injectable } from 'lib/inversify';
+import { CameraService } from 'services/cameras';
+import { Environment } from 'kernel/environment';
+import { Service } from '../service';
 
 @injectable()
 export class DefaultCameraService extends Service implements CameraService {
@@ -10,12 +10,12 @@ export class DefaultCameraService extends Service implements CameraService {
 
   async getCameraPicture(variableName: string) {
     return new Promise<Buffer>((resolve, reject) => {
-      const { cameraPictures } = this.environment
-      const cameraPicture = cameraPictures[variableName]
+      const { cameraPictures } = this.environment;
+      const cameraPicture = cameraPictures[variableName];
 
-      if (cameraPicture) resolve(cameraPicture)
-      else reject(new Error('Camera picture not available.'))
-    })
+      if (cameraPicture) resolve(cameraPicture);
+      else reject(new Error('Camera picture not available.'));
+    });
   }
 
 }

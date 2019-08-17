@@ -1,3 +1,3 @@
 export interface Component {
-  init(): Promise<void>
+  init(): Promise<void>;
 }

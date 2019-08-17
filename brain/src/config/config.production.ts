@@ -1,6 +1,6 @@
-import * as path from 'path'
+import * as path from 'path';
 
-const dataPath = '/data'
+const dataPath = '/data';
 
 export default {
 
@@ -47,4 +47,4 @@ export default {
     baseUrl: 'https://github.com/lunchbox-lambda'
   }
 
-}
+};

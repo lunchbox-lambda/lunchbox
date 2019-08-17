@@ -1,6 +1,6 @@
-import { Server } from 'http'
-import { Express } from 'express'
+import { Server } from 'http';
+import { Express } from 'express';
 
 export interface NodeRed {
-  start(server: Server, app: Express)
+  start(server: Server, app: Express);
 }

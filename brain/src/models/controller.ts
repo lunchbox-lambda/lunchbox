@@ -1,4 +1,4 @@
-import { Entity } from './entity'
+import { Entity } from './entity';
 
 export class Controller extends Entity {
   type: string

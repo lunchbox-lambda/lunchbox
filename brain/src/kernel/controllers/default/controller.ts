@@ -1,5 +1,5 @@
-import * as uuid from 'uuid'
-import { ControllerState } from 'models'
+import * as uuid from 'uuid';
+import { ControllerState } from 'models';
 
 export abstract class Controller {
 
@@ -12,15 +12,15 @@ export abstract class Controller {
   abstract spin()
 
   turnOn() {
-    this.state = ControllerState.TURNED_ON
+    this.state = ControllerState.TURNED_ON;
   }
 
   turnOff() {
-    this.state = ControllerState.TURNED_OFF
+    this.state = ControllerState.TURNED_OFF;
   }
 
   reset() {
-    this.state = ControllerState.AUTOMATIC
+    this.state = ControllerState.AUTOMATIC;
   }
 
   status(status?: any) {
@@ -30,7 +30,7 @@ export abstract class Controller {
       state: this.state,
       active: this.active,
       ...status
-    }
+    };
   }
 
 }

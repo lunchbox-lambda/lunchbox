@@ -1,13 +1,13 @@
-import * as fs from 'fs'
-import * as path from 'path'
-import config from 'config'
-import settings from 'lib/settings'
-import { TYPES, inject, injectable } from 'lib/inversify'
-import { ComputerService } from 'services/computers'
-import { Service } from '../service'
-import { Fixture } from 'models'
-import { ControllerCommand } from 'models'
-import { CommandCenter } from 'kernel/command-center'
+import * as fs from 'fs';
+import * as path from 'path';
+import config from 'config';
+import settings from 'lib/settings';
+import { TYPES, inject, injectable } from 'lib/inversify';
+import { ComputerService } from 'services/computers';
+import { Service } from '../service';
+import { Fixture } from 'models';
+import { ControllerCommand } from 'models';
+import { CommandCenter } from 'kernel/command-center';
 
 @injectable()
 export class DefaultComputerService extends Service implements ComputerService {
@@ -15,53 +15,53 @@ export class DefaultComputerService extends Service implements ComputerService {
   @inject(TYPES.CommandCenter) private commandCenter: CommandCenter
 
   async getComputer() {
-    return this.repository.getComputer()
+    return this.repository.getComputer();
   }
 
   async updateComputerFixtures(fixtures: Fixture[]) {
-    await this.repository.updateComputerFixtures(fixtures)
-    const computer = await this.repository.getComputer()
-    return computer.fixtures
+    await this.repository.updateComputerFixtures(fixtures);
+    const computer = await this.repository.getComputer();
+    return computer.fixtures;
   }
 
   async commandController(command: string, controllerId: string) {
-    let controllerCommand: ControllerCommand
+    let controllerCommand: ControllerCommand;
 
     switch (command) {
 
       case 'turn-on':
-        controllerCommand = ControllerCommand.TURN_ON
-        break
+        controllerCommand = ControllerCommand.TURN_ON;
+        break;
 
       case 'turn-off':
-        controllerCommand = ControllerCommand.TURN_OFF
-        break
+        controllerCommand = ControllerCommand.TURN_OFF;
+        break;
 
       case 'reset':
-        controllerCommand = ControllerCommand.RESET
-        break
+        controllerCommand = ControllerCommand.RESET;
+        break;
     }
 
-    this.commandCenter.commandController(controllerCommand, controllerId)
+    this.commandCenter.commandController(controllerCommand, controllerId);
   }
 
   async restartComputer() {
-    this.commandCenter.restartComputer()
+    this.commandCenter.restartComputer();
   }
 
   async getSettings() {
-    return Promise.resolve(settings)
+    return Promise.resolve(settings);
   }
 
   async setSettings(settings: object) {
-    const data = JSON.stringify(settings, null, '    ')
-    const filePath = path.resolve(config.data.path, 'settings.json')
+    const data = JSON.stringify(settings, null, '    ');
+    const filePath = path.resolve(config.data.path, 'settings.json');
     return new Promise<void>((resolve, reject) => {
       fs.writeFile(filePath, data, error => {
-        if (error) reject(error)
-        else resolve()
-      })
-    })
+        if (error) reject(error);
+        else resolve();
+      });
+    });
   }
 
 }

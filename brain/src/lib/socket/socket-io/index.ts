@@ -1,12 +1,12 @@
-import logger from 'lib/logger'
-import * as socketio from 'socket.io'
-import { injectable } from 'lib/inversify'
-import { Subject, Observable } from 'rxjs'
-import { Server as HttpServer } from 'http'
-import { Server as HttpsServer } from 'https'
-import { Socket, SocketNode } from 'lib/socket'
+import logger from 'lib/logger';
+import * as socketio from 'socket.io';
+import { injectable } from 'lib/inversify';
+import { Subject, Observable } from 'rxjs';
+import { Server as HttpServer } from 'http';
+import { Server as HttpsServer } from 'https';
+import { Socket, SocketNode } from 'lib/socket';
 
-const log = logger('webapi:socket-io')
+const log = logger('webapi:socket-io');
 
 @injectable()
 export class SocketIO implements Socket {
@@ -17,36 +17,36 @@ export class SocketIO implements Socket {
   private connectCounter: number = 0
 
   async init(server: HttpServer | HttpsServer): Promise<void> {
-    log(`init`)
+    log(`init`);
 
     this.io = socketio(server, {
       path: '/socket'
-    })
+    });
 
     this.io.on('connection', client => {
-      log(`connected ${client.id}`)
-      this.connectCounter++
+      log(`connected ${client.id}`);
+      this.connectCounter++;
 
 
       client.on('disconnect', () => {
-        log(`disconnected ${client.id}`)
-        this.connectCounter--
-      })
+        log(`disconnected ${client.id}`);
+        this.connectCounter--;
+      });
 
-      this.subject.next(client)
-    })
+      this.subject.next(client);
+    });
   }
 
   emit(event: string, data: any) {
-    this.io.emit(event, data)
+    this.io.emit(event, data);
   }
 
   onConnection(): Observable<SocketNode> {
-    return this.observable
+    return this.observable;
   }
 
   connectionCount(): number {
-    return this.connectCounter
+    return this.connectCounter;
   }
 
 }

@@ -1,5 +1,5 @@
-import { Component } from 'lib/component'
+import { Component } from 'lib/component';
 
 export interface CameraService extends Component {
-  getCameraPicture(variableName: string): Promise<Buffer>
+  getCameraPicture(variableName: string): Promise<Buffer>;
 }
