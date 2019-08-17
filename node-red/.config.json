@@ -365,7 +365,7 @@
   "node-red-contrib-lunchbox": {
    "name": "node-red-contrib-lunchbox",
    "version": "1.0.0",
-   "local": true,
+   "local": false,
    "nodes": {
     "lunchbox": {
      "name": "lunchbox",
@@ -373,9 +373,9 @@
       "lunchbox"
      ],
      "enabled": true,
-     "local": true,
+     "local": false,
      "module": "node-red-contrib-lunchbox",
-     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node-red/node_modules/node-red-contrib-lunchbox/src/lunchbox.js"
+     "file": "/home/lynx/Projects/lunchbox-lambda/lunchbox/node_modules/node-red-contrib-lunchbox/src/lunchbox.js"
     }
    }
   },
