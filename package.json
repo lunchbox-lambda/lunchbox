@@ -6,5 +6,8 @@
     "frontend",
     "node-red",
     "node-red-contrib"
-  ]
+  ],
+  "devDependencies": {
+    "typescript": "^3.5.3"
+  }
 }
