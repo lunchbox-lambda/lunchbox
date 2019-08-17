@@ -15,7 +15,6 @@
   "scripts": {
     "tsc": "tsc -p .",
     "clean": "rm -rf dist",
-    "eslint": "eslint \"**/*.ts\"",
     "copy": "cp -r src/schemas dist",
     "build": "yarn clean && tsc -p . && yarn copy"
   },
@@ -53,11 +52,6 @@
     "@types/reflect-metadata": "0.0.5",
     "@types/socket.io": "^1.4.31",
     "@types/uuid": "^3.4.3",
-    "@types/uuid-1345": "^0.99.21",
-    "@typescript-eslint/eslint-plugin": "^1.12.0",
-    "@typescript-eslint/parser": "^1.12.0",
-    "eslint": "^6.0.1",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "@types/uuid-1345": "^0.99.21"
   }
 }
