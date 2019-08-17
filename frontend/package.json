@@ -14,7 +14,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "clean": "rm -rf dist",
-    "build": "npm run clean && webpack --config webpack.config.js --mode=production"
+    "build": "yarn clean && webpack --config webpack.config.js --mode=production"
   },
   "devDependencies": {
     "@blueprintjs/core": "^1.40.0",

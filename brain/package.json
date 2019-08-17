@@ -17,7 +17,7 @@
     "clean": "rm -rf dist",
     "eslint": "eslint \"**/*.ts\"",
     "copy": "cp -r src/schemas dist",
-    "build": "npm run clean && tsc -p . && npm run copy"
+    "build": "yarn clean && tsc -p . && yarn copy"
   },
   "dependencies": {
     "ajv": "^5.5.0",
