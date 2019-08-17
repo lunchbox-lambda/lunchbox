@@ -112,7 +112,7 @@ class NoRecipeState extends RecipeState {
 @RecipeStateStatus(RecipeStatus.STARTED, RecipeEventType.RECIPE_STARTED)
 class RecipeStartedState extends RecipeState {
 
-  constructor(private recipeId: string) {
+  public constructor(private recipeId: string) {
     super();
   }
 
@@ -280,7 +280,7 @@ class RecipeFinishedState extends RecipeState {
 @RecipeStateStatus(RecipeStatus.ERROR, RecipeEventType.ERROR_OCCURED)
 class RecipeErrorState extends RecipeState {
 
-  constructor(private error: string) {
+  public constructor(private error: string) {
     super();
   }
 

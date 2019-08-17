@@ -12,7 +12,7 @@ export abstract class Sensor<T> {
   private subject: Subject<SensorEvent>
   public observable: Observable<SensorEvent>
 
-  constructor(
+  public constructor(
     public id: string,
     public pin: number | string,
     public env: string
@@ -22,7 +22,7 @@ export abstract class Sensor<T> {
     this.observable = this.subject as Observable<SensorEvent>;
   }
 
-  init() { }
+  public init() { }
 
   protected onSensorData(data: object) {
     this.data = data;
@@ -36,11 +36,11 @@ export abstract class Sensor<T> {
     }
   }
 
-  get outputs() {
+  public get outputs() {
     return this._outputs;
   }
 
-  set outputs(outputs: string[]) {
+  public set outputs(outputs: string[]) {
     this._outputs = outputs.map(variable =>
       synthesizeVariable(this.env, variable)
     );
@@ -51,7 +51,7 @@ export class SensorEvent {
 
   public timestamp: Date = new Date()
 
-  constructor(
+  public constructor(
     public sensorId: string,
     public variable: string,
     public value: number

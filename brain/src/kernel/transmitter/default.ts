@@ -16,7 +16,7 @@ export class DefaultTransmitter implements Transmitter {
   @inject(TYPES.Environment) private environment: Environment
   @inject(TYPES.RecipeManager) private recipeManager: RecipeManager
 
-  async init() {
+  public async init() {
     log(`init`);
 
     await this.initBroadcasts();

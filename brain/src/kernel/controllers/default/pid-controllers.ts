@@ -10,12 +10,12 @@ const log = logger('kernel:controllers');
 
 export class PIDControllers {
 
-  constructor(
+  public constructor(
     private peripherals: Peripherals,
     private environment: Environment
   ) { }
 
-  async init() {
+  public async init() {
     const controllers: PIDController[] = [];
 
     const sensors = this.peripherals.sensors;
@@ -63,7 +63,7 @@ export class PIDControllers {
 
 class PIDController extends Controller {
 
-  constructor(
+  public constructor(
     public variable: string,
     public sensors: Sensor<any>[] = [],
     public actuators: Actuator<any>[] = [],
@@ -76,7 +76,7 @@ class PIDController extends Controller {
   //   e = error value
   //   u = control variable    
 
-  spin() {
+  public spin() {
     if (this.state != ControllerState.AUTOMATIC) return;
 
     let pv = this.environment.sensorReadings[this.variable];
@@ -102,7 +102,7 @@ class PIDController extends Controller {
     });
   }
 
-  turnOn() {
+  public turnOn() {
     super.turnOn();
 
     const actuatorState = new ActuatorState('on');
@@ -110,7 +110,7 @@ class PIDController extends Controller {
       actuator.subject.next(actuatorState));
   }
 
-  turnOff() {
+  public turnOff() {
     super.turnOff();
 
     const actuatorState = new ActuatorState('off');
@@ -118,7 +118,7 @@ class PIDController extends Controller {
       actuator.subject.next(actuatorState));
   }
 
-  reset() {
+  public reset() {
     super.reset();
 
     const actuatorState = new ActuatorState('off');
@@ -126,7 +126,7 @@ class PIDController extends Controller {
       actuator.subject.next(actuatorState));
   }
 
-  status() {
+  public status() {
     return super.status({
       variable: this.variable,
       active: this.actuators.some(x => x.active),

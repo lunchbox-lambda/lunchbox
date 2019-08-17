@@ -1,8 +1,8 @@
 export abstract class Entity {
-  id: string
+  public id: string
 }
 
 export class EntityOption {
-  id: string
-  name: string
+  public id: string
+  public name: string
 }

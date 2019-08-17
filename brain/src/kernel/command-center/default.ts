@@ -14,19 +14,19 @@ export class DefaultCommandCenter implements CommandCenter {
   @inject(TYPES.Controllers) private controllers: Controllers
   @inject(TYPES.RecipeManager) private recipeManager: RecipeManager
 
-  async init() {
+  public async init() {
     log(`init`);
   }
 
-  restartComputer() {
+  public restartComputer() {
     process.nextTick(() => process.exit());
   }
 
-  commandRecipe(environment: string, command: RecipeCommand, recipeId?: string) {
+  public commandRecipe(environment: string, command: RecipeCommand, recipeId?: string) {
     this.recipeManager.command(environment, command, recipeId);
   }
 
-  commandController(command: ControllerCommand, controllerId: string) {
+  public commandController(command: ControllerCommand, controllerId: string) {
     log(`controller ${controllerId} ${ControllerCommand[command]}`);
     switch (command) {
 

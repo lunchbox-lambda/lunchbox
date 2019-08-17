@@ -41,7 +41,7 @@ export class DefaultDataSync implements DataSync {
     }
   ] as SyncItem[]
 
-  async sync() {
+  public async sync() {
     this.assetsDir = await this.createAssetsDirectory();
 
     await Promise.all(

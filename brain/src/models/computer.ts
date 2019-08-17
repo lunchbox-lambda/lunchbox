@@ -3,19 +3,19 @@ import { Fixture } from './fixture';
 import { ISerializable } from './serializable';
 
 export class Computer extends Entity implements ISerializable {
-  createdAt: Date
-  updatedAt: Date
-  name: string
-  organization: string
-  uuid: string
-  version: string
-  boardType: 'megaatmega2560' | 'uno'
-  fixtures: Fixture[]
+  public createdAt: Date
+  public updatedAt: Date
+  public name: string
+  public organization: string
+  public uuid: string
+  public version: string
+  public boardType: 'megaatmega2560' | 'uno'
+  public fixtures: Fixture[]
 
-  localTime?: Date
-  timeZone?: string
+  public localTime?: Date
+  public timeZone?: string
 
-  serialize?= () => ({
+  public serialize?= () => ({
     id: this.id,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,

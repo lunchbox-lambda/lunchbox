@@ -16,7 +16,7 @@ export class DefaultRouter implements Router {
   @inject(TYPES.ServiceHolder) private services: ServiceHolder
   @inject(TYPES.JSONValidator) private validator: JSONValidator
 
-  async config(app: Express) {
+  public async config(app: Express) {
 
     // Static Router
     app.use(express.static(config.server.public));

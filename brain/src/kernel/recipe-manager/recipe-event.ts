@@ -17,7 +17,7 @@ export class RecipeEvent {
 
   public timestamp: Date = new Date()
 
-  constructor(
+  public constructor(
     public context: RecipeContext,
     public eventType: RecipeEventType,
     public variableValues?: Map<string, number>) { }

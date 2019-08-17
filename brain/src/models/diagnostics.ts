@@ -1,9 +1,9 @@
 export class Diagnostics {
-  peripherals: {
+  public peripherals: {
     sensors: any[];
     actuators: any[];
     regulators: any[];
     cameras: any[];
   }
-  controllers: any[]
+  public controllers: any[]
 }

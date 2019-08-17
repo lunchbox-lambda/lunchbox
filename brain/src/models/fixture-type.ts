@@ -1,10 +1,10 @@
 import { Entity } from './entity';
 
 export class FixtureType extends Entity {
-  name: string
-  type: 'sensor' | 'actuator' | 'regulator' | 'camera'
-  description?: string
-  inputs?: string[]
-  outputs?: string[]
-  params?: null
+  public name: string
+  public type: 'sensor' | 'actuator' | 'regulator' | 'camera'
+  public description?: string
+  public inputs?: string[]
+  public outputs?: string[]
+  public params?: null
 }

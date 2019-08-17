@@ -8,7 +8,7 @@ export class DefaultCameraService extends Service implements CameraService {
 
   @inject(TYPES.Environment) private environment: Environment
 
-  async getCameraPicture(variableName: string) {
+  public async getCameraPicture(variableName: string) {
     return new Promise<Buffer>((resolve, reject) => {
       const { cameraPictures } = this.environment;
       const cameraPicture = cameraPictures[variableName];

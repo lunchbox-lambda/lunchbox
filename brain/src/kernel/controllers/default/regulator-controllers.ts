@@ -12,12 +12,12 @@ const log = logger('kernel:controllers');
 
 export class RegulatorControllers {
 
-  constructor(
+  public constructor(
     private peripherals: Peripherals,
     private scheduler: Scheduler
   ) { }
 
-  async init() {
+  public async init() {
     const controllers: RegulatorController[] = [];
 
     const regulators = this.peripherals.regulators;
@@ -57,32 +57,32 @@ export class RegulatorControllers {
 
 abstract class RegulatorController extends Controller {
 
-  constructor(
+  public constructor(
     public regulator: Regulator<any>
   ) { super('regulator'); }
 
-  turnOn() {
+  public turnOn() {
     super.turnOn();
 
     const regulatorState = new RegulatorState('on');
     this.regulator.subject.next(regulatorState);
   }
 
-  turnOff() {
+  public turnOff() {
     super.turnOff();
 
     const regulatorState = new RegulatorState('off');
     this.regulator.subject.next(regulatorState);
   }
 
-  reset() {
+  public reset() {
     super.reset();
 
     const regulatorState = new RegulatorState('off');
     this.regulator.subject.next(regulatorState);
   }
 
-  status() {
+  public status() {
     return super.status({
       active: [this.regulator].some(x => x.active),
       regulators: [this.regulator].map(x => x.id)
@@ -94,7 +94,7 @@ class StaticController extends RegulatorController {
 
   private initialized: boolean
 
-  spin() {
+  public spin() {
     if (this.initialized) return;
     this.initialized = true;
   }
@@ -105,7 +105,7 @@ class StaticController extends RegulatorController {
     this.regulator.subject.next(regulatorState);
   }
 
-  reset() {
+  public reset() {
     super.reset();
     this.setRegulatorState();
   }
@@ -116,12 +116,12 @@ class PeriodicController extends RegulatorController {
   private cronSubscription: Subscription
   private durationSubscription: Subscription
 
-  constructor(
+  public constructor(
     regulator: Regulator<any>,
     private scheduler: Scheduler
   ) { super(regulator); }
 
-  spin() {
+  public spin() {
     if (this.cronSubscription) return;
     this.initCronJob();
   }
@@ -166,7 +166,7 @@ class PeriodicController extends RegulatorController {
     this.regulator.subject.next(regulatorState);
   }
 
-  reset() {
+  public reset() {
     super.reset();
     this.resumeCronJob();
   }

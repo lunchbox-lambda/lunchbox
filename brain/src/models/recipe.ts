@@ -2,9 +2,9 @@ import { Entity, EntityOption } from './entity';
 import { ISerializable } from './serializable';
 
 export class Recipe extends Entity {
-  name: string
-  description?: string
-  phases: {
+  public name: string
+  public description?: string
+  public phases: {
     name: string;
     cycles: number;
     dayparts: {
@@ -23,21 +23,21 @@ export class RecipeOption extends EntityOption {
 }
 
 export class RecipeContext implements ISerializable {
-  environment: string
-  instanceId: string
-  recipeId: string
-  status: RecipeStatus
-  error: string
-  startedAt: Date
-  resumedAt: Date
-  pausedAt: Date
-  stoppedAt: Date
-  finishedAt: Date
-  errorAt: Date
+  public environment: string
+  public instanceId: string
+  public recipeId: string
+  public status: RecipeStatus
+  public error: string
+  public startedAt: Date
+  public resumedAt: Date
+  public pausedAt: Date
+  public stoppedAt: Date
+  public finishedAt: Date
+  public errorAt: Date
 
-  progress?: number
+  public progress?: number
 
-  serialize?= () => ({
+  public serialize?= () => ({
     environment: this.environment,
     instanceId: this.instanceId,
     recipeId: this.recipeId,

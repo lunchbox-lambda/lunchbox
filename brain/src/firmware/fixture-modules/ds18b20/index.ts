@@ -3,7 +3,7 @@ import { Sensor } from '../_sensor';
 
 export = class Default extends Sensor<Thermometer> {
 
-  init() {
+  public init() {
     super.init();
 
     this.sensor = new Thermometer({

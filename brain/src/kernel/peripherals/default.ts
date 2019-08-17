@@ -18,18 +18,18 @@ export class DefaultPeripherals implements Peripherals {
   @inject(TYPES.Firmware) private firmware: Firmware
   @inject(TYPES.Repository) private repository: Repository
 
-  sensors: Sensor<any>[] = []
-  actuators: Actuator<any>[] = []
-  regulators: Regulator<any>[] = []
-  cameras: Camera<any>[] = []
+  public sensors: Sensor<any>[] = []
+  public actuators: Actuator<any>[] = []
+  public regulators: Regulator<any>[] = []
+  public cameras: Camera<any>[] = []
 
   private sensorSubject = new Subject<SensorEvent>()
-  sensorEvents = this.sensorSubject.asObservable()
+  public sensorEvents = this.sensorSubject.asObservable()
 
   private cameraSubject = new Subject<CameraEvent>()
-  cameraEvents = this.cameraSubject.asObservable()
+  public cameraEvents = this.cameraSubject.asObservable()
 
-  async init() {
+  public async init() {
     log(`init`);
 
     const computer = await this.repository.getComputer();
@@ -136,7 +136,7 @@ export class DefaultPeripherals implements Peripherals {
     }
   }
 
-  status(): { sensors: any[]; actuators: any[]; regulators: any[]; cameras: any[] } {
+  public status(): { sensors: any[]; actuators: any[]; regulators: any[]; cameras: any[] } {
     return {
 
       sensors: this.sensors.map(({ id, pin, env, data }) =>

@@ -12,7 +12,7 @@ const settings = config.nodered;
 @injectable()
 export class DefaultNodeRed implements NodeRed {
 
-  async start(server: Server, app: Express) {
+  public async start(server: Server, app: Express) {
     log('init');
 
     settings.logging = {

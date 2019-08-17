@@ -16,7 +16,7 @@ export class SocketIO implements Socket {
   private observable = this.subject.asObservable()
   private connectCounter: number = 0
 
-  async init(server: HttpServer | HttpsServer): Promise<void> {
+  public async init(server: HttpServer | HttpsServer): Promise<void> {
     log(`init`);
 
     this.io = socketio(server, {
@@ -37,15 +37,15 @@ export class SocketIO implements Socket {
     });
   }
 
-  emit(event: string, data: any) {
+  public emit(event: string, data: any) {
     this.io.emit(event, data);
   }
 
-  onConnection(): Observable<SocketNode> {
+  public onConnection(): Observable<SocketNode> {
     return this.observable;
   }
 
-  connectionCount(): number {
+  public connectionCount(): number {
     return this.connectCounter;
   }
 

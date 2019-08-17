@@ -17,7 +17,7 @@ export class DefaultDiagnosticsService extends Service implements DiagnosticsSer
   @inject(TYPES.Controllers) private controllers: Controllers
   @inject(TYPES.Broadcaster) private broadcaster: Broadcaster
 
-  async init() {
+  public async init() {
     await this.initConnectivityBroadcast();
   }
 
@@ -25,18 +25,18 @@ export class DefaultDiagnosticsService extends Service implements DiagnosticsSer
     this.broadcaster.register('connectivity', this.getConnectivity.bind(this));
   }
 
-  async getDiagnostics() {
+  public async getDiagnostics() {
     return {
       peripherals: this.peripherals.status(),
       controllers: this.controllers.status()
     };
   }
 
-  async getConnectivity() {
+  public async getConnectivity() {
     return { broker: null, board: this.firmware.status };
   }
 
-  async getConsoleOutput() {
+  public async getConsoleOutput() {
     const filePath = path.resolve(config.data.path, 'stdout.log');
     return new Promise<string>((resolve, reject) => {
       fs.readFile(filePath, 'utf8', (error, data) => {

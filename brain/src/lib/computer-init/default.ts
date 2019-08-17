@@ -12,7 +12,7 @@ export class DefaultComputerInit implements ComputerInit {
 
   @inject(TYPES.Repository) private repository: Repository
 
-  async init() {
+  public async init() {
     await this.createDefaultComputer();
     await this.updateComputerProperties();
   }

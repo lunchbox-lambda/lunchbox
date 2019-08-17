@@ -3,7 +3,7 @@ import { Sensor } from '../_sensor';
 
 export = class Default extends Sensor<GeneralSensor> {
 
-  init() {
+  public init() {
     super.init();
 
     this.sensor = new GeneralSensor({

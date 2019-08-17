@@ -3,27 +3,27 @@ import { ControllerState } from 'models';
 
 export abstract class Controller {
 
-  id: string = uuid.v4()
-  state: ControllerState = ControllerState.AUTOMATIC
-  active: boolean = false
+  public id: string = uuid.v4()
+  public state: ControllerState = ControllerState.AUTOMATIC
+  public active: boolean = false
 
-  constructor(public type: 'pid' | 'regulator') { }
+  public constructor(public type: 'pid' | 'regulator') { }
 
   abstract spin()
 
-  turnOn() {
+  public turnOn() {
     this.state = ControllerState.TURNED_ON;
   }
 
-  turnOff() {
+  public turnOff() {
     this.state = ControllerState.TURNED_OFF;
   }
 
-  reset() {
+  public reset() {
     this.state = ControllerState.AUTOMATIC;
   }
 
-  status(status?: any) {
+  public status(status?: any) {
     return {
       id: this.id,
       type: this.type,

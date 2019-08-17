@@ -23,7 +23,7 @@ interface RouteProps {
 
 export class Route {
 
-  static create(args: RouteArgs): RequestHandler {
+  public static create(args: RouteArgs): RequestHandler {
     const { authorize, validate, response } = args;
     const route = new Route(authorize, validate, response);
     return route.handler;

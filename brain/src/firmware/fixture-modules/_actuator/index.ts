@@ -10,7 +10,7 @@ export abstract class Actuator<T> {
   public subject: Subject<ActuatorState>
   protected observable: Observable<ActuatorState>
 
-  constructor(
+  public constructor(
     public id: string,
     public pin: number | string,
     public env: string
@@ -25,13 +25,13 @@ export abstract class Actuator<T> {
       });
   }
 
-  init() { }
+  public init() { }
 
-  get inputs() {
+  public get inputs() {
     return this._inputs;
   }
 
-  set inputs(inputs: string[]) {
+  public set inputs(inputs: string[]) {
     this._inputs = inputs.map(variable =>
       synthesizeVariable(this.env, variable)
     );
@@ -41,6 +41,6 @@ export abstract class Actuator<T> {
 
 export class ActuatorState {
 
-  constructor(public state: 'on' | 'off') { }
+  public constructor(public state: 'on' | 'off') { }
 
 }

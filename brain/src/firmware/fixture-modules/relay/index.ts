@@ -3,7 +3,7 @@ import { Relay } from 'johnny-five';
 
 export = class Default extends Actuator<Relay> {
 
-  init() {
+  public init() {
     super.init();
 
     this.actuator = new Relay({

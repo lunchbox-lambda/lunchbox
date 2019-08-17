@@ -9,11 +9,11 @@ export class DefaultEnvironmentService extends Service implements EnvironmentSer
 
   @inject(TYPES.CommandCenter) private commandCenter: CommandCenter
 
-  async getEnvironmentData(offset: number) {
+  public async getEnvironmentData(offset: number) {
     return [];
   }
 
-  async commandRecipe(environment: string, command: string, recipeId?: string) {
+  public async commandRecipe(environment: string, command: string, recipeId?: string) {
     let recipeCommand: RecipeCommand;
 
     switch (command) {

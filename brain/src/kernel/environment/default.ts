@@ -22,14 +22,14 @@ export class DefaultEnvironment implements Environment {
   @inject(TYPES.Peripherals) private peripherals: Peripherals
   @inject(TYPES.RecipeManager) private recipeManager: RecipeManager
 
-  computer: Computer
-  variables: Map<string, Variable>
-  environments: string[]
-  sensorReadings: Map<string, number> = new Map()
-  cameraPictures: Map<string, Buffer> = new Map()
-  desiredValues: Map<string, number> = new Map()
+  public computer: Computer
+  public variables: Map<string, Variable>
+  public environments: string[]
+  public sensorReadings: Map<string, number> = new Map()
+  public cameraPictures: Map<string, Buffer> = new Map()
+  public desiredValues: Map<string, number> = new Map()
 
-  async init() {
+  public async init() {
     log(`init`);
 
     await this.loadComputer();
@@ -64,7 +64,7 @@ export class DefaultEnvironment implements Environment {
     this.environments = await this.repository.getEnvironments();
   }
 
-  serializeForBroadcast(environment: string): EnvironmentModel {
+  public serializeForBroadcast(environment: string): EnvironmentModel {
     const filterValues = (map: Map<string, any>) => {
       return [...map.entries()]
         .reduce((result, [key, value]) => {

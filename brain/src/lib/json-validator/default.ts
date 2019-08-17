@@ -14,7 +14,7 @@ export class DefaultJSONValidator implements JSONValidator {
 
   private ajv = new Ajv()
 
-  constructor() {
+  public constructor() {
 
     const schemasPath = path.join(__dirname, '../../schemas');
     fs.readdirSync(schemasPath).forEach(file => {
@@ -49,7 +49,7 @@ export class DefaultJSONValidator implements JSONValidator {
     });
   }
 
-  validate(data: any, schemaKey: string, batch?: boolean): Error {
+  public validate(data: any, schemaKey: string, batch?: boolean): Error {
     let isValid = true;
 
     if (batch) {
@@ -66,7 +66,7 @@ export class DefaultJSONValidator implements JSONValidator {
     return isValid ? null : new Error(message);
   }
 
-  validateThrow(data: any, schemaKey: string, batch?: boolean): any {
+  public validateThrow(data: any, schemaKey: string, batch?: boolean): any {
     const validateError = this.validate(data, schemaKey, batch);
     if (validateError) throw validateError;
     else return data;

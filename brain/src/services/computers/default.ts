@@ -14,17 +14,17 @@ export class DefaultComputerService extends Service implements ComputerService {
 
   @inject(TYPES.CommandCenter) private commandCenter: CommandCenter
 
-  async getComputer() {
+  public async getComputer() {
     return this.repository.getComputer();
   }
 
-  async updateComputerFixtures(fixtures: Fixture[]) {
+  public async updateComputerFixtures(fixtures: Fixture[]) {
     await this.repository.updateComputerFixtures(fixtures);
     const computer = await this.repository.getComputer();
     return computer.fixtures;
   }
 
-  async commandController(command: string, controllerId: string) {
+  public async commandController(command: string, controllerId: string) {
     let controllerCommand: ControllerCommand;
 
     switch (command) {
@@ -45,15 +45,15 @@ export class DefaultComputerService extends Service implements ComputerService {
     this.commandCenter.commandController(controllerCommand, controllerId);
   }
 
-  async restartComputer() {
+  public async restartComputer() {
     this.commandCenter.restartComputer();
   }
 
-  async getSettings() {
+  public async getSettings() {
     return Promise.resolve(settings);
   }
 
-  async setSettings(settings: object) {
+  public async setSettings(settings: object) {
     const data = JSON.stringify(settings, null, '    ');
     const filePath = path.resolve(config.data.path, 'settings.json');
     return new Promise<void>((resolve, reject) => {

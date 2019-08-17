@@ -15,7 +15,7 @@ export class RecipeContext extends RecipeContextModel {
   private _eventSubject: Subject<RecipeEvent>
   private _recipeState: RecipeState
 
-  constructor(
+  public constructor(
     public repository: Repository,
     public scheduler: Scheduler,
     environment?: string
@@ -26,7 +26,7 @@ export class RecipeContext extends RecipeContextModel {
     this.status = RecipeStatus.NO_RECIPE;
   }
 
-  command(recipeCommand: RecipeCommand, recipeId?: string) {
+  public command(recipeCommand: RecipeCommand, recipeId?: string) {
     switch (recipeCommand) {
 
       case RecipeCommand.START:
@@ -51,7 +51,7 @@ export class RecipeContext extends RecipeContextModel {
     }
   }
 
-  async loadRecipeInstance(recipeId: string = this.recipeId) {
+  public async loadRecipeInstance(recipeId: string = this.recipeId) {
     if (!recipeId) return;
 
     const recipe = await this.repository.getRecipe(recipeId);
@@ -63,21 +63,21 @@ export class RecipeContext extends RecipeContextModel {
     this.recipeInstance = new RecipeInstance(recipe);
   }
 
-  publishEvent(eventType: RecipeEventType, variableValues?: Map<string, number>) {
+  public publishEvent(eventType: RecipeEventType, variableValues?: Map<string, number>) {
     if (!this._eventSubject || eventType === undefined) return;
     const recipeEvent = new RecipeEvent(this, eventType, variableValues);
     this._eventSubject.next(recipeEvent);
   }
 
-  serializeForBroadcast(): RecipeContextModel {
+  public serializeForBroadcast(): RecipeContextModel {
     return { ...this.serialize(), progress: this.progress };
   }
 
-  deserialize(source: RecipeContextModel): RecipeContext {
+  public deserialize(source: RecipeContextModel): RecipeContext {
     return Object.assign(this, source);
   }
 
-  reset() {
+  public reset() {
     this.environment = this.environment;
     delete this.instanceId;
     delete this.recipeId;
@@ -92,11 +92,11 @@ export class RecipeContext extends RecipeContextModel {
     delete this.progress;
   }
 
-  set eventSubject(eventSubject: Subject<RecipeEvent>) {
+  public set eventSubject(eventSubject: Subject<RecipeEvent>) {
     this._eventSubject = eventSubject;
   }
 
-  set recipeState(recipeState: RecipeState) {
+  public set recipeState(recipeState: RecipeState) {
     this._recipeState = recipeState;
     this._recipeState.handle(this);
   }

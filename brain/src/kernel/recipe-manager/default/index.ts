@@ -23,7 +23,7 @@ export class DefaultRecipeManager implements RecipeManager {
   public recipeEvents = this.eventSubject.asObservable()
   private contexts: Map<string, RecipeContext> = new Map()
 
-  async init() {
+  public async init() {
     log(`init`);
 
     await this.loadRecipeContexts();
@@ -111,12 +111,12 @@ export class DefaultRecipeManager implements RecipeManager {
     });
   }
 
-  command(environment: string, command: RecipeCommand, recipeId?: string) {
+  public command(environment: string, command: RecipeCommand, recipeId?: string) {
     const recipeContext = this.contexts.get(environment);
     recipeContext.command(command, recipeId);
   }
 
-  get recipeContexts(): Map<string, RecipeContext> {
+  public get recipeContexts(): Map<string, RecipeContext> {
     return this.contexts;
   }
 

@@ -14,13 +14,13 @@ export class DefaultScheduler implements Scheduler {
   private subject = new Subject()
   private expected: number
 
-  async start() {
+  public async start() {
     this.expected = Date.now() + INTERVAL;
     this.schedule();
     log(`started`);
   }
 
-  timeout(next: () => void, timeout: number) {
+  public timeout(next: () => void, timeout: number) {
     return this.subject
       .bufferCount(Math.ceil(timeout / INTERVAL))
       .map(value => undefined)
@@ -28,14 +28,14 @@ export class DefaultScheduler implements Scheduler {
       .subscribe(next);
   }
 
-  interval(next: () => void, timeout: number) {
+  public interval(next: () => void, timeout: number) {
     return this.subject
       .bufferCount(Math.ceil(timeout / INTERVAL))
       .map(value => undefined)
       .subscribe(next);
   }
 
-  cron(next: () => void, pattern: string) {
+  public cron(next: () => void, pattern: string) {
     return this.subject
       .pipe(cronOperator(pattern))
       .map(value => undefined)

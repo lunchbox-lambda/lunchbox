@@ -1,7 +1,7 @@
 import { Entity } from './entity';
 
 export class Variable extends Entity {
-  name: string
-  description: string
-  unit: string
+  public name: string
+  public description: string
+  public unit: string
 }

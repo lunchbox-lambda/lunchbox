@@ -21,7 +21,7 @@ export class DefaultWebApi implements WebApi {
   @inject(TYPES.NodeRed) private nodeRed: NodeRed
   @inject(TYPES.Broadcaster) private broadcaster: Broadcaster
 
-  async init() {
+  public async init() {
     log(`init`);
 
     const app = express();

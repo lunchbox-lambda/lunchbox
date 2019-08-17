@@ -2,7 +2,7 @@ import { Camera } from '../_camera';
 
 export = class Default extends Camera<void> {
 
-  init() {
+  public init() {
     super.init();
 
     setInterval(async () => {

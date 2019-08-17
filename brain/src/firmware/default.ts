@@ -22,20 +22,20 @@ interface PlatformioEnv {
 @injectable()
 export class DefaultFirmware implements Firmware {
 
-  board: Board = null
+  public board: Board = null
   private _status: boolean = null
   @inject(TYPES.Broadcaster) private broadcaster: Broadcaster
 
-  get status() {
+  public get status() {
     return this._status;
   }
 
-  set status(value: boolean) {
+  public set status(value: boolean) {
     this._status = value;
     this.broadcaster.broadcast('connectivity');
   }
 
-  async init() {
+  public async init() {
     if (!process.env.PLATFORMIO_BOARD_ID) {
       logBoard(`init skipped`);
     } else {

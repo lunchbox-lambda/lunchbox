@@ -13,7 +13,7 @@ export abstract class Regulator<T> {
   public subject: Subject<RegulatorState>
   protected observable: Observable<RegulatorState>
 
-  constructor(
+  public constructor(
     public id: string,
     public pin: number | string,
     public env: string
@@ -28,13 +28,13 @@ export abstract class Regulator<T> {
       });
   }
 
-  init() { }
+  public init() { }
 
-  get params() {
+  public get params() {
     return this._params;
   }
 
-  set params(params: {
+  public set params(params: {
     cron?: string;
     duration?: string;
     always?: 'on' | 'off';
@@ -46,6 +46,6 @@ export abstract class Regulator<T> {
 
 export class RegulatorState {
 
-  constructor(public state: 'on' | 'off') { }
+  public constructor(public state: 'on' | 'off') { }
 
 }

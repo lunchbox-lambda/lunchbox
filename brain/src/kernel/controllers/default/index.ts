@@ -19,7 +19,7 @@ export class DefaultControllers implements Controllers {
 
   private controllers: Controller[] = []
 
-  async init() {
+  public async init() {
     log(`init`);
 
     const pidControllers = new PIDControllers(this.peripherals, this.environment);
@@ -31,21 +31,21 @@ export class DefaultControllers implements Controllers {
     this.scheduler.interval(() => this.spin(), 1000);
   }
 
-  turnOn(id: string) {
+  public turnOn(id: string) {
     this.controllers.find(x => x.id === id).turnOn();
   }
 
-  turnOff(id?: string) {
+  public turnOff(id?: string) {
     if (id) this.controllers.find(x => x.id === id).turnOff();
     else this.controllers.forEach(x => x.turnOff.call(x));
   }
 
-  reset(id?: string) {
+  public reset(id?: string) {
     if (id) this.controllers.find(x => x.id === id).reset();
     else this.controllers.forEach(x => x.reset.call(x));
   }
 
-  status() {
+  public status() {
     return this.controllers.map(x => x.status());
   }
 

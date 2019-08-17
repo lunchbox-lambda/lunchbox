@@ -5,7 +5,7 @@ import { Service } from '../service';
 @injectable()
 export class DefaultFixtureTypeService extends Service implements FixtureTypeService {
 
-  async getFixtureTypes() {
+  public async getFixtureTypes() {
     return this.repository.getFixtureTypes();
   }
 

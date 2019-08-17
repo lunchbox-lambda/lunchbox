@@ -5,7 +5,7 @@ import { Service } from '../service';
 @injectable()
 export class DefaultVariableService extends Service implements VariableService {
 
-  async getVariables() {
+  public async getVariables() {
     return this.repository.getVariables();
   }
 

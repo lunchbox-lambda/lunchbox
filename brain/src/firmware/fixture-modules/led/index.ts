@@ -3,7 +3,7 @@ import { Led } from 'johnny-five';
 
 export = class Default extends Actuator<Led> {
 
-  init() {
+  public init() {
     super.init();
 
     this.actuator = new Led({

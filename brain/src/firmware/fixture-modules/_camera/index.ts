@@ -14,7 +14,7 @@ export abstract class Camera<T> {
   private subject: Subject<CameraEvent>
   public observable: Observable<CameraEvent>
 
-  constructor(
+  public constructor(
     public id: string,
     public dev: string,
     public env: string
@@ -24,7 +24,7 @@ export abstract class Camera<T> {
     this.observable = this.subject as Observable<CameraEvent>;
   }
 
-  init() { }
+  public init() { }
 
   protected takeSnapshot(): Promise<Buffer> {
     return new Promise<Buffer>((resolve, reject) => {
@@ -49,11 +49,11 @@ export abstract class Camera<T> {
     this.subject.next(event);
   }
 
-  get outputs() {
+  public get outputs() {
     return this._outputs;
   }
 
-  set outputs(outputs: string[]) {
+  public set outputs(outputs: string[]) {
     this._outputs = outputs.map(variable =>
       synthesizeVariable(this.env, variable)
     );
@@ -66,7 +66,7 @@ export class CameraEvent {
 
   public timestamp: Date = new Date()
 
-  constructor(
+  public constructor(
     public cameraId: string,
     public variable: string,
     public image: Buffer

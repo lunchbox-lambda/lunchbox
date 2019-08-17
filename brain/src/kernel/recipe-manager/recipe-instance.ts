@@ -10,7 +10,7 @@ export class RecipeInstance {
   public phases: RecipePhase[] = []
   public timeSeries: Map<number, RecipePoint> = new Map()
 
-  constructor(recipe: Recipe) {
+  public constructor(recipe: Recipe) {
     this.name = recipe.name;
     this.recipeId = recipe.id;
 
@@ -66,11 +66,11 @@ export enum RecipeDaypart {
 }
 
 export class RecipePhase {
-  constructor(public name: string) { }
+  public constructor(public name: string) { }
 }
 
 export class RecipePoint {
-  constructor(
+  public constructor(
     public offset: number,
     public recipePhase: RecipePhase,
     public recipeDaypart: RecipeDaypart,

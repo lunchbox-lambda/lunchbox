@@ -13,7 +13,7 @@ export class DefaultBroadcaster implements Broadcaster {
   @inject(TYPES.Socket) private socket: Socket
   private broadcasts: Map<BroadcastEvent, Broadcast> = new Map()
 
-  async start() {
+  public async start() {
     this.socket.onConnection().subscribe(client => {
       this.broadcasts.forEach(broadcast => {
         this.doBroadcast(broadcast, null, client);
@@ -21,12 +21,12 @@ export class DefaultBroadcaster implements Broadcaster {
     });
   }
 
-  register(event: BroadcastEvent, provider: () => Promise<any> | Promise<any>[]) {
+  public register(event: BroadcastEvent, provider: () => Promise<any> | Promise<any>[]) {
     const broadcast = { event, provider };
     this.broadcasts.set(event, broadcast);
   }
 
-  broadcast(event: BroadcastEvent, data?: any) {
+  public broadcast(event: BroadcastEvent, data?: any) {
     const broadcast = this.broadcasts.get(event);
     this.doBroadcast(broadcast, data);
   }
