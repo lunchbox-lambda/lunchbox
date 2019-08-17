@@ -15,7 +15,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "yarn clean && tsc -p ."
+    "build": "yarn clean && tsc"
   },
   "dependencies": {
     "inversify": "^4.11.1",
@@ -29,5 +29,8 @@
     "@types/lodash": "^4.14.121",
     "@types/node": "^9.4.6",
     "@types/socket.io-client": "^1.4.32"
+  },
+  "peerDependencies": {
+    "typescript": ""
   }
 }

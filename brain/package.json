@@ -13,10 +13,9 @@
   ],
   "main": "dist/index.js",
   "scripts": {
-    "tsc": "tsc -p .",
     "clean": "rm -rf dist",
     "copy": "cp -r src/schemas dist",
-    "build": "yarn clean && tsc -p . && yarn copy"
+    "build": "yarn clean && tsc && yarn copy"
   },
   "dependencies": {
     "ajv": "^5.5.0",
@@ -53,5 +52,8 @@
     "@types/socket.io": "^1.4.31",
     "@types/uuid": "^3.4.3",
     "@types/uuid-1345": "^0.99.21"
+  },
+  "peerDependencies": {
+    "typescript": ""
   }
 }
