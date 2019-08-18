@@ -13,6 +13,7 @@ export = class Default extends Sensor<Switch> {
     setInterval(() => {
       const isOpen = this.sensor.isOpen;
       super.onSensorData({
+        /* eslint-disable-next-line @typescript-eslint/camelcase */
         switch_status: isOpen ? 1 : 0
       });
     }, Sensor.readFrequency);

@@ -19,6 +19,7 @@ export = class Default extends Sensor<GeneralSensor> {
       // console.log(`${value} ${_value}`)
 
       super.onSensorData({
+        /* eslint-disable-next-line @typescript-eslint/camelcase */
         soil_moisture: _value
       });
     });

@@ -14,6 +14,7 @@ export = class Default extends Sensor<Thermometer> {
 
     this.sensor.on('data', data => {
       super.onSensorData({
+        /* eslint-disable-next-line @typescript-eslint/camelcase */
         air_temperature: data.celsius
       });
     });
