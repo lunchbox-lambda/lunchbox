@@ -30,12 +30,12 @@ export abstract class Camera<T> {
     return new Promise<Buffer>((resolve, reject) => {
       const variable = synthesizeVariable(this.env, this.variable);
       const command = `fswebcam -d ${this.dev} -r 800x600 -S 25 -q --gmt --title "${variable}" --save '-'`;
-      exec(command, { encoding: 'buffer', maxBuffer: 512 * 2048 }, (error, stdout, stderr) => {
+      exec(command, { encoding: 'buffer', maxBuffer: 512 * 2048 }, (error, stdout) => {
         if (error) reject(error);
         else if (stdout.length == 0) reject(new Error('No picture captured.'));
         else resolve(stdout);
       });
-    }).catch(error => null);
+    }).catch(() => null);
   }
 
   protected onCameraPicture(image: Buffer) {

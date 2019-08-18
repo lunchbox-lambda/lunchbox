@@ -18,7 +18,7 @@ export class DefaultNodeRed implements NodeRed {
     settings.logging = {
       logger: {
         level: 'error',
-        handler: (settings) =>
+        handler: () =>
           message => log(JSON.stringify(message), 'error')
       }
     };

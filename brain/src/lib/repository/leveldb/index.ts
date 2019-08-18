@@ -34,7 +34,7 @@ export class LevelDB implements Repository {
   // Computer
   public async getComputer(): Promise<Computer> {
     return this.db.get(COMPUTER)
-      .catch(error => null);
+      .catch(() => null);
   }
 
   public async setComputer(computer: Computer): Promise<void> {
@@ -58,7 +58,7 @@ export class LevelDB implements Repository {
   // FixtureTypes
   public async getFixtureTypes(): Promise<FixtureType[]> {
     return this.db.get(FIXTURE_TYPES)
-      .catch(error => []);
+      .catch(() => []);
   }
 
   public async getFixtureTypesWithIds(ids: string[]): Promise<FixtureType[]> {
@@ -66,7 +66,7 @@ export class LevelDB implements Repository {
       .then(fixtureTypes => fixtureTypes.filter(
         fixtureType => ids.includes(fixtureType.id)
       ))
-      .catch(error => []);
+      .catch(() => []);
   }
 
   public async setFixtureTypes(fixtureTypes: FixtureType[]): Promise<void> {
@@ -76,7 +76,7 @@ export class LevelDB implements Repository {
   // Variables
   public async getVariables(): Promise<Variable[]> {
     return this.db.get(VARIABLES)
-      .catch(error => []);
+      .catch(() => []);
   }
 
   public async setVariables(variables: Variable[]): Promise<void> {
@@ -86,7 +86,7 @@ export class LevelDB implements Repository {
   // Recipes
   public async getRecipes(): Promise<Recipe[]> {
     return this.db.get(RECIPES)
-      .catch(error => []);
+      .catch(() => []);
   }
 
   public async setRecipes(recipes: Recipe[]): Promise<void> {
@@ -98,13 +98,13 @@ export class LevelDB implements Repository {
       .then(recipes => recipes.find(
         recipe => recipe.id === id
       ))
-      .catch(error => null);
+      .catch(() => null);
   }
 
   public async getRecipeContext(environment: string): Promise<RecipeContext> {
     const key = `${RECIPE_CONTEXT}::${environment}`;
     return this.db.get(key)
-      .catch(error => null);
+      .catch(() => null);
   }
 
   public async upsertRecipeContext(context: RecipeContext): Promise<RecipeContext> {
@@ -124,7 +124,7 @@ export class LevelDB implements Repository {
   ///
 
   private async upsert<T>(key: string, value: T): Promise<T> {
-    let _value = await this.db.get(key).catch(error => null);
+    let _value = await this.db.get(key).catch(() => null);
     _value = Object.assign({}, _value, value);
     await this.db.put(key, _value);
     return _value;

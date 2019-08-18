@@ -9,7 +9,7 @@ export class DefaultEnvironmentService extends Service implements EnvironmentSer
 
   @inject(TYPES.CommandCenter) private commandCenter: CommandCenter
 
-  public async getEnvironmentData(offset: number) {
+  public async getEnvironmentData() {
     return [];
   }
 

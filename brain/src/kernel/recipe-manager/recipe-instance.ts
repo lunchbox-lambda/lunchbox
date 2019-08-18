@@ -56,7 +56,7 @@ export class RecipeInstance {
     this.duration = offset;
 
     this.offsets = Array
-      .from(this.timeSeries, ([key, value]) => key)
+      .from(this.timeSeries, ([key]) => key)
       .sort((a, b) => a - b);
   }
 }

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { RequestHandler } from 'express';
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import { ServiceHolder } from 'lib/service-holder';
 import { JSONValidator } from 'lib/json-validator';
 
@@ -36,7 +36,7 @@ export class Route {
   ) { }
 
   private get handler() {
-    return async (req: Request, res: Response, next: NextFunction) => {
+    return async (req: Request, res: Response) => {
       try {
 
         const props = {

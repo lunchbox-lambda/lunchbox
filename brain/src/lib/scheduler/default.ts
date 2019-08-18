@@ -23,7 +23,7 @@ export class DefaultScheduler implements Scheduler {
   public timeout(next: () => void, timeout: number) {
     return this.subject
       .bufferCount(Math.ceil(timeout / INTERVAL))
-      .map(value => undefined)
+      .map(() => undefined)
       .first()
       .subscribe(next);
   }
@@ -31,14 +31,14 @@ export class DefaultScheduler implements Scheduler {
   public interval(next: () => void, timeout: number) {
     return this.subject
       .bufferCount(Math.ceil(timeout / INTERVAL))
-      .map(value => undefined)
+      .map(() => undefined)
       .subscribe(next);
   }
 
   public cron(next: () => void, pattern: string) {
     return this.subject
       .pipe(cronOperator(pattern))
-      .map(value => undefined)
+      .map(() => undefined)
       .subscribe(next);
   }
 

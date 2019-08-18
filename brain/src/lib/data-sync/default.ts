@@ -67,7 +67,7 @@ export class DefaultDataSync implements DataSync {
   }
 
   private async check(item: SyncItem) {
-    return new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve) => {
       const dir = path.resolve(this.assetsDir, item.type);
       fs.access(dir, error => {
         if (error) resolve(false);
@@ -82,7 +82,7 @@ export class DefaultDataSync implements DataSync {
       const cwd = this.assetsDir;
       const repo = `${config.git.baseUrl}/${item.type}.git`;
       const command = `git clone ${repo}`;
-      exec(command, { cwd }, (error, stdout, stderr) => {
+      exec(command, { cwd }, (error) => {
         if (error) reject(error);
         else resolve();
       });
@@ -94,7 +94,7 @@ export class DefaultDataSync implements DataSync {
     return new Promise((resolve, reject) => {
       const cwd = path.resolve(this.assetsDir, item.type);
       const command = `git pull`;
-      exec(command, { cwd }, (error, stdout, stderr) => {
+      exec(command, { cwd }, (error) => {
         if (error) reject(error);
         else resolve();
       });

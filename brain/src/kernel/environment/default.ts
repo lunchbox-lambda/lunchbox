@@ -88,8 +88,7 @@ export class DefaultEnvironment implements Environment {
     this.peripherals.sensorEvents.subscribe(
       event => {
         this.sensorReadings.set(event.variable, event.value);
-      },
-      error => { }
+      }
     );
   }
 
@@ -97,8 +96,7 @@ export class DefaultEnvironment implements Environment {
     this.peripherals.cameraEvents.subscribe(
       event => {
         this.cameraPictures.set(event.variable, event.image);
-      },
-      error => { }
+      }
     );
   }
 
@@ -125,8 +123,7 @@ export class DefaultEnvironment implements Environment {
             keys.forEach(key => this.desiredValues.delete(key));
           } break;
         }
-      },
-      error => { }
+      }
     );
   }
 

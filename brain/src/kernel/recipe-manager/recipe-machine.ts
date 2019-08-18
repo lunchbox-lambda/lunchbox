@@ -82,6 +82,7 @@ export abstract class RecipeState {
       this.context.recipeState = nextState;
   }
 
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   public startRecipe(recipeId?: string) { this.rejectState(); }
   public pauseRecipe() { this.rejectState(); }
   public resumeRecipe() { this.rejectState(); }

@@ -85,7 +85,7 @@ export class DefaultFirmware implements Firmware {
         const board = `--board ${boardId}`;
         const projectDir = `--project-dir ${config.platformio.path}`;
         const command = `platformio init ${board} ${projectDir}`;
-        exec(command, { cwd: __dirname }, (error, stdout, stderr) => {
+        exec(command, { cwd: __dirname }, (error) => {
           if (error) reject(error);
           else resolve();
         });
@@ -113,7 +113,7 @@ export class DefaultFirmware implements Firmware {
           const uploadPort = `--upload-port ${config.board.port}`;
           const projectDir = `--project-dir ${config.platformio.path}`;
           const command = `platformio run ${environment} ${target} ${uploadPort} ${projectDir}`;
-          exec(command, { cwd: __dirname }, (error, stdout, stderr) => {
+          exec(command, { cwd: __dirname }, (error) => {
             if (error) reject(error);
             else resolve();
           });
