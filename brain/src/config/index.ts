@@ -39,7 +39,7 @@ interface IConfig {
 }
 
 let _config: IConfig;
-const config = {} as IConfig;
+const config = {};
 
 if (process.env.NODE_ENV === 'production')
   _config = configProduction;
@@ -49,4 +49,4 @@ if (process.env.NODE_ENV === 'development')
 
 Object.assign(config, _config);
 
-export default config;
+export default config as IConfig;
