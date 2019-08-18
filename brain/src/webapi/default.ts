@@ -15,7 +15,6 @@ const log = logger('webapi:server');
 
 @injectable()
 export class DefaultWebApi implements WebApi {
-
   @inject(TYPES.Router) private router: Router
   @inject(TYPES.Socket) private socket: Socket
   @inject(TYPES.NodeRed) private nodeRed: NodeRed
@@ -40,5 +39,4 @@ export class DefaultWebApi implements WebApi {
     await server.listen(config.server.port);
     log(`listening on port ${config.server.port}`);
   }
-
 }

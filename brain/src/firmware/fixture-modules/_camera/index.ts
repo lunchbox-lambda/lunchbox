@@ -3,7 +3,6 @@ import { exec } from 'child_process';
 import { synthesizeVariable } from 'lib/tools';
 
 export abstract class Camera<T> {
-
   public static snapshotFrequency = 5000
 
   public cameraPicture: Buffer
@@ -59,11 +58,9 @@ export abstract class Camera<T> {
     );
     this.variable = outputs[0];
   }
-
 }
 
 export class CameraEvent {
-
   public timestamp: Date = new Date()
 
   public constructor(
@@ -71,5 +68,4 @@ export class CameraEvent {
     public variable: string,
     public image: Buffer
   ) { }
-
 }

@@ -2,7 +2,6 @@ import { Switch } from 'johnny-five';
 import { Sensor } from '../_sensor';
 
 export = class Default extends Sensor<Switch> {
-
   public init() {
     super.init();
 
@@ -17,7 +16,5 @@ export = class Default extends Sensor<Switch> {
         switch_status: isOpen ? 1 : 0
       });
     }, Sensor.readFrequency);
-
   }
-
 }

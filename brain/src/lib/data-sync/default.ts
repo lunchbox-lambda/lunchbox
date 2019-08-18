@@ -18,7 +18,6 @@ interface SyncItem {
 
 @injectable()
 export class DefaultDataSync implements DataSync {
-
   @inject(TYPES.Repository) private repository: Repository
   @inject(TYPES.JSONValidator) private validator: JSONValidator
 
@@ -120,5 +119,4 @@ export class DefaultDataSync implements DataSync {
     await item.fn(data);
     log(`imported ${data.length} ${item.type}`);
   }
-
 }

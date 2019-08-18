@@ -2,7 +2,6 @@ import { Sensor as GeneralSensor, Fn } from 'johnny-five';
 import { Sensor } from '../_sensor';
 
 export = class Default extends Sensor<GeneralSensor> {
-
   public init() {
     super.init();
 
@@ -24,5 +23,4 @@ export = class Default extends Sensor<GeneralSensor> {
       });
     });
   }
-
 }

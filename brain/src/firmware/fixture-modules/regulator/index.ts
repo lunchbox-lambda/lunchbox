@@ -2,7 +2,6 @@ import { Regulator } from '../_regulator';
 import { Relay } from 'johnny-five';
 
 export = class Default extends Regulator<Relay> {
-
   public init() {
     super.init();
 
@@ -19,5 +18,4 @@ export = class Default extends Regulator<Relay> {
         this.regulator.open();
     });
   }
-
 }

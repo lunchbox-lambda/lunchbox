@@ -10,7 +10,6 @@ const log = logger('kernel:command-center');
 
 @injectable()
 export class DefaultCommandCenter implements CommandCenter {
-
   @inject(TYPES.Controllers) private controllers: Controllers
   @inject(TYPES.RecipeManager) private recipeManager: RecipeManager
 
@@ -29,7 +28,6 @@ export class DefaultCommandCenter implements CommandCenter {
   public commandController(command: ControllerCommand, controllerId: string) {
     log(`controller ${controllerId} ${ControllerCommand[command]}`);
     switch (command) {
-
       case ControllerCommand.TURN_ON:
         this.controllers.turnOn(controllerId);
         break;
@@ -43,5 +41,4 @@ export class DefaultCommandCenter implements CommandCenter {
         break;
     }
   }
-
 }

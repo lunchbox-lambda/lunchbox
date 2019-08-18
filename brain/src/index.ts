@@ -54,7 +54,6 @@ const variables = container.get<VariableService>(TYPES.VariableService);
 const webApi = container.get<WebApi>(TYPES.WebApi);
 
 async function init() {
-
   await repository.init();
   await computerInit.init();
   await dataSync.sync();

@@ -11,11 +11,9 @@ const log = logger('lib:json-validator');
 
 @injectable()
 export class DefaultJSONValidator implements JSONValidator {
-
   private ajv = new Ajv()
 
   public constructor() {
-
     const schemasPath = path.join(__dirname, '../../schemas');
     fs.readdirSync(schemasPath).forEach(file => {
       const schema = require(`schemas/${file}`);
@@ -28,7 +26,6 @@ export class DefaultJSONValidator implements JSONValidator {
       errors: true,
       validate: function validate(schema, data) {
         try {
-
           if (schema === 'cron') {
             cronParser.parseExpression(data);
           }
@@ -71,5 +68,4 @@ export class DefaultJSONValidator implements JSONValidator {
     if (validateError) throw validateError;
     else return data;
   }
-
 }

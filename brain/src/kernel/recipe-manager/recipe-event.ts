@@ -14,7 +14,6 @@ export enum RecipeEventType {
 }
 
 export class RecipeEvent {
-
   public timestamp: Date = new Date()
 
   public constructor(

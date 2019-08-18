@@ -11,7 +11,6 @@ import { VariableService } from 'services/variables';
 
 @injectable()
 export class DefaultServiceHolder implements ServiceHolder {
-
   @inject(TYPES.CameraService) public cameras: CameraService
   @inject(TYPES.ComputerService) public computers: ComputerService
   @inject(TYPES.DiagnosticsService) public diagnostics: DiagnosticsService
@@ -19,5 +18,4 @@ export class DefaultServiceHolder implements ServiceHolder {
   @inject(TYPES.FixtureTypeService) public fixtureTypes: FixtureTypeService
   @inject(TYPES.RecipeService) public recipes: RecipeService
   @inject(TYPES.VariableService) public variables: VariableService
-
 }

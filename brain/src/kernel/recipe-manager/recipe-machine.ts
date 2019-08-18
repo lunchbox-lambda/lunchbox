@@ -7,12 +7,10 @@ import { RecipeContext } from './recipe-context';
 import { synthesizeVariable } from 'lib/tools';
 
 export class RecipeMachine {
-
   public async start(context: RecipeContext) {
     let state: RecipeState;
 
     switch (context.status) {
-
       case RecipeStatus.NO_RECIPE:
         state = new NoRecipeState();
         break;
@@ -48,11 +46,9 @@ export class RecipeMachine {
 
     context.recipeState = state;
   }
-
 }
 
 export abstract class RecipeState {
-
   private isLocked: boolean = false
   protected context: RecipeContext
   protected async onStateEnter(): Promise<void | RecipeState> { }
@@ -100,7 +96,6 @@ export abstract class RecipeState {
 
 @RecipeStateStatus(RecipeStatus.NO_RECIPE, RecipeEventType.NO_RECIPE_LOADED)
 class NoRecipeState extends RecipeState {
-
   protected async onStateEnter() {
     this.context.reset();
   }
@@ -112,7 +107,6 @@ class NoRecipeState extends RecipeState {
 
 @RecipeStateStatus(RecipeStatus.STARTED, RecipeEventType.RECIPE_STARTED)
 class RecipeStartedState extends RecipeState {
-
   public constructor(private recipeId: string) {
     super();
   }
@@ -128,7 +122,6 @@ class RecipeStartedState extends RecipeState {
 
 @RecipeStateStatus(RecipeStatus.RESUMED, RecipeEventType.RECIPE_RESUMED)
 class RecipeResumedState extends RecipeState {
-
   protected async onStateEnter() {
     this.context.resumedAt = new Date();
     return new RecipeRunningState();
@@ -137,12 +130,10 @@ class RecipeResumedState extends RecipeState {
 
 @RecipeStateStatus(RecipeStatus.RUNNING, RecipeEventType.RECIPE_RUNNING)
 class RecipeRunningState extends RecipeState {
-
   private subscription: Subscription
   private offsetIndex: number
 
   protected async onStateEnter() {
-
     this.subscription = this.context.scheduler.interval(() => {
       this.advanceRecipePosition();
     }, 1000);
@@ -230,7 +221,6 @@ class RecipeRunningState extends RecipeState {
 
 @RecipeStateStatus(RecipeStatus.PAUSED, RecipeEventType.RECIPE_PAUSED)
 class RecipePausedState extends RecipeState {
-
   protected async onStateEnter() {
     this.context.pausedAt = new Date();
   }
@@ -246,7 +236,6 @@ class RecipePausedState extends RecipeState {
 
 @RecipeStateStatus(RecipeStatus.STOPPED, RecipeEventType.RECIPE_STOPPED)
 class RecipeStoppedState extends RecipeState {
-
   protected async onStateEnter() {
     this.context.stoppedAt = new Date();
   }
@@ -263,7 +252,6 @@ class RecipeStoppedState extends RecipeState {
 
 @RecipeStateStatus(RecipeStatus.FINISHED, RecipeEventType.RECIPE_FINISHED)
 class RecipeFinishedState extends RecipeState {
-
   protected async onStateEnter() {
     this.context.finishedAt = new Date();
   }
@@ -280,7 +268,6 @@ class RecipeFinishedState extends RecipeState {
 
 @RecipeStateStatus(RecipeStatus.ERROR, RecipeEventType.ERROR_OCCURED)
 class RecipeErrorState extends RecipeState {
-
   public constructor(private error: string) {
     super();
   }

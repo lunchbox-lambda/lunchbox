@@ -11,7 +11,6 @@ import { CommandCenter } from 'kernel/command-center';
 
 @injectable()
 export class DefaultComputerService extends Service implements ComputerService {
-
   @inject(TYPES.CommandCenter) private commandCenter: CommandCenter
 
   public async getComputer() {
@@ -28,7 +27,6 @@ export class DefaultComputerService extends Service implements ComputerService {
     let controllerCommand: ControllerCommand;
 
     switch (command) {
-
       case 'turn-on':
         controllerCommand = ControllerCommand.TURN_ON;
         break;
@@ -63,5 +61,4 @@ export class DefaultComputerService extends Service implements ComputerService {
       });
     });
   }
-
 }

@@ -4,7 +4,6 @@ import { Service } from '../service';
 
 @injectable()
 export class DefaultRecipeService extends Service implements RecipeService {
-
   public async getRecipes() {
     return this.repository.getRecipes();
   }
@@ -12,5 +11,4 @@ export class DefaultRecipeService extends Service implements RecipeService {
   public async getRecipe(id: string) {
     return this.repository.getRecipe(id);
   }
-
 }

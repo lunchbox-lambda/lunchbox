@@ -10,7 +10,6 @@ const log = logger('kernel:transmitter');
 
 @injectable()
 export class DefaultTransmitter implements Transmitter {
-
   @inject(TYPES.Scheduler) private scheduler: Scheduler
   @inject(TYPES.Broadcaster) private broadcaster: Broadcaster
   @inject(TYPES.Environment) private environment: Environment
@@ -23,7 +22,6 @@ export class DefaultTransmitter implements Transmitter {
   }
 
   private async initBroadcasts() {
-
     this.broadcaster.register('computer', () => Promise.resolve(
       this.environment.computer
     ));
@@ -59,7 +57,5 @@ export class DefaultTransmitter implements Transmitter {
       // Broadcast computer local time changes
       this.broadcaster.broadcast('computer');
     }, '0 * * * * *');
-
   }
-
 }

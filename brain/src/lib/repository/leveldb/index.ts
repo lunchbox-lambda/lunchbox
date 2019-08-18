@@ -18,7 +18,6 @@ const RECIPE_CONTEXT = 'recipe-context';
 
 @injectable()
 export class LevelDB implements Repository {
-
   private db: any
 
   public async init() {
@@ -129,5 +128,4 @@ export class LevelDB implements Repository {
     await this.db.put(key, _value);
     return _value;
   }
-
 }

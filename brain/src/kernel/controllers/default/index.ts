@@ -12,7 +12,6 @@ const log = logger('kernel:controllers');
 
 @injectable()
 export class DefaultControllers implements Controllers {
-
   @inject(TYPES.Peripherals) private peripherals: Peripherals
   @inject(TYPES.Environment) private environment: Environment
   @inject(TYPES.Scheduler) private scheduler: Scheduler

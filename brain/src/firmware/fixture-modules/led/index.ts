@@ -2,7 +2,6 @@ import { Actuator } from '../_actuator';
 import { Led } from 'johnny-five';
 
 export = class Default extends Actuator<Led> {
-
   public init() {
     super.init();
 
@@ -18,5 +17,4 @@ export = class Default extends Actuator<Led> {
         this.actuator.off();
     });
   }
-
 }

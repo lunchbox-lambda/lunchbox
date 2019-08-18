@@ -1,7 +1,6 @@
 import { Route, RouteDeps } from '../route';
 
 export = ({ router, services, validator }: RouteDeps) => {
-
   router.get('/computer', Route.create({
     response: async () => {
       return services.computers.getComputer();
@@ -44,5 +43,4 @@ export = ({ router, services, validator }: RouteDeps) => {
       return services.computers.updateComputerFixtures(body);
     }
   }));
-
 }

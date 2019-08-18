@@ -22,7 +22,6 @@ interface RouteProps {
 }
 
 export class Route {
-
   public static create(args: RouteArgs): RequestHandler {
     const { authorize, validate, response } = args;
     const route = new Route(authorize, validate, response);
@@ -38,7 +37,6 @@ export class Route {
   private get handler() {
     return async (req: Request, res: Response) => {
       try {
-
         const props = {
           params: req.params,
           body: req.body
@@ -57,7 +55,6 @@ export class Route {
           return res.status(204).end();
 
         res.send(body);
-
       }
       catch (error) {
         const { message } = error;
@@ -65,5 +62,4 @@ export class Route {
       }
     };
   }
-
 }

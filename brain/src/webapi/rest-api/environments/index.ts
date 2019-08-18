@@ -13,5 +13,4 @@ export = ({ router, services }: RouteDeps) => {
       return services.environments.commandRecipe(environment, command, recipeId);
     }
   }));
-
 }

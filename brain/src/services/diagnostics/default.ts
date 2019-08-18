@@ -11,7 +11,6 @@ import { Service } from '../service';
 
 @injectable()
 export class DefaultDiagnosticsService extends Service implements DiagnosticsService {
-
   @inject(TYPES.Firmware) private firmware: Firmware
   @inject(TYPES.Peripherals) private peripherals: Peripherals
   @inject(TYPES.Controllers) private controllers: Controllers
@@ -45,5 +44,4 @@ export class DefaultDiagnosticsService extends Service implements DiagnosticsSer
       });
     });
   }
-
 }

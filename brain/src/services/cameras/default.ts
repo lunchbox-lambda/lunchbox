@@ -5,7 +5,6 @@ import { Service } from '../service';
 
 @injectable()
 export class DefaultCameraService extends Service implements CameraService {
-
   @inject(TYPES.Environment) private environment: Environment
 
   public async getCameraPicture(variableName: string) {
@@ -17,5 +16,4 @@ export class DefaultCameraService extends Service implements CameraService {
       else reject(new Error('Camera picture not available.'));
     });
   }
-
 }

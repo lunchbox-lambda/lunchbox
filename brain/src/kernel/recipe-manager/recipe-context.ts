@@ -10,7 +10,6 @@ import { RecipeState } from './recipe-machine';
 import { RecipeInstance } from './recipe-instance';
 
 export class RecipeContext extends RecipeContextModel {
-
   public recipeInstance: RecipeInstance
   private _eventSubject: Subject<RecipeEvent>
   private _recipeState: RecipeState
@@ -28,7 +27,6 @@ export class RecipeContext extends RecipeContextModel {
 
   public command(recipeCommand: RecipeCommand, recipeId?: string) {
     switch (recipeCommand) {
-
       case RecipeCommand.START:
         this._recipeState.startRecipe(recipeId);
         break;

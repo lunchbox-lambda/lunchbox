@@ -6,5 +6,4 @@ export = ({ router, services }: RouteDeps) => {
       return services.variables.getVariables();
     }
   }));
-
 }

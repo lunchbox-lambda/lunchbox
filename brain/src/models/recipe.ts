@@ -50,7 +50,6 @@ export class RecipeContext implements ISerializable {
     finishedAt: this.finishedAt,
     errorAt: this.errorAt
   })
-
 }
 
 export enum RecipeCommand {

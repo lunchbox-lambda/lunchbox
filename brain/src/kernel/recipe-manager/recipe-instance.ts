@@ -2,7 +2,6 @@ import * as moment from 'moment';
 import { Recipe } from 'models';
 
 export class RecipeInstance {
-
   public name: string
   public recipeId: string
   public duration: number = 0

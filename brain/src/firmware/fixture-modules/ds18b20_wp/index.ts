@@ -2,7 +2,6 @@ import { Thermometer } from 'johnny-five';
 import { Sensor } from '../_sensor';
 
 export = class Default extends Sensor<Thermometer> {
-
   public init() {
     super.init();
 
@@ -19,5 +18,4 @@ export = class Default extends Sensor<Thermometer> {
       });
     });
   }
-
 }

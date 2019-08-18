@@ -11,7 +11,6 @@ import { Regulator, RegulatorState } from 'firmware/fixture-modules/_regulator';
 const log = logger('kernel:controllers');
 
 export class RegulatorControllers {
-
   public constructor(
     private peripherals: Peripherals,
     private scheduler: Scheduler
@@ -56,7 +55,6 @@ export class RegulatorControllers {
 }
 
 abstract class RegulatorController extends Controller {
-
   public constructor(
     public regulator: Regulator<any>
   ) { super('regulator'); }
@@ -91,7 +89,6 @@ abstract class RegulatorController extends Controller {
 }
 
 class StaticController extends RegulatorController {
-
   private initialized: boolean
 
   public spin() {
@@ -112,7 +109,6 @@ class StaticController extends RegulatorController {
 }
 
 class PeriodicController extends RegulatorController {
-
   private cronSubscription: Subscription
   private durationSubscription: Subscription
 

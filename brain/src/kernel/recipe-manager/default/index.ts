@@ -14,7 +14,6 @@ const log = logger('kernel:recipe-manager');
 
 @injectable()
 export class DefaultRecipeManager implements RecipeManager {
-
   @inject(TYPES.Scheduler) private scheduler: Scheduler
   @inject(TYPES.Repository) private repository: Repository
   @inject(TYPES.Broadcaster) private broadcaster: Broadcaster
@@ -63,7 +62,6 @@ export class DefaultRecipeManager implements RecipeManager {
 
   private async subscribeRecipeEvents() {
     this.recipeEvents.subscribe(event => {
-
       const { context } = event;
       const { environment, recipeInstance, error } = context;
       const name = recipeInstance ? recipeInstance.name : null;
@@ -71,7 +69,6 @@ export class DefaultRecipeManager implements RecipeManager {
       this.broadcaster.broadcast('recipe-context', context.serializeForBroadcast());
 
       switch (event.eventType) {
-
         case RecipeEventType.NO_RECIPE_LOADED:
           log(`no recipe loaded in the "${environment}" environment`);
           break;
@@ -119,5 +116,4 @@ export class DefaultRecipeManager implements RecipeManager {
   public get recipeContexts(): Map<string, RecipeContext> {
     return this.contexts;
   }
-
 }

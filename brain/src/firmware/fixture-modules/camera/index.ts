@@ -1,7 +1,6 @@
 import { Camera } from '../_camera';
 
 export = class Default extends Camera<void> {
-
   public init() {
     super.init();
 
@@ -10,5 +9,4 @@ export = class Default extends Camera<void> {
       if (image) super.onCameraPicture(image);
     }, Camera.snapshotFrequency);
   }
-
 }

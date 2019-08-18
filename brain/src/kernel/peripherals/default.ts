@@ -14,7 +14,6 @@ const log = logger('kernel:peripherals');
 
 @injectable()
 export class DefaultPeripherals implements Peripherals {
-
   @inject(TYPES.Firmware) private firmware: Firmware
   @inject(TYPES.Repository) private repository: Repository
 
@@ -48,7 +47,6 @@ export class DefaultPeripherals implements Peripherals {
 
   private async initPeripherals(computer: Computer, fixtureTypes: Map<string, FixtureType>) {
     return Promise.all(computer.fixtures.map(async fixture => {
-
       if (fixture.disabled) {
         log(`skipped fixture ${fixture.id} ${fixture.env} (disabled)`);
         return;
@@ -104,7 +102,6 @@ export class DefaultPeripherals implements Peripherals {
         camera.init();
         log(`mounted camera ${camera.id} ${camera.env} ${camera.dev}`);
       }
-
     }));
   }
 
@@ -156,5 +153,4 @@ export class DefaultPeripherals implements Peripherals {
       )
     };
   }
-
 }

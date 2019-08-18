@@ -1,7 +1,6 @@
 import { Subject, Observable } from 'rxjs';
 
 export abstract class Regulator<T> {
-
   public active: boolean
   protected regulator: T
   private _params: {
@@ -41,11 +40,8 @@ export abstract class Regulator<T> {
   }) {
     this._params = params;
   }
-
 }
 
 export class RegulatorState {
-
   public constructor(public state: 'on' | 'off') { }
-
 }

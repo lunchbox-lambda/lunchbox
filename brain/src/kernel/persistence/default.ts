@@ -6,10 +6,8 @@ const log = logger('kernel:persistence');
 
 @injectable()
 export class DefaultPersistence implements Persistence {
-
   // TODO: Implement Persistence
   public async init() {
     log(`init skipped`);
   }
-
 }

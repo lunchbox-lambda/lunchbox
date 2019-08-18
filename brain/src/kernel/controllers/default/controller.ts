@@ -2,7 +2,6 @@ import * as uuid from 'uuid';
 import { ControllerState } from 'models';
 
 export abstract class Controller {
-
   public id: string = uuid.v4()
   public state: ControllerState = ControllerState.AUTOMATIC
   public active: boolean = false
@@ -32,5 +31,4 @@ export abstract class Controller {
       ...status
     };
   }
-
 }

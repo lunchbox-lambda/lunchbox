@@ -6,7 +6,6 @@ import { RecipeCommand } from 'models';
 
 @injectable()
 export class DefaultEnvironmentService extends Service implements EnvironmentService {
-
   @inject(TYPES.CommandCenter) private commandCenter: CommandCenter
 
   public async getEnvironmentData() {
@@ -17,7 +16,6 @@ export class DefaultEnvironmentService extends Service implements EnvironmentSer
     let recipeCommand: RecipeCommand;
 
     switch (command) {
-
       case 'start':
         recipeCommand = RecipeCommand.START;
         break;
@@ -41,5 +39,4 @@ export class DefaultEnvironmentService extends Service implements EnvironmentSer
 
     this.commandCenter.commandRecipe(environment, recipeCommand, recipeId);
   }
-
 }

@@ -2,7 +2,6 @@ import { Actuator } from '../_actuator';
 import { Relay } from 'johnny-five';
 
 export = class Default extends Actuator<Relay> {
-
   public init() {
     super.init();
 
@@ -19,5 +18,4 @@ export = class Default extends Actuator<Relay> {
         this.actuator.open();
     });
   }
-
 }

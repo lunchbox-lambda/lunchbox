@@ -21,7 +21,6 @@ interface PlatformioEnv {
 
 @injectable()
 export class DefaultFirmware implements Firmware {
-
   public board: Board = null
   private _status: boolean = null
   @inject(TYPES.Broadcaster) private broadcaster: Broadcaster
@@ -81,7 +80,6 @@ export class DefaultFirmware implements Firmware {
       logPlatformio(`init environment ${boardId}`);
 
       return new Promise((resolve, reject) => {
-
         const board = `--board ${boardId}`;
         const projectDir = `--project-dir ${config.platformio.path}`;
         const command = `platformio init ${board} ${projectDir}`;
@@ -89,7 +87,6 @@ export class DefaultFirmware implements Firmware {
           if (error) reject(error);
           else resolve();
         });
-
       });
     }
   }
@@ -98,7 +95,6 @@ export class DefaultFirmware implements Firmware {
     logBoard(`firmata preflight`);
 
     return new Promise((resolve, reject) => {
-
       const command = 'node ./firmata-preflight';
       exec(command, { cwd: __dirname }, (error, stdout, stderr) => {
         if (!error) resolve();
@@ -119,7 +115,6 @@ export class DefaultFirmware implements Firmware {
           });
         }
       });
-
     });
   }
 
@@ -139,7 +134,6 @@ export class DefaultFirmware implements Firmware {
     });
 
     return new Promise((resolve, reject) => {
-
       this.board.on('ready', () => {
         this.board.samplingInterval(Sensor.readFrequency);
         logBoard(`ready`);
@@ -149,9 +143,6 @@ export class DefaultFirmware implements Firmware {
       this.board.on('error', (event?) => {
         reject(event);
       });
-
     });
-
   }
-
 }

@@ -11,7 +11,6 @@ const settings = config.nodered;
 
 @injectable()
 export class DefaultNodeRed implements NodeRed {
-
   public async start(server: Server, app: Express) {
     log('init');
 
@@ -32,5 +31,4 @@ export class DefaultNodeRed implements NodeRed {
 
     log('started');
   }
-
 }

@@ -2,7 +2,6 @@ import { Subject, Observable } from 'rxjs';
 import { synthesizeVariable } from 'lib/tools';
 
 export abstract class Sensor<T> {
-
   public static readFrequency = 15000
 
   public data: object
@@ -48,7 +47,6 @@ export abstract class Sensor<T> {
 }
 
 export class SensorEvent {
-
   public timestamp: Date = new Date()
 
   public constructor(
@@ -56,5 +54,4 @@ export class SensorEvent {
     public variable: string,
     public value: number
   ) { }
-
 }

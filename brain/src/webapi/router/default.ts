@@ -12,12 +12,10 @@ import { apiVersioning } from 'webapi/middleware/api-versioning';
 
 @injectable()
 export class DefaultRouter implements Router {
-
   @inject(TYPES.ServiceHolder) private services: ServiceHolder
   @inject(TYPES.JSONValidator) private validator: JSONValidator
 
   public async config(app: Express) {
-
     // Static Router
     app.use(express.static(config.server.public));
 
@@ -28,7 +26,6 @@ export class DefaultRouter implements Router {
     app.use('/*', (req, res) => {
       res.sendFile(path.resolve(config.server.public, 'index.html'));
     });
-
   }
 
   private async mountRESTApi(): Promise<express.Router> {
@@ -45,5 +42,4 @@ export class DefaultRouter implements Router {
 
     return router;
   }
-
 }

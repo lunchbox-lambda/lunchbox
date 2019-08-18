@@ -10,7 +10,6 @@ const INTERVAL = 1000;
 
 @injectable()
 export class DefaultScheduler implements Scheduler {
-
   private subject = new Subject()
   private expected: number
 
@@ -54,13 +53,11 @@ export class DefaultScheduler implements Scheduler {
       Math.max(0, timeout)
     );
   }
-
 }
 
 const cronOperator = (pattern) => {
   return (source) => {
     return Observable.create(subscriber => {
-
       const interval = cronParser.parseExpression(pattern);
       let nextTime = interval.next().toDate().getTime();
 

@@ -9,7 +9,6 @@ import { Actuator, ActuatorState } from 'firmware/fixture-modules/_actuator';
 const log = logger('kernel:controllers');
 
 export class PIDControllers {
-
   public constructor(
     private peripherals: Peripherals,
     private environment: Environment
@@ -62,7 +61,6 @@ export class PIDControllers {
 }
 
 class PIDController extends Controller {
-
   public constructor(
     public variable: string,
     public sensors: Sensor<any>[] = [],

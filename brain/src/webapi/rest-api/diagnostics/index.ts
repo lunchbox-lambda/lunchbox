@@ -1,7 +1,6 @@
 import { Route, RouteDeps } from '../route';
 
 export = ({ router, services }: RouteDeps) => {
-
   router.get('/diagnostics', Route.create({
     response: async () => {
       return services.diagnostics.getDiagnostics();
@@ -14,5 +13,4 @@ export = ({ router, services }: RouteDeps) => {
       return { data };
     }
   }));
-
 }

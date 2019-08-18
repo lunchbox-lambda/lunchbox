@@ -1,7 +1,6 @@
 import { Route, RouteDeps } from '../route';
 
 export = ({ router, services }: RouteDeps) => {
-
   router.get('/recipes', Route.create({
     response: async () => {
       return services.recipes.getRecipes();
@@ -20,5 +19,4 @@ export = ({ router, services }: RouteDeps) => {
       return services.recipes.getRecipe(params.id);
     }
   }));
-
 }

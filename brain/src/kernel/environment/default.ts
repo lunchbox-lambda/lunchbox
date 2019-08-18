@@ -16,7 +16,6 @@ const log = logger('kernel:environment');
 
 @injectable()
 export class DefaultEnvironment implements Environment {
-
   @inject(TYPES.Scheduler) private scheduler: Scheduler
   @inject(TYPES.Repository) private repository: Repository
   @inject(TYPES.Peripherals) private peripherals: Peripherals
@@ -107,7 +106,6 @@ export class DefaultEnvironment implements Environment {
         const { environment } = context;
 
         switch (event.eventType) {
-
           case RecipeEventType.OFFSET_CHANGED: {
             // Assign all the values for this environment
             const entries = [...variableValues.entries()];
@@ -126,5 +124,4 @@ export class DefaultEnvironment implements Environment {
       }
     );
   }
-
 }

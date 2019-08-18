@@ -9,7 +9,6 @@ const log = logger('lib:computer-init');
 
 @injectable()
 export class DefaultComputerInit implements ComputerInit {
-
   @inject(TYPES.Repository) private repository: Repository
 
   public async init() {
@@ -62,5 +61,4 @@ export class DefaultComputerInit implements ComputerInit {
       uuid: computerUUID
     };
   }
-
 }

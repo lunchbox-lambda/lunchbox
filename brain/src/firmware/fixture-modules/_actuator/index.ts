@@ -2,7 +2,6 @@ import { Subject, Observable } from 'rxjs';
 import { synthesizeVariable } from 'lib/tools';
 
 export abstract class Actuator<T> {
-
   public active: boolean
   protected actuator: T
   private _inputs: string[]
@@ -36,11 +35,8 @@ export abstract class Actuator<T> {
       synthesizeVariable(this.env, variable)
     );
   }
-
 }
 
 export class ActuatorState {
-
   public constructor(public state: 'on' | 'off') { }
-
 }
