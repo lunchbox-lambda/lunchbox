@@ -7,7 +7,7 @@ export = class Default extends Sensor<GeneralSensor> {
 
     this.sensor = new GeneralSensor({
       pin: this.pin,
-      freq: Sensor.readFrequency as any
+      freq: Sensor.readFrequency as any,
     });
 
     this.sensor.on('data', () => {
@@ -19,7 +19,7 @@ export = class Default extends Sensor<GeneralSensor> {
 
       super.onSensorData({
         /* eslint-disable-next-line @typescript-eslint/camelcase */
-        soil_moisture: _value
+        soil_moisture: _value,
       });
     });
   }

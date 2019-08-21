@@ -18,8 +18,8 @@ export class DefaultNodeRed implements NodeRed {
       logger: {
         level: 'error',
         handler: () =>
-          message => log(JSON.stringify(message), 'error')
-      }
+          (message) => log(JSON.stringify(message), 'error'),
+      },
     };
 
     await RED.init(server, settings);

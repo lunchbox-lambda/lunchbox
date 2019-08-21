@@ -5,5 +5,6 @@ export class Diagnostics {
     regulators: any[];
     cameras: any[];
   }
+
   public controllers: any[]
 }

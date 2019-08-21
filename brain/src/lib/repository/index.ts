@@ -2,7 +2,7 @@ import { Component } from 'lib/component';
 import {
   Computer, Fixture, FixtureType,
   Variable, Recipe,
-  RecipeContext
+  RecipeContext,
 } from 'models';
 
 export interface Repository extends Component {

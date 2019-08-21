@@ -25,8 +25,8 @@ const mapLevelPrefix = (level: Level) => {
 export default function log(namespace: string) {
   const _debug = debug(namespace);
   return (message: string, level: Level = 'info') => {
-    let icon = mapLevelIcon(level);
-    let prefix = mapLevelPrefix(level);
+    const icon = mapLevelIcon(level);
+    const prefix = mapLevelPrefix(level);
     if (prefix) message = `${prefix}: ${message}`;
     _debug(`[${icon}] ${message}`);
   };

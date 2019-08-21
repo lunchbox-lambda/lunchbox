@@ -4,15 +4,17 @@ export function synthesizeVariable(env: string, variable: string) {
 
 export function resolveVariable(variable: string) {
   const parts = variable.split('::');
-  if (parts.length !== 2)
+  if (parts.length !== 2) {
     throw new Error(`Not a synthesized variable: ${variable}`);
+  }
   return parts[1];
 }
 
 export function resolveEnvironment(variable: string) {
   const parts = variable.split('::');
-  if (parts.length !== 2)
+  if (parts.length !== 2) {
     throw new Error(`Not a synthesized variable: ${variable}`);
+  }
   return parts[0];
 }
 

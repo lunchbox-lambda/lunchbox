@@ -21,7 +21,7 @@ export class DefaultWebApi implements WebApi {
   @inject(TYPES.Broadcaster) private broadcaster: Broadcaster
 
   public async init() {
-    log(`init`);
+    log('init');
 
     const app = express();
     const server = http.createServer(app);

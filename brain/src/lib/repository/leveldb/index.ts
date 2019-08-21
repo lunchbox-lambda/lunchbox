@@ -1,12 +1,13 @@
 import config from 'config';
 import logger from 'lib/logger';
-const level = require('level');
 import { injectable } from 'inversify';
 import { Repository } from 'lib/repository';
 import {
   Computer, Fixture, FixtureType,
-  Variable, Recipe, RecipeContext
+  Variable, Recipe, RecipeContext,
 } from 'models';
+
+const level = require('level');
 
 const log = logger('backend:leveldb');
 
@@ -21,12 +22,12 @@ export class LevelDB implements Repository {
   private db: any
 
   public async init() {
-    const path = config.leveldb.path;
+    const { path } = config.leveldb;
     log(`init ${path}`);
 
     this.db = await level(path, {
       keyEncoding: 'utf8',
-      valueEncoding: 'json'
+      valueEncoding: 'json',
     });
   }
 
@@ -62,8 +63,8 @@ export class LevelDB implements Repository {
 
   public async getFixtureTypesWithIds(ids: string[]): Promise<FixtureType[]> {
     return this.db.get(FIXTURE_TYPES)
-      .then(fixtureTypes => fixtureTypes.filter(
-        fixtureType => ids.includes(fixtureType.id)
+      .then((fixtureTypes) => fixtureTypes.filter(
+        (fixtureType) => ids.includes(fixtureType.id),
       ))
       .catch(() => []);
   }
@@ -94,8 +95,8 @@ export class LevelDB implements Repository {
 
   public async getRecipe(id: string): Promise<Recipe> {
     return this.db.get(RECIPES)
-      .then(recipes => recipes.find(
-        recipe => recipe.id === id
+      .then((recipes) => recipes.find(
+        (recipe) => recipe.id === id,
       ))
       .catch(() => null);
   }
@@ -116,15 +117,15 @@ export class LevelDB implements Repository {
     const computer = await this.getComputer();
     if (!computer || !computer.fixtures) return [];
     return [...new Set(
-      computer.fixtures.map(fixture => fixture.env)
+      computer.fixtures.map((fixture) => fixture.env),
     )];
   }
 
-  ///
+  //
 
   private async upsert<T>(key: string, value: T): Promise<T> {
     let _value = await this.db.get(key).catch(() => null);
-    _value = Object.assign({}, _value, value);
+    _value = { ..._value, ...value };
     await this.db.put(key, _value);
     return _value;
   }

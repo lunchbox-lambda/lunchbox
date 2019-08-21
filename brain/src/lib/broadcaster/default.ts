@@ -13,8 +13,8 @@ export class DefaultBroadcaster implements Broadcaster {
   private broadcasts: Map<BroadcastEvent, Broadcast> = new Map()
 
   public async start() {
-    this.socket.onConnection().subscribe(client => {
-      this.broadcasts.forEach(broadcast => {
+    this.socket.onConnection().subscribe((client) => {
+      this.broadcasts.forEach((broadcast) => {
         this.doBroadcast(broadcast, null, client);
       });
     });
@@ -34,7 +34,7 @@ export class DefaultBroadcaster implements Broadcaster {
     if (!broadcast) return;
 
     const connectionCount = this.socket.connectionCount();
-    if (connectionCount == 0) return;
+    if (connectionCount === 0) return;
 
     const { event, provider } = broadcast;
 
@@ -42,7 +42,7 @@ export class DefaultBroadcaster implements Broadcaster {
     else {
       const resolvers = provider();
       (resolvers instanceof Array ? resolvers : [resolvers])
-        .forEach(async resolver => {
+        .forEach(async (resolver) => {
           socket.emit(event, await resolver);
         });
     }

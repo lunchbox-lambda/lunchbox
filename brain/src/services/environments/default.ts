@@ -1,8 +1,8 @@
 import { TYPES, inject, injectable } from 'lib/inversify';
 import { EnvironmentService } from 'services/environments';
-import { Service } from '../service';
 import { CommandCenter } from 'kernel/command-center';
 import { RecipeCommand } from 'models';
+import { Service } from '../service';
 
 @injectable()
 export class DefaultEnvironmentService extends Service implements EnvironmentService {
@@ -35,6 +35,8 @@ export class DefaultEnvironmentService extends Service implements EnvironmentSer
       case 'eject':
         recipeCommand = RecipeCommand.EJECT;
         break;
+
+      default: throw new Error('Invalid command');
     }
 
     this.commandCenter.commandRecipe(environment, recipeCommand, recipeId);

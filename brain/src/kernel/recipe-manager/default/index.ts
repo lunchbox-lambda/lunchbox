@@ -5,9 +5,9 @@ import { RecipeCommand } from 'models';
 import { Scheduler } from 'lib/scheduler';
 import { Repository } from 'lib/repository';
 import { Broadcaster } from 'lib/broadcaster';
+import { RecipeManager } from 'kernel/recipe-manager';
 import { RecipeMachine } from '../recipe-machine';
 import { RecipeContext } from '../recipe-context';
-import { RecipeManager } from 'kernel/recipe-manager';
 import { RecipeEvent, RecipeEventType } from '../recipe-event';
 
 const log = logger('kernel:recipe-manager');
@@ -23,7 +23,7 @@ export class DefaultRecipeManager implements RecipeManager {
   private contexts: Map<string, RecipeContext> = new Map()
 
   public async init() {
-    log(`init`);
+    log('init');
 
     await this.loadRecipeContexts();
     await this.subscribeRecipeEvents();
@@ -32,19 +32,19 @@ export class DefaultRecipeManager implements RecipeManager {
 
   private async loadRecipeContexts() {
     const environments = await this.repository.getEnvironments();
-    for (let environment of environments) {
+    for (const environment of environments) {
       let context = await this.repository.getRecipeContext(environment);
 
       if (!context) {
         context = await this.repository.upsertRecipeContext(
           new RecipeContext(
-            this.repository, this.scheduler, environment
-          ).serialize()
+            this.repository, this.scheduler, environment,
+          ).serialize(),
         );
       }
 
       const recipeContext = new RecipeContext(
-        this.repository, this.scheduler
+        this.repository, this.scheduler,
       ).deserialize(context);
 
       recipeContext.eventSubject = this.eventSubject;
@@ -55,13 +55,13 @@ export class DefaultRecipeManager implements RecipeManager {
   private async startRecipes() {
     const recipeMachine = new RecipeMachine();
     const contexts = [...this.recipeContexts.values()];
-    for (let context of contexts) {
+    for (const context of contexts) {
       await recipeMachine.start(context);
     }
   }
 
   private async subscribeRecipeEvents() {
-    this.recipeEvents.subscribe(event => {
+    this.recipeEvents.subscribe((event) => {
       const { context } = event;
       const { environment, recipeInstance, error } = context;
       const name = recipeInstance ? recipeInstance.name : null;
@@ -104,6 +104,8 @@ export class DefaultRecipeManager implements RecipeManager {
         case RecipeEventType.ERROR_OCCURED:
           log(`error occured with recipe "${name}" in the "${environment}" environment - ${error}`, 'error');
           break;
+
+        default: break;
       }
     });
   }

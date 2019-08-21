@@ -16,14 +16,14 @@ export class DefaultTransmitter implements Transmitter {
   @inject(TYPES.RecipeManager) private recipeManager: RecipeManager
 
   public async init() {
-    log(`init`);
+    log('init');
 
     await this.initBroadcasts();
   }
 
   private async initBroadcasts() {
     this.broadcaster.register('computer', () => Promise.resolve(
-      this.environment.computer
+      this.environment.computer,
     ));
 
     this.broadcaster.register('environment-list', () => {
@@ -32,15 +32,15 @@ export class DefaultTransmitter implements Transmitter {
 
     this.broadcaster.register('environment', () => {
       const { environments } = this.environment;
-      return environments.map(environment => Promise.resolve(
-        this.environment.serializeForBroadcast(environment)
+      return environments.map((environment) => Promise.resolve(
+        this.environment.serializeForBroadcast(environment),
       ));
     });
 
     this.broadcaster.register('recipe-context', () => {
       const { recipeContexts } = this.recipeManager;
-      return Array.from(recipeContexts.keys()).map(key => Promise.resolve(
-        recipeContexts.get(key).serializeForBroadcast()
+      return Array.from(recipeContexts.keys()).map((key) => Promise.resolve(
+        recipeContexts.get(key).serializeForBroadcast(),
       ));
     });
 

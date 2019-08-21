@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 import {
   RecipeStatus, RecipeCommand,
-  RecipeContext as RecipeContextModel
+  RecipeContext as RecipeContextModel,
 } from 'models';
 import { Repository } from 'lib/repository';
 import { Scheduler } from 'lib/scheduler';
@@ -17,7 +17,7 @@ export class RecipeContext extends RecipeContextModel {
   public constructor(
     public repository: Repository,
     public scheduler: Scheduler,
-    environment?: string
+    environment?: string,
   ) {
     super();
 
@@ -46,6 +46,8 @@ export class RecipeContext extends RecipeContextModel {
       case RecipeCommand.EJECT:
         this._recipeState.ejectRecipe();
         break;
+
+      default: throw new Error('Invalid command');
     }
   }
 
@@ -54,8 +56,9 @@ export class RecipeContext extends RecipeContextModel {
 
     const recipe = await this.repository.getRecipe(recipeId);
 
-    if (!recipe)
+    if (!recipe) {
       throw new Error(`Recipe '${recipeId}' not found`);
+    }
 
     this.recipeId = recipe.id;
     this.recipeInstance = new RecipeInstance(recipe);

@@ -15,7 +15,7 @@ export class RecipeInstance {
 
     let offset = 0;
 
-    for (let phase of recipe.phases) {
+    for (const phase of recipe.phases) {
       const recipePhase = new RecipePhase(phase.name);
       this.phases.push(recipePhase);
 
@@ -26,7 +26,7 @@ export class RecipeInstance {
         // Ensure the right daypart order
         const dayparts = [dawn, day, dusk, night];
 
-        for (let daypart of dayparts) {
+        for (const daypart of dayparts) {
           if (!daypart) continue;
 
           const daypartIndex = dayparts.indexOf(daypart);
@@ -37,7 +37,7 @@ export class RecipeInstance {
             offset,
             recipePhase,
             daypartIndex as RecipeDaypart,
-            new Map(Object.entries(variables))
+            new Map(Object.entries(variables)),
           );
 
           this.timeSeries.set(offset, recipePoint);

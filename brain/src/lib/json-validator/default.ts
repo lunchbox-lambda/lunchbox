@@ -15,7 +15,7 @@ export class DefaultJSONValidator implements JSONValidator {
 
   public constructor() {
     const schemasPath = path.join(__dirname, '../../schemas');
-    fs.readdirSync(schemasPath).forEach(file => {
+    fs.readdirSync(schemasPath).forEach((file) => {
       const schema = require(`schemas/${file}`);
       const key = path.parse(file).name;
       this.ajv.addSchema(schema, key);
@@ -28,21 +28,19 @@ export class DefaultJSONValidator implements JSONValidator {
         try {
           if (schema === 'cron') {
             cronParser.parseExpression(data);
-          }
-
-          else if (schema === 'duration') {
+          } else if (schema === 'duration') {
             const duration = moment.duration(data);
-            if (duration.toISOString() === 'P0D')
+            if (duration.toISOString() === 'P0D') {
               throw new Error(`Invalid ISO 8601 duration pattern ${data}`);
+            }
           }
-
           return true;
-        }
-        catch (error) {
+        } catch (error) {
+          /* eslint-disable-next-line dot-notation */
           validate['errors'] = [{ message: error.message }];
           return false;
         }
-      }
+      },
     });
   }
 
@@ -50,12 +48,11 @@ export class DefaultJSONValidator implements JSONValidator {
     let isValid = true;
 
     if (batch) {
-      data.forEach(item => {
+      data.forEach((item) => {
         isValid = isValid && this.ajv.validate(schemaKey, item) as boolean;
         return isValid;
       });
-    }
-    else isValid = isValid && this.ajv.validate(schemaKey, data) as boolean;
+    } else isValid = isValid && this.ajv.validate(schemaKey, data) as boolean;
 
     const message = isValid ? null : this.ajv.errorsText();
     if (!isValid) log(`${schemaKey}: ${message}`, 'error');

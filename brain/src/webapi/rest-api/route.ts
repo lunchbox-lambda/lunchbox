@@ -29,9 +29,10 @@ export class Route {
   }
 
   private constructor(
+    /* eslint-disable no-empty-pattern */
     private authorize = ({ }) => Promise.resolve<Error>(null),
     private validate = ({ }) => Promise.resolve<Error>(null),
-    private response = ({ }) => Promise.resolve<any>(null)
+    private response = ({ }) => Promise.resolve<any>(null),
   ) { }
 
   private get handler() {
@@ -39,24 +40,26 @@ export class Route {
       try {
         const props = {
           params: req.params,
-          body: req.body
+          body: req.body,
         };
 
         const authorizeError = await this.authorize(props);
-        if (authorizeError)
+        if (authorizeError) {
           return res.status(403).end(authorizeError.message);
+        }
 
         const validateError = await this.validate(props);
-        if (validateError)
+        if (validateError) {
           return res.status(400).end(validateError.message);
+        }
 
         const body = await this.response(props);
-        if (!body)
+        if (!body) {
           return res.status(204).end();
+        }
 
         res.send(body);
-      }
-      catch (error) {
+      } catch (error) {
         const { message } = error;
         res.status(500).end(message);
       }

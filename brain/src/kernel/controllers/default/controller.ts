@@ -28,7 +28,7 @@ export abstract class Controller {
       type: this.type,
       state: this.state,
       active: this.active,
-      ...status
+      ...status,
     };
   }
 }

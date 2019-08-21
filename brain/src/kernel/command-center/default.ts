@@ -1,8 +1,7 @@
 import logger from 'lib/logger';
 import { TYPES, inject, injectable } from 'lib/inversify';
 import { CommandCenter } from 'kernel/command-center';
-import { RecipeCommand } from 'models';
-import { ControllerCommand } from 'models';
+import { RecipeCommand, ControllerCommand } from 'models';
 import { Controllers } from 'kernel/controllers';
 import { RecipeManager } from 'kernel/recipe-manager';
 
@@ -14,7 +13,7 @@ export class DefaultCommandCenter implements CommandCenter {
   @inject(TYPES.RecipeManager) private recipeManager: RecipeManager
 
   public async init() {
-    log(`init`);
+    log('init');
   }
 
   public restartComputer() {
@@ -39,6 +38,8 @@ export class DefaultCommandCenter implements CommandCenter {
       case ControllerCommand.RESET:
         this.controllers.reset(controllerId);
         break;
+
+      default: throw new Error('Invalid command');
     }
   }
 }

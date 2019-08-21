@@ -29,7 +29,7 @@ export const TYPES = {
   VariableService: Symbol('VariableService'),
 
   WebApi: Symbol('WebApi'),
-  Router: Symbol('Router')
+  Router: Symbol('Router'),
 };
 
 export { inject, injectable } from 'inversify';

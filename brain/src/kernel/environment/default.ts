@@ -7,7 +7,7 @@ import { Peripherals } from 'kernel/peripherals';
 import { RecipeManager } from 'kernel/recipe-manager';
 import {
   Computer, Variable,
-  Environment as EnvironmentModel
+  Environment as EnvironmentModel,
 } from 'models';
 import { Scheduler } from 'lib/scheduler';
 import { checkVariable, resolveVariable } from 'lib/tools';
@@ -29,7 +29,7 @@ export class DefaultEnvironment implements Environment {
   public desiredValues: Map<string, number> = new Map()
 
   public async init() {
-    log(`init`);
+    log('init');
 
     await this.loadComputer();
     await this.loadVariables();
@@ -38,7 +38,7 @@ export class DefaultEnvironment implements Environment {
     await Promise.all([
       this.subscribeSensorEvents(),
       this.subscribeCameraEvents(),
-      this.subscribeRecipeEvents()
+      this.subscribeRecipeEvents(),
     ]);
   }
 
@@ -56,7 +56,7 @@ export class DefaultEnvironment implements Environment {
 
   private async loadVariables() {
     const variables = await this.repository.getVariables();
-    this.variables = new Map(variables.map<[string, Variable]>(x => [x.id, x]));
+    this.variables = new Map(variables.map<[string, Variable]>((x) => [x.id, x]));
   }
 
   private async loadEnvironments() {
@@ -79,29 +79,29 @@ export class DefaultEnvironment implements Environment {
       environment,
       sensorReadings: filterValues(this.sensorReadings),
       cameraPictures: filterValues(this.cameraPictures),
-      desiredValues: filterValues(this.desiredValues)
+      desiredValues: filterValues(this.desiredValues),
     };
   }
 
   private async subscribeSensorEvents() {
     this.peripherals.sensorEvents.subscribe(
-      event => {
+      (event) => {
         this.sensorReadings.set(event.variable, event.value);
-      }
+      },
     );
   }
 
   private async subscribeCameraEvents() {
     this.peripherals.cameraEvents.subscribe(
-      event => {
+      (event) => {
         this.cameraPictures.set(event.variable, event.image);
-      }
+      },
     );
   }
 
   private async subscribeRecipeEvents() {
     this.recipeManager.recipeEvents.subscribe(
-      event => {
+      (event) => {
         const { context, variableValues } = event;
         const { environment } = context;
 
@@ -117,11 +117,11 @@ export class DefaultEnvironment implements Environment {
           default: {
             // Remove all the values for this environment
             const keys = [...this.desiredValues.keys()]
-              .filter(key => checkVariable(environment, key));
-            keys.forEach(key => this.desiredValues.delete(key));
+              .filter((key) => checkVariable(environment, key));
+            keys.forEach((key) => this.desiredValues.delete(key));
           } break;
         }
-      }
+      },
     );
   }
 }

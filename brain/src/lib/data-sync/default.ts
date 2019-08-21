@@ -26,25 +26,25 @@ export class DefaultDataSync implements DataSync {
     {
       type: 'variables',
       schemaKey: 'variable',
-      fn: (data) => this.repository.setVariables(data)
+      fn: (data) => this.repository.setVariables(data),
     },
     {
       type: 'fixture-types',
       schemaKey: 'fixture-type',
-      fn: (data) => this.repository.setFixtureTypes(data)
+      fn: (data) => this.repository.setFixtureTypes(data),
     },
     {
       type: 'recipes',
       schemaKey: 'recipe',
-      fn: (data) => this.repository.setRecipes(data)
-    }
+      fn: (data) => this.repository.setRecipes(data),
+    },
   ] as SyncItem[]
 
   public async sync() {
     this.assetsDir = await this.createAssetsDirectory();
 
     await Promise.all(
-      this.items.map(item => this.doSync(item))
+      this.items.map((item) => this.doSync(item)),
     );
   }
 
@@ -61,14 +61,13 @@ export class DefaultDataSync implements DataSync {
       if (!exists) await this.clone(item);
       await this.pull(item);
       await this.import(item);
-    }
-    catch (error) { log(error.message, 'error'); }
+    } catch (error) { log(error.message, 'error'); }
   }
 
   private async check(item: SyncItem) {
     return new Promise<boolean>((resolve) => {
       const dir = path.resolve(this.assetsDir, item.type);
-      fs.access(dir, error => {
+      fs.access(dir, (error) => {
         if (error) resolve(false);
         else resolve(true);
       });
@@ -92,7 +91,7 @@ export class DefaultDataSync implements DataSync {
     log(`pull repository ${item.type}`);
     return new Promise((resolve, reject) => {
       const cwd = path.resolve(this.assetsDir, item.type);
-      const command = `git pull`;
+      const command = 'git pull';
       exec(command, { cwd }, (error) => {
         if (error) reject(error);
         else resolve();
@@ -105,15 +104,14 @@ export class DefaultDataSync implements DataSync {
     const files = fs.readdirSync(libDir);
     const data = [];
 
-    for (let file of files) {
+    for (const file of files) {
       try {
         const filePath = path.resolve(libDir, file);
         const content = fs.readFileSync(filePath, 'utf8');
         const json = JSON.parse(content);
         this.validator.validateThrow(json, item.schemaKey);
         data.push(json);
-      }
-      catch (error) { log(error.message, 'error'); }
+      } catch (error) { log(error.message, 'error'); }
     }
 
     await item.fn(data);

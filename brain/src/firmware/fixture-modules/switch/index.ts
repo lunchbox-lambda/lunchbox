@@ -6,14 +6,14 @@ export = class Default extends Sensor<Switch> {
     super.init();
 
     this.sensor = new Switch({
-      pin: this.pin
+      pin: this.pin,
     });
 
     setInterval(() => {
-      const isOpen = this.sensor.isOpen;
+      const { isOpen } = this.sensor;
       super.onSensorData({
         /* eslint-disable-next-line @typescript-eslint/camelcase */
-        switch_status: isOpen ? 1 : 0
+        switch_status: isOpen ? 1 : 0,
       });
     }, Sensor.readFrequency);
   }

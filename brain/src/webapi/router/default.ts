@@ -33,7 +33,7 @@ export class DefaultRouter implements Router {
     const { services, validator } = this;
 
     const root = path.resolve(__dirname, '../rest-api');
-    for (let entry of fs.readdirSync(root)) {
+    for (const entry of fs.readdirSync(root)) {
       const dir = path.join(root, entry);
       if (!fs.statSync(dir).isDirectory()) continue;
       const route = await import(dir) as (deps: RouteDeps) => void;

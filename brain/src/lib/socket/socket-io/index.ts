@@ -16,16 +16,15 @@ export class SocketIO implements Socket {
   private connectCounter: number = 0
 
   public async init(server: HttpServer | HttpsServer): Promise<void> {
-    log(`init`);
+    log('init');
 
     this.io = socketio(server, {
-      path: '/socket'
+      path: '/socket',
     });
 
-    this.io.on('connection', client => {
+    this.io.on('connection', (client) => {
       log(`connected ${client.id}`);
       this.connectCounter++;
-
 
       client.on('disconnect', () => {
         log(`disconnected ${client.id}`);

@@ -4,10 +4,9 @@ import config from 'config';
 import settings from 'lib/settings';
 import { TYPES, inject, injectable } from 'lib/inversify';
 import { ComputerService } from 'services/computers';
-import { Service } from '../service';
-import { Fixture } from 'models';
-import { ControllerCommand } from 'models';
+import { Fixture, ControllerCommand } from 'models';
 import { CommandCenter } from 'kernel/command-center';
+import { Service } from '../service';
 
 @injectable()
 export class DefaultComputerService extends Service implements ComputerService {
@@ -38,6 +37,8 @@ export class DefaultComputerService extends Service implements ComputerService {
       case 'reset':
         controllerCommand = ControllerCommand.RESET;
         break;
+
+      default: throw new Error('Invalid command');
     }
 
     this.commandCenter.commandController(controllerCommand, controllerId);
@@ -55,7 +56,7 @@ export class DefaultComputerService extends Service implements ComputerService {
     const data = JSON.stringify(settings, null, '    ');
     const filePath = path.resolve(config.data.path, 'settings.json');
     return new Promise<void>((resolve, reject) => {
-      fs.writeFile(filePath, data, error => {
+      fs.writeFile(filePath, data, (error) => {
         if (error) reject(error);
         else resolve();
       });

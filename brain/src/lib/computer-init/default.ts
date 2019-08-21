@@ -19,7 +19,7 @@ export class DefaultComputerInit implements ComputerInit {
   private async createDefaultComputer() {
     let computer = await this.repository.getComputer();
     if (!computer) {
-      log(`create default computer`);
+      log('create default computer');
 
       computer = new Computer();
       computer.createdAt = new Date();
@@ -35,7 +35,7 @@ export class DefaultComputerInit implements ComputerInit {
 
     const properties = {
       name, organization, uuid, version,
-      boardType: process.env.PLATFORMIO_BOARD_ID
+      boardType: process.env.PLATFORMIO_BOARD_ID,
     };
 
     log(`set name to ${properties.name}`);
@@ -58,7 +58,7 @@ export class DefaultComputerInit implements ComputerInit {
     return {
       name: computerName,
       organization: organizationName,
-      uuid: computerUUID
+      uuid: computerUUID,
     };
   }
 }

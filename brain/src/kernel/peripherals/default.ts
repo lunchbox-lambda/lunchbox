@@ -29,7 +29,7 @@ export class DefaultPeripherals implements Peripherals {
   public cameraEvents = this.cameraSubject.asObservable()
 
   public async init() {
-    log(`init`);
+    log('init');
 
     const computer = await this.repository.getComputer();
     const fixtureTypes = await this.loadFixtureTypes(computer);
@@ -39,14 +39,14 @@ export class DefaultPeripherals implements Peripherals {
   }
 
   private async loadFixtureTypes(computer: Computer) {
-    const fixtures = computer.fixtures;
-    const fixtureTypeIds = fixtures.map(fixture => fixture.type);
+    const { fixtures } = computer;
+    const fixtureTypeIds = fixtures.map((fixture) => fixture.type);
     const fixtureTypes = await this.repository.getFixtureTypesWithIds(fixtureTypeIds);
-    return new Map(fixtureTypes.map<[string, FixtureType]>(x => [x.id, x]));
+    return new Map(fixtureTypes.map<[string, FixtureType]>((x) => [x.id, x]));
   }
 
   private async initPeripherals(computer: Computer, fixtureTypes: Map<string, FixtureType>) {
-    return Promise.all(computer.fixtures.map(async fixture => {
+    return Promise.all(computer.fixtures.map(async (fixture) => {
       if (fixture.disabled) {
         log(`skipped fixture ${fixture.id} ${fixture.env} (disabled)`);
         return;
@@ -61,6 +61,7 @@ export class DefaultPeripherals implements Peripherals {
       }
 
       const mountPoint = fixture.pin === undefined ? fixture.dev : fixture.pin;
+      /* eslint-disable-next-line new-cap */
       const peripheral = new fixtureModule(fixture.id, mountPoint, fixture.env);
 
       // The fixture is a sensor
@@ -74,7 +75,7 @@ export class DefaultPeripherals implements Peripherals {
       }
 
       // The fixture is an actuator
-      else if (fixtureType.type === 'actuator') {
+      if (fixtureType.type === 'actuator') {
         const actuator = peripheral as Actuator<any>;
         actuator.inputs = fixtureType.inputs;
         this.actuators.push(actuator);
@@ -84,7 +85,7 @@ export class DefaultPeripherals implements Peripherals {
       }
 
       // The fixture is a regulator
-      else if (fixtureType.type === 'regulator') {
+      if (fixtureType.type === 'regulator') {
         const regulator = peripheral as Regulator<any>;
         regulator.params = fixture.params;
         this.regulators.push(regulator);
@@ -94,7 +95,7 @@ export class DefaultPeripherals implements Peripherals {
       }
 
       // The fixture is a camera
-      else if (fixtureType.type === 'camera') {
+      if (fixtureType.type === 'camera') {
         const camera = peripheral as Camera<any>;
         camera.outputs = fixtureType.outputs;
         this.cameras.push(camera);
@@ -107,50 +108,52 @@ export class DefaultPeripherals implements Peripherals {
 
   private async initObservables() {
     // Sensors
-    const sensorObservables = this.sensors.map(sensor => sensor.observable);
+    const sensorObservables = this.sensors.map((sensor) => sensor.observable);
     Observable
       .merge(...sensorObservables)
-      .filter(event => !!event.sensorId)
+      .filter((event) => !!event.sensorId)
       .subscribe(this.sensorSubject);
 
     // Cameras
-    const cameraObservables = this.cameras.map(camera => camera.observable);
+    const cameraObservables = this.cameras.map((camera) => camera.observable);
     Observable
       .merge(...cameraObservables)
-      .filter(event => !!event.cameraId)
+      .filter((event) => !!event.cameraId)
       .subscribe(this.cameraSubject);
   }
 
   private async loadFixtureModule(fixtureTypeId: string, fixtureTypes: Map<string, FixtureType>) {
     const fixtureType = fixtureTypes.get(fixtureTypeId);
+
     if (!fixtureType) {
       return { fixtureType: null, fixtureModule: null };
-    } else {
-      const fixtureModuleName = fixtureType.type === 'regulator' ? 'regulator' : fixtureType.id;
-      const _fixtureModule = await import(`firmware/fixture-modules/${fixtureModuleName}`);
-      const fixtureModule = _fixtureModule as (id: string, mountPoint: number | string, env: string) => void;
-      return { fixtureType, fixtureModule };
     }
+
+    type FixtureModule = (id: string, mountPoint: number | string, env: string) => void;
+    const fixtureModuleName = fixtureType.type === 'regulator' ? 'regulator' : fixtureType.id;
+    const _fixtureModule = await import(`firmware/fixture-modules/${fixtureModuleName}`);
+    const fixtureModule = _fixtureModule as FixtureModule;
+    return { fixtureType, fixtureModule };
   }
 
   public status(): { sensors: any[]; actuators: any[]; regulators: any[]; cameras: any[] } {
     return {
 
       sensors: this.sensors.map(({ id, pin, env, data }) =>
-        ({ id, pin, env, data })
+        ({ id, pin, env, data }),
       ),
 
       actuators: this.actuators.map(({ id, pin, env, active }) =>
-        ({ id, pin, env, active })
+        ({ id, pin, env, active }),
       ),
 
       regulators: this.regulators.map(({ id, pin, env, active }) =>
-        ({ id, pin, env, active })
+        ({ id, pin, env, active }),
       ),
 
       cameras: this.cameras.map(({ id, dev, env, variable, cameraPicture }) =>
-        ({ id, dev, env, variable, size: cameraPicture ? cameraPicture.length : 0 })
-      )
+        ({ id, dev, env, variable, size: cameraPicture ? cameraPicture.length : 0 }),
+      ),
     };
   }
 }

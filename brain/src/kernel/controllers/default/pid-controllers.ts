@@ -1,46 +1,45 @@
 import logger from 'lib/logger';
 import { ControllerState } from 'models';
-import { Controller } from './controller';
 import { Peripherals } from 'kernel/peripherals';
 import { Environment } from 'kernel/environment';
 import { Sensor } from 'firmware/fixture-modules/_sensor';
 import { Actuator, ActuatorState } from 'firmware/fixture-modules/_actuator';
+import { Controller } from './controller';
 
 const log = logger('kernel:controllers');
 
 export class PIDControllers {
   public constructor(
     private peripherals: Peripherals,
-    private environment: Environment
+    private environment: Environment,
   ) { }
 
   public async init() {
     const controllers: PIDController[] = [];
 
-    const sensors = this.peripherals.sensors;
+    const { sensors } = this.peripherals;
     const sensorsByVariable = this.reducePeripheralsByVariable(sensors, 'outputs');
     const sensorVariables = Object.keys(sensorsByVariable);
 
-    const actuators = this.peripherals.actuators;
+    const { actuators } = this.peripherals;
     const actuatorsByVariable = this.reducePeripheralsByVariable(actuators, 'inputs');
     const actuatorVariables = Object.keys(actuatorsByVariable);
 
     const variables = new Set([...sensorVariables, ...actuatorVariables]);
 
-    variables.forEach(variable => {
+    variables.forEach((variable) => {
       try {
         const sensors = sensorsByVariable[variable];
         const actuators = actuatorsByVariable[variable];
 
-        if (!!actuators) {
+        if (actuators) {
           const controller = new PIDController(variable, sensors, actuators, this.environment);
           controllers.push(controller);
           controller.reset();
 
           log(`created pid ctrl ${controller.id} ${controller.variable}`);
         }
-      }
-      catch (error) {
+      } catch (error) {
         log(`failed to create pid ctrl for ${variable} - ${error.message}`, 'error');
       }
     });
@@ -50,7 +49,7 @@ export class PIDControllers {
 
   private reducePeripheralsByVariable(peripherals: any[], key: string) {
     return peripherals.reduce((memo, peripheral) => {
-      peripheral[key].forEach(variable => {
+      peripheral[key].forEach((variable) => {
         const acc = memo[variable] || [];
         memo[variable] = acc;
         acc.push(peripheral);
@@ -65,20 +64,20 @@ class PIDController extends Controller {
     public variable: string,
     public sensors: Sensor<any>[] = [],
     public actuators: Actuator<any>[] = [],
-    private environment: Environment
+    private environment: Environment,
   ) { super('pid'); }
 
   // Notation remarks
   //   pv = process variable, sensor value
-  //   sp = setpoint, desired value    
+  //   sp = setpoint, desired value
   //   e = error value
-  //   u = control variable    
+  //   u = control variable
 
   public spin() {
-    if (this.state != ControllerState.AUTOMATIC) return;
+    if (this.state !== ControllerState.AUTOMATIC) return;
 
     let pv = this.environment.sensorReadings[this.variable];
-    let sp = this.environment.desiredValues[this.variable];
+    const sp = this.environment.desiredValues[this.variable];
 
     if (pv === undefined) pv = 0;
     if (sp === undefined) return;
@@ -90,7 +89,7 @@ class PIDController extends Controller {
 
     const u = Kp * e + Ki + Kd;
 
-    this.actuators.forEach(actuator => {
+    this.actuators.forEach((actuator) => {
       let actuatorState;
 
       if (u > 0) actuatorState = new ActuatorState('on');
@@ -104,7 +103,7 @@ class PIDController extends Controller {
     super.turnOn();
 
     const actuatorState = new ActuatorState('on');
-    this.actuators.forEach(actuator =>
+    this.actuators.forEach((actuator) =>
       actuator.subject.next(actuatorState));
   }
 
@@ -112,7 +111,7 @@ class PIDController extends Controller {
     super.turnOff();
 
     const actuatorState = new ActuatorState('off');
-    this.actuators.forEach(actuator =>
+    this.actuators.forEach((actuator) =>
       actuator.subject.next(actuatorState));
   }
 
@@ -120,16 +119,16 @@ class PIDController extends Controller {
     super.reset();
 
     const actuatorState = new ActuatorState('off');
-    this.actuators.forEach(actuator =>
+    this.actuators.forEach((actuator) =>
       actuator.subject.next(actuatorState));
   }
 
   public status() {
     return super.status({
       variable: this.variable,
-      active: this.actuators.some(x => x.active),
-      sensors: this.sensors.map(x => x.id),
-      actuators: this.actuators.map(x => x.id)
+      active: this.actuators.some((x) => x.active),
+      sensors: this.sensors.map((x) => x.id),
+      actuators: this.actuators.map((x) => x.id),
     });
   }
 }

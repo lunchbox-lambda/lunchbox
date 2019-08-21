@@ -36,10 +36,11 @@ export class DefaultFirmware implements Firmware {
 
   public async init() {
     if (!process.env.PLATFORMIO_BOARD_ID) {
-      logBoard(`init skipped`);
+      logBoard('init skipped');
     } else {
       logBoard(`init ${config.board.port}`);
-      return new Promise<void>(async resolve => {
+      /* eslint-disable-next-line no-async-promise-executor */
+      return new Promise<void>(async (resolve) => {
         try {
           await this.initPlatformio();
           await this.initFirmata();
@@ -63,7 +64,7 @@ export class DefaultFirmware implements Firmware {
     const platformioConfig = ini.parse(content);
 
     let platformioEnv: PlatformioEnv = null;
-    for (let key in platformioConfig) {
+    for (const key in platformioConfig) {
       if (key.includes('env:')) {
         const value = platformioConfig[key] as PlatformioEnv;
         if (value.board === boardId) {
@@ -92,7 +93,7 @@ export class DefaultFirmware implements Firmware {
   }
 
   private async initFirmata() {
-    logBoard(`firmata preflight`);
+    logBoard('firmata preflight');
 
     return new Promise((resolve, reject) => {
       const command = 'node ./firmata-preflight';
@@ -101,11 +102,11 @@ export class DefaultFirmware implements Firmware {
         else {
           if (stderr) logBoard(stderr);
 
-          logBoard(`compile and install firmata`);
+          logBoard('compile and install firmata');
 
           const boardId = process.env.PLATFORMIO_BOARD_ID;
           const environment = `--environment ${boardId}`;
-          const target = `--target upload`;
+          const target = '--target upload';
           const uploadPort = `--upload-port ${config.board.port}`;
           const projectDir = `--project-dir ${config.platformio.path}`;
           const command = `platformio run ${environment} ${target} ${uploadPort} ${projectDir}`;
@@ -119,16 +120,16 @@ export class DefaultFirmware implements Firmware {
   }
 
   private async initBoard() {
-    logBoard(`connecting to the board`);
+    logBoard('connecting to the board');
 
     this.board = new Board({
       port: config.board.port,
       debug: false,
-      repl: false
+      repl: false,
     });
 
     this.board.on('close', () => {
-      logBoard(`close`);
+      logBoard('close');
       this.board = null;
       this.status = false;
     });
@@ -136,7 +137,7 @@ export class DefaultFirmware implements Firmware {
     return new Promise((resolve, reject) => {
       this.board.on('ready', () => {
         this.board.samplingInterval(Sensor.readFrequency);
-        logBoard(`ready`);
+        logBoard('ready');
         resolve();
       });
 

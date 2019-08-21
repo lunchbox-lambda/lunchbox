@@ -1,5 +1,5 @@
-import { Actuator } from '../_actuator';
 import { Relay } from 'johnny-five';
+import { Actuator } from '../_actuator';
 
 export = class Default extends Actuator<Relay> {
   public init() {
@@ -7,15 +7,15 @@ export = class Default extends Actuator<Relay> {
 
     this.actuator = new Relay({
       pin: this.pin,
-      type: 'NC'
+      type: 'NC',
     });
 
-    this.observable.subscribe(value => {
-      if (value.state === 'on')
+    this.observable.subscribe((value) => {
+      if (value.state === 'on') {
         this.actuator.close();
-
-      else if (value.state === 'off')
+      } else if (value.state === 'off') {
         this.actuator.open();
+      }
     });
   }
 }

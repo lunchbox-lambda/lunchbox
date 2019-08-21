@@ -4,4 +4,3 @@ import { Variable } from 'models';
 export interface VariableService extends Component {
   getVariables(): Promise<Variable[]>;
 }
-

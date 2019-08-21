@@ -5,6 +5,6 @@ export = ({ router, services }: RouteDeps) => {
     response: async ({ params }) => {
       const { variableName } = params;
       return services.cameras.getCameraPicture(variableName);
-    }
+    },
   }));
 }

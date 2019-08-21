@@ -16,7 +16,7 @@ export class DefaultScheduler implements Scheduler {
   public async start() {
     this.expected = Date.now() + INTERVAL;
     this.schedule();
-    log(`started`);
+    log('started');
   }
 
   public timeout(next: () => void, timeout: number) {
@@ -50,19 +50,19 @@ export class DefaultScheduler implements Scheduler {
 
   private schedule(timeout: number = INTERVAL) {
     setTimeout(() => this.step(),
-      Math.max(0, timeout)
+      Math.max(0, timeout),
     );
   }
 }
 
 const cronOperator = (pattern) => {
   return (source) => {
-    return Observable.create(subscriber => {
+    return Observable.create((subscriber) => {
       const interval = cronParser.parseExpression(pattern);
       let nextTime = interval.next().toDate().getTime();
 
       return source.subscribe(
-        value => {
+        (value) => {
           if (nextTime <= value) {
             nextTime = interval.next().toDate().getTime();
             try {
@@ -72,7 +72,7 @@ const cronOperator = (pattern) => {
             }
           }
         },
-        error => subscriber.error(error),
+        (error) => subscriber.error(error),
         () => subscriber.complete());
     });
   };

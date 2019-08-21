@@ -14,7 +14,7 @@ export abstract class Sensor<T> {
   public constructor(
     public id: string,
     public pin: number | string,
-    public env: string
+    public env: string,
   ) {
     this.data = {};
     this.subject = new Subject<SensorEvent>();
@@ -29,7 +29,7 @@ export abstract class Sensor<T> {
       const event = new SensorEvent(
         this.id,
         synthesizeVariable(this.env, key),
-        value
+        value,
       );
       this.subject.next(event);
     }
@@ -40,8 +40,8 @@ export abstract class Sensor<T> {
   }
 
   public set outputs(outputs: string[]) {
-    this._outputs = outputs.map(variable =>
-      synthesizeVariable(this.env, variable)
+    this._outputs = outputs.map((variable) =>
+      synthesizeVariable(this.env, variable),
     );
   }
 }
@@ -52,6 +52,6 @@ export class SensorEvent {
   public constructor(
     public sensorId: string,
     public variable: string,
-    public value: number
+    public value: number,
   ) { }
 }

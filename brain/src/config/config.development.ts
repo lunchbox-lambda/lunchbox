@@ -7,11 +7,11 @@ export default {
   projectDir: path.resolve(__dirname, '..'),
 
   data: {
-    path: dataPath
+    path: dataPath,
   },
 
   board: {
-    port: '/dev/ttyACM0'
+    port: '/dev/ttyACM0',
   },
 
   server: {
@@ -20,11 +20,11 @@ export default {
   },
 
   platformio: {
-    path: path.resolve(__dirname, '../../platformio')
+    path: path.resolve(__dirname, '../../platformio'),
   },
 
   leveldb: {
-    path: path.resolve(dataPath, 'db')
+    path: path.resolve(dataPath, 'db'),
   },
 
   nodered: {
@@ -34,17 +34,17 @@ export default {
     userDir: path.resolve(__dirname, '../../../node-red'),
     flowFile: 'flows.json',
     functionGlobalContext: {
-      serverHost: 'http://localhost:8090'
-    }
+      serverHost: 'http://localhost:8090',
+    },
   },
 
   ssl: {
     certFile: 'lunchbox-node.crt',
-    keyFile: 'lunchbox-node.key'
+    keyFile: 'lunchbox-node.key',
   },
 
   git: {
-    baseUrl: 'https://github.com/lunchbox-lambda'
-  }
+    baseUrl: 'https://github.com/lunchbox-lambda',
+  },
 
 };

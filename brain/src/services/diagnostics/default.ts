@@ -27,7 +27,7 @@ export class DefaultDiagnosticsService extends Service implements DiagnosticsSer
   public async getDiagnostics() {
     return {
       peripherals: this.peripherals.status(),
-      controllers: this.controllers.status()
+      controllers: this.controllers.status(),
     };
   }
 

@@ -2,9 +2,9 @@ import * as uuid from 'uuid';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { RecipeStatus } from 'models';
+import { synthesizeVariable } from 'lib/tools';
 import { RecipeEventType } from './recipe-event';
 import { RecipeContext } from './recipe-context';
-import { synthesizeVariable } from 'lib/tools';
 
 export class RecipeMachine {
   public async start(context: RecipeContext) {
@@ -36,6 +36,8 @@ export class RecipeMachine {
       case RecipeStatus.ERROR:
         state = new RecipeErrorState(context.error);
         break;
+
+      default: throw new Error('Invalid recipe status');
     }
 
     try {
@@ -74,8 +76,9 @@ export abstract class RecipeState {
 
     this.isLocked = false;
 
-    if (nextState)
+    if (nextState) {
       this.context.recipeState = nextState;
+    }
   }
 
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
@@ -153,7 +156,7 @@ class RecipeRunningState extends RecipeState {
     const { environment, recipeInstance } = this.context;
 
     // Clear the timer if the status changed
-    if (this.context.status != RecipeStatus.RUNNING) {
+    if (this.context.status !== RecipeStatus.RUNNING) {
       this.subscription.unsubscribe();
       return;
     }
@@ -178,14 +181,14 @@ class RecipeRunningState extends RecipeState {
 
       const offset = recipeInstance.offsets[offsetIndex];
       const recipePoint = recipeInstance.timeSeries.get(offset);
-      const variableValues = recipePoint.variableValues;
+      const { variableValues } = recipePoint;
 
       this.context.publishEvent(
         RecipeEventType.OFFSET_CHANGED,
         new Map(Array.from(variableValues, ([key, value]) => {
           const variable = synthesizeVariable(environment, key);
           return [variable, value] as [string, number];
-        }))
+        })),
       );
     }
   }
@@ -202,15 +205,14 @@ class RecipeRunningState extends RecipeState {
     if (this.offsetIndex === -1) {
       let index = offsets.length;
       while (index--) {
-        if (offsets[index] <= currentPosition)
-          break;
+        if (offsets[index] <= currentPosition) break;
       }
       return index;
-    } else {
-      const nextOffsetIndex = this.offsetIndex + 1;
-      const nextOffset = offsets[nextOffsetIndex];
-      return nextOffset <= currentPosition ? nextOffsetIndex : this.offsetIndex;
     }
+
+    const nextOffsetIndex = this.offsetIndex + 1;
+    const nextOffset = offsets[nextOffsetIndex];
+    return nextOffset <= currentPosition ? nextOffsetIndex : this.offsetIndex;
   }
 
   private updateProgress(duration, currentPosition) {
@@ -288,7 +290,7 @@ class RecipeErrorState extends RecipeState {
 }
 
 function RecipeStateStatus(recipeStatus: RecipeStatus, recipeEvent: RecipeEventType) {
-  return function (target: Function) {
+  return function decorator(target: Function) {
     Reflect.defineMetadata('RecipeStatus', recipeStatus, target);
     Reflect.defineMetadata('RecipeEvent', recipeEvent, target);
   };

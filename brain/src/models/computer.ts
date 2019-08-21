@@ -24,6 +24,6 @@ export class Computer extends Entity implements ISerializable {
     uuid: this.uuid,
     version: this.version,
     boardType: this.boardType,
-    fixtures: this.fixtures
+    fixtures: this.fixtures,
   })
 }

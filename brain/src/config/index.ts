@@ -41,11 +41,13 @@ interface IConfig {
 let _config: IConfig;
 const config = {};
 
-if (process.env.NODE_ENV === 'production')
+if (process.env.NODE_ENV === 'production') {
   _config = configProduction;
+}
 
-if (process.env.NODE_ENV === 'development')
+if (process.env.NODE_ENV === 'development') {
   _config = configDevelopment;
+}
 
 Object.assign(config, _config);
 

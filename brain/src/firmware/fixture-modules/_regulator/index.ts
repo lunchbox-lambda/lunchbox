@@ -15,13 +15,13 @@ export abstract class Regulator<T> {
   public constructor(
     public id: string,
     public pin: number | string,
-    public env: string
+    public env: string,
   ) {
     this.active = false;
     this.subject = new Subject<RegulatorState>();
     this.observable = (this.subject as Observable<RegulatorState>)
       .distinctUntilChanged((p, q) => p.state === q.state)
-      .do(value => {
+      .do((value) => {
         if (value.state === 'on') this.active = true;
         else if (value.state === 'off') this.active = false;
       });

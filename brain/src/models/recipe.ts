@@ -48,7 +48,7 @@ export class RecipeContext implements ISerializable {
     pausedAt: this.pausedAt,
     stoppedAt: this.stoppedAt,
     finishedAt: this.finishedAt,
-    errorAt: this.errorAt
+    errorAt: this.errorAt,
   })
 }
 
