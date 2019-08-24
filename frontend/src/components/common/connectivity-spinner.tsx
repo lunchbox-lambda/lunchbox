@@ -1,39 +1,38 @@
-import app from 'lib/app'
-import * as React from 'react'
-import { Component } from 'components/common'
-import { Connectivity } from '@lunchbox-lambda/client'
-import { Spinner, Intent } from '@blueprintjs/core'
+import app from 'lib/app';
+import * as React from 'react';
+import { Component } from 'components/common';
+import { Connectivity } from '@lunchbox-lambda/client';
+import { Spinner, Intent } from '@blueprintjs/core';
 
 interface Props { }
 
 interface State {
-  connectivity: Connectivity
+  connectivity: Connectivity;
 }
 
 export class ConnectivitySpinnerComponent extends Component<Props, State> {
-
-  constructor(props) {
-    super(props)
+  public constructor(props) {
+    super(props);
 
     this.state = {
       connectivity: {
         broker: null,
         board: null,
-        socket: null
-      }
-    }
+        socket: null,
+      },
+    };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.handleSubscriptions([
 
       app.store.getConnectivity()
-        .subscribe(connectivity => this.setState({ connectivity }))
-    ])
+        .subscribe((connectivity) => this.setState({ connectivity })),
+    ]);
   }
 
-  render() {
-    const { connectivity } = this.state
+  public render() {
+    const { connectivity } = this.state;
 
     return (
       connectivity.socket === true ? null :
@@ -45,11 +44,10 @@ export class ConnectivitySpinnerComponent extends Component<Props, State> {
           zIndex: 999,
           margin: '-15px',
           textAlign: 'center',
-          padding: '150px'
+          padding: '150px',
         } }>
           <Spinner className="pt-large" intent={ Intent.PRIMARY } />
         </div>
-    )
+    );
   }
-
 }

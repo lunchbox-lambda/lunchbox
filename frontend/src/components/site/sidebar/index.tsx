@@ -1,16 +1,15 @@
-import './style.scss'
-import * as React from 'react'
-import { Component } from 'components/common'
-import { NavLink } from 'react-router-dom'
-import { Button } from '@blueprintjs/core'
+import './style.scss';
+import * as React from 'react';
+import { Component } from 'components/common';
+import { NavLink } from 'react-router-dom';
+import { Button } from '@blueprintjs/core';
 
 interface Props { }
 
 interface State { }
 
 export class Siderbar extends Component<Props, State> {
-
-  render() {
+  public render() {
     return (
       <div className="sidebar">
 
@@ -66,7 +65,6 @@ export class Siderbar extends Component<Props, State> {
         </NavLink>
 
       </div>
-    )
+    );
   }
-
 }

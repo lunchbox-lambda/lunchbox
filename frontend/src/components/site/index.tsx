@@ -1,36 +1,35 @@
-import './style.scss'
-import * as React from 'react'
-import { Component } from 'components/common'
-import { Route } from 'react-router-dom'
-import { Redirect } from 'react-router'
-import { Navbar } from 'components/site/navbar'
-import { Siderbar } from 'components/site/sidebar'
-import { ConnectivitySpinnerComponent } from 'components/common'
-import { DashboardComponent } from 'components/dashboard'
-import { DiagnosticsComponent } from 'components/diagnostics'
-import { FixtureTypeListComponent } from 'components/fixture-types'
-import { VariableListComponent } from 'components/variables'
-import { RecipeBookComponent } from 'components/recipes'
-import { ArchitectureComponent } from 'components/architecture'
-import { ControlRoomComponent } from 'components/control-room'
-import { ConsoleOutputComponent } from 'components/console-output'
-import { SettingsComponent } from 'components/settings'
+import './style.scss';
+import * as React from 'react';
+import { Component } from 'components/common';
+import { Route } from 'react-router-dom';
+import { Redirect } from 'react-router';
+import { Navbar } from 'components/site/navbar';
+import { Siderbar } from 'components/site/sidebar';
+import { ConnectivitySpinnerComponent } from 'components/common';
+import { DashboardComponent } from 'components/dashboard';
+import { DiagnosticsComponent } from 'components/diagnostics';
+import { FixtureTypeListComponent } from 'components/fixture-types';
+import { VariableListComponent } from 'components/variables';
+import { RecipeBookComponent } from 'components/recipes';
+import { ArchitectureComponent } from 'components/architecture';
+import { ControlRoomComponent } from 'components/control-room';
+import { ConsoleOutputComponent } from 'components/console-output';
+import { SettingsComponent } from 'components/settings';
 
 interface Props { }
 
 interface State { }
 
 export class Site extends Component<Props, State> {
-
-  constructor(props: Props) {
-    super(props)
+  public constructor(props: Props) {
+    super(props);
   }
 
-  componentDidMount() {
+  public componentDidMount() {
 
   }
 
-  render() {
+  public render() {
     return (
       <div>
         <Navbar />
@@ -52,7 +51,6 @@ export class Site extends Component<Props, State> {
           </div>
         </section>
       </div>
-    )
+    );
   }
-
 }

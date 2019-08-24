@@ -1,36 +1,35 @@
-import app from 'lib/app'
-import * as React from 'react'
-import { Component } from 'components/common'
-import { Recipe } from '@lunchbox-lambda/client'
+import app from 'lib/app';
+import * as React from 'react';
+import { Component } from 'components/common';
+import { Recipe } from '@lunchbox-lambda/client';
 
 interface Props { }
 
 interface State {
-  recipes: Recipe[]
+  recipes: Recipe[];
 }
 
 export class RecipeBookComponent extends Component<Props, State> {
-
-  constructor(props: Props) {
-    super(props)
+  public constructor(props: Props) {
+    super(props);
 
     this.state = {
-      recipes: []
-    }
+      recipes: [],
+    };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.handleSubscriptions([
 
       app.services.recipes.query()
-        .subscribe(recipes => {
-          recipes.sort((a, b) => a.name.localeCompare(b.name))
-          this.setState({ recipes })
-        })
-    ])
+        .subscribe((recipes) => {
+          recipes.sort((a, b) => a.name.localeCompare(b.name));
+          this.setState({ recipes });
+        }),
+    ]);
   }
 
-  render() {
+  public render() {
     return (
       <div className='content'>
         <h4>Recipe Book</h4>
@@ -41,17 +40,16 @@ export class RecipeBookComponent extends Component<Props, State> {
             </tr>
           </thead>
           <tbody>
-            { this.state.recipes.map(recipe =>
+            { this.state.recipes.map((recipe) =>
               <tr key={ recipe.id }>
                 <td>
                   <div style={ { fontWeight: 'bold' } }>{ recipe.name }</div>
                 </td>
-              </tr>
+              </tr>,
             ) }
           </tbody>
         </table>
       </div>
-    )
+    );
   }
-
 }

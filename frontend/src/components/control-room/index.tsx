@@ -1,31 +1,30 @@
-import './style.scss'
-import app from 'lib/app'
-import * as React from 'react'
-import { Component } from 'components/common'
-import { Button } from '@blueprintjs/core'
-import { RecipeControlsComponent } from 'components/recipe-controls'
+import './style.scss';
+import app from 'lib/app';
+import * as React from 'react';
+import { Component } from 'components/common';
+import { Button } from '@blueprintjs/core';
+import { RecipeControlsComponent } from 'components/recipe-controls';
 
 interface Props { }
 
 interface State { }
 
 export class ControlRoomComponent extends Component<Props, State> {
-
-  constructor(props: Props) {
-    super(props)
+  public constructor(props: Props) {
+    super(props);
   }
 
-  componentDidMount() {
+  public componentDidMount() {
 
   }
 
   private onRestartClick() {
-    if (!window.confirm('Are you sure?')) return
-    app.services.computer.restartComputer()
+    if (!window.confirm('Are you sure?')) return;
+    app.services.computer.restartComputer();
   }
 
   private onNodeREDClick() {
-    window.open('/red', '_blank')
+    window.open('/red', '_blank');
   }
 
   private renderComputerPanel() {
@@ -36,10 +35,10 @@ export class ControlRoomComponent extends Component<Props, State> {
           <Button onClick={ this.onNodeREDClick.bind(this) }>Launch NodeRED</Button>
         </div>
       </div>
-    )
+    );
   }
 
-  render() {
+  public render() {
     return (
       <div className='content content-control-room'>
         <h4>Control Room</h4>
@@ -52,7 +51,6 @@ export class ControlRoomComponent extends Component<Props, State> {
           </div>
         </div>
       </div>
-    )
+    );
   }
-
 }

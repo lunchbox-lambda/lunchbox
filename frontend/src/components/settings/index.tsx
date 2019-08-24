@@ -1,63 +1,61 @@
-import app from 'lib/app'
-import * as React from 'react'
-import { Component } from 'components/common'
-import { Button } from '@blueprintjs/core'
-import { Toaster } from 'lib/toaster'
+import app from 'lib/app';
+import * as React from 'react';
+import { Component } from 'components/common';
+import { Button } from '@blueprintjs/core';
+import { Toaster } from 'lib/toaster';
 
 interface Props { }
 
 interface State {
-  isEditing: boolean
-  settings: object
+  isEditing: boolean;
+  settings: object;
 }
 
 export class SettingsComponent extends Component<Props, State> {
-
   private textArea: HTMLTextAreaElement
 
-  constructor(props: Props) {
-    super(props)
+  public constructor(props: Props) {
+    super(props);
 
     this.state = {
       isEditing: false,
-      settings: null
-    }
+      settings: null,
+    };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.handleSubscriptions([
 
       app.services.computer.getSettings()
-        .subscribe(settings =>
-          this.setState({ settings })
-        )
-    ])
+        .subscribe((settings) =>
+          this.setState({ settings }),
+        ),
+    ]);
   }
 
   private onEditClick() {
-    this.setState({ isEditing: true })
+    this.setState({ isEditing: true });
   }
 
   private onCancelClick() {
-    this.setState({ isEditing: false })
+    this.setState({ isEditing: false });
   }
 
   private onSaveClick() {
     try {
-      const settings = JSON.parse(this.textArea.value)
+      const settings = JSON.parse(this.textArea.value);
 
       this.handleSubscriptions([
         app.services.computer.setSettings(settings)
           .subscribe(() => {
-            this.setState({ isEditing: false, settings })
-            Toaster.success('Settings saved successfuly.')
-          }, Toaster.error)
-      ])
-
-    } catch (error) { Toaster.error(error) }
+            this.setState({ isEditing: false, settings });
+            Toaster.success('Settings saved successfuly.');
+          }, Toaster.error),
+      ]);
+    } catch (error) { Toaster.error(error); }
   }
 
-  render() {
+  public render() {
     return (
       <div className='content'>
         <div className='flex-row' style={ { flex: '0 0 auto' } }>
@@ -69,7 +67,7 @@ export class SettingsComponent extends Component<Props, State> {
             !this.state.isEditing ? this.renderSettingsView() : this.renderTextArea()
         }
       </div>
-    )
+    );
   }
 
   private renderActionBar() {
@@ -87,7 +85,7 @@ export class SettingsComponent extends Component<Props, State> {
             </div>
         }
       </div>
-    )
+    );
   }
 
   private renderSettingsView() {
@@ -95,19 +93,18 @@ export class SettingsComponent extends Component<Props, State> {
       <div>
         <pre>{ JSON.stringify(this.state.settings, null, '    ') }</pre>
       </div>
-    )
+    );
   }
 
   private renderTextArea() {
     return (
       <textarea
-        ref={ textarea => { this.textArea = textarea } }
+        ref={ (textarea) => { this.textArea = textarea; } }
         className='pt-input pt-fill'
         defaultValue={ JSON.stringify(this.state.settings, null, '    ') }
         rows={ 10 }
         spellCheck={ false }>
       </textarea>
-    )
+    );
   }
-
 }

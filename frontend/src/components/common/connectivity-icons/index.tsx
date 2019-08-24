@@ -1,50 +1,49 @@
-import './style.scss'
-import app from 'lib/app'
-import * as React from 'react'
-import { Component } from 'components/common'
-import { Connectivity } from '@lunchbox-lambda/client'
+import './style.scss';
+import app from 'lib/app';
+import * as React from 'react';
+import { Component } from 'components/common';
+import { Connectivity } from '@lunchbox-lambda/client';
 
 interface Props { }
 
 interface State {
-  connectivity: Connectivity
+  connectivity: Connectivity;
 }
 
 export class ConnectivityIconsComponent extends Component<Props, State> {
-
   private items = {
     broker: { icon: 'fa-database' },
     board: { icon: 'fa-microchip' },
-    socket: { icon: 'fa-exchange-alt' }
+    socket: { icon: 'fa-exchange-alt' },
   }
 
-  constructor(props) {
-    super(props)
+  public constructor(props) {
+    super(props);
 
     this.state = {
       connectivity: {
         broker: null,
         board: null,
-        socket: null
-      }
-    }
+        socket: null,
+      },
+    };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.handleSubscriptions([
 
       app.store.getConnectivity()
-        .subscribe(connectivity => this.setState({ connectivity }))
-    ])
+        .subscribe((connectivity) => this.setState({ connectivity })),
+    ]);
   }
 
-  render() {
-    const { connectivity } = this.state
+  public render() {
+    const { connectivity } = this.state;
 
     return (
       <div className="connectivity-icons">
         {
-          Object.keys(connectivity).map(key =>
+          Object.keys(connectivity).map((key) =>
             <span
               key={ key }
               className="fa-layers fa-fw fa-lg"
@@ -60,11 +59,10 @@ export class ConnectivityIconsComponent extends Component<Props, State> {
                     </i>
                   </span>
               }
-            </span>
+            </span>,
           )
         }
       </div>
-    )
+    );
   }
-
 }

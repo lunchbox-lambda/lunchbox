@@ -1,140 +1,140 @@
-import app from 'lib/app'
-import * as React from 'react'
-import { Component } from 'components/common'
-import { Observable } from 'rxjs'
-import { Button, Switch } from '@blueprintjs/core'
-import { Controller } from '@lunchbox-lambda/client'
-import { resolveEnvironment } from 'lib/tools'
+import app from 'lib/app';
+import * as React from 'react';
+import { Component } from 'components/common';
+import { Observable } from 'rxjs';
+import { Button, Switch } from '@blueprintjs/core';
+import { Controller } from '@lunchbox-lambda/client';
+import { resolveEnvironment } from 'lib/tools';
 
 interface Props { }
 
 interface State {
-  environments: string[]
-  controllers: Controller[]
-  sensorData: any[]
-  cameraData: any[]
+  environments: string[];
+  controllers: Controller[];
+  sensorData: any[];
+  cameraData: any[];
 }
 
 export class DiagnosticsComponent extends Component<Props, State> {
-
-  constructor(props: Props) {
-    super(props)
+  public constructor(props: Props) {
+    super(props);
 
     this.state = {
       environments: [],
       controllers: [],
       sensorData: [],
-      cameraData: []
-    }
+      cameraData: [],
+    };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.handleSubscriptions([
 
       Observable
         .combineLatest(
           app.store.getEnvironmentList(),
           app.store.getEnvironments(),
-          app.services.diagnostics.getDiagnostics()
+          app.services.diagnostics.getDiagnostics(),
         )
         .filter(([environmentList, environments]) => {
-          return environmentList.every(environment =>
-            !!environments[environment]
-          )
+          return environmentList.every((environment) =>
+            !!environments[environment],
+          );
         })
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .subscribe(([environmentList, environments, diagnostics]) => {
-          const data = { environments, ...diagnostics }
-          this.processData(data)
+          const data = { environments, ...diagnostics };
+          this.processData(data);
         }),
 
       app.store.getEnvironmentList()
-        .subscribe(environments => this.setState({ environments }))
+        .subscribe((environments) => this.setState({ environments })),
 
-    ])
+    ]);
   }
 
-  private keyById = (items) => !items ? {} :
-    items.reduce((r, v) => (r[v.id] = v, r), {})
+  private keyById = (items) => (!items ? {} :
+    items.reduce((acc, value) => {
+      acc[value.id] = value;
+      return acc;
+    }, {}))
 
-  private sortByVariable = (items: any[], k = 'variable') => !items ? [] :
+  private sortByVariable = (items: any[], k = 'variable') => (!items ? [] :
     items.sort((a, b) =>
-      (!a[k] || !b[k]) ? 0 : a[k].localeCompare(b[k])
-    )
+      ((!a[k] || !b[k]) ? 0 : a[k].localeCompare(b[k])),
+    ))
 
   private processData(data): void {
     const { environments, peripherals } = data;
 
-    const _sensors = this.keyById(peripherals.sensors)
-    const _actuators = this.keyById(peripherals.actuators)
-    const _regulators = this.keyById(peripherals.regulators)
+    const _sensors = this.keyById(peripherals.sensors);
+    const _actuators = this.keyById(peripherals.actuators);
+    const _regulators = this.keyById(peripherals.regulators);
     // const _cameras = this.keyById(peripherals.cameras)
 
     const controllers = this.sortByVariable(
-      data.controllers.map(controller => {
-
-        const { id, type, state, active, variable } = controller
-        const { sensors = [], actuators = [], regulators = [] } = controller
-        const env = variable ? resolveEnvironment(variable) : null
-        const sensorReadings = env ? environments[env].sensorReadings : {}
-        const desiredValues = env ? environments[env].desiredValues : {}
+      data.controllers.map((controller) => {
+        const { id, type, state, active, variable } = controller;
+        const { sensors = [], actuators = [], regulators = [] } = controller;
+        const env = variable ? resolveEnvironment(variable) : null;
+        const sensorReadings = env ? environments[env].sensorReadings : {};
+        const desiredValues = env ? environments[env].desiredValues : {};
 
         return {
           id, type, state, active, variable,
-          sensors: sensors.map(id => _sensors[id]),
-          actuators: actuators.map(id => _actuators[id]),
-          regulators: regulators.map(id => _regulators[id]),
+          sensors: sensors.map((id) => _sensors[id]),
+          actuators: actuators.map((id) => _actuators[id]),
+          regulators: regulators.map((id) => _regulators[id]),
           currentValue: sensorReadings[variable],
-          desiredValue: desiredValues[variable]
-        }
-      })
-    )
+          desiredValue: desiredValues[variable],
+        };
+      }),
+    );
 
     const sensorData = this.sortByVariable(
       peripherals.sensors.reduce((result, sensor) => {
-        Object.keys(sensor.data).forEach(key => {
-          const { id, pin, env } = sensor
+        Object.keys(sensor.data).forEach((key) => {
+          const { id, pin, env } = sensor;
           result.push({
             id, pin, env,
             variable: key,
-            value: sensor.data[key]
-          })
-        })
-        return result
-      }, [])
-    )
+            value: sensor.data[key],
+          });
+        });
+        return result;
+      }, []),
+    );
 
     const cameraData = this.sortByVariable(
-      peripherals.cameras.map(camera => {
-        const { id, dev, env } = camera
+      peripherals.cameras.map((camera) => {
+        const { id, dev, env } = camera;
         return {
           id, dev, env,
           variable: camera.variable,
-          pictureSize: camera.size
-        }
-      })
-    )
+          pictureSize: camera.size,
+        };
+      }),
+    );
 
-    this.setState({ controllers, sensorData, cameraData })
+    this.setState({ controllers, sensorData, cameraData });
   }
 
   private onToggleController(controller: Controller) {
-    const command = controller.active ? 'turn-off' : 'turn-on'
-    app.services.computer.commandController(command, controller.id)
+    const command = controller.active ? 'turn-off' : 'turn-on';
+    app.services.computer.commandController(command, controller.id);
   }
 
   private onResetClick(controller: Controller) {
-    const command = 'reset'
-    app.services.computer.commandController(command, controller.id)
+    const command = 'reset';
+    app.services.computer.commandController(command, controller.id);
   }
 
   private renderControllerRow(controller: Controller) {
-    if (controller.type === 'pid')
-      return this.renderPIDControllerRow(controller)
+    if (controller.type === 'pid') return this.renderPIDControllerRow(controller);
 
-    else if (controller.type === 'regulator')
-      return this.renderRegulatorControllerRow(controller)
+    if (controller.type === 'regulator') return this.renderRegulatorControllerRow(controller);
 
-    else return null
+    return null;
   }
 
   private renderPIDControllerRow(controller: Controller) {
@@ -146,23 +146,23 @@ export class DiagnosticsComponent extends Component<Props, State> {
           </div>
           <div style={ { margin: '5px 10px 0px 10px' } }>
             {
-              controller.sensors.map(sensor =>
+              controller.sensors.map((sensor) =>
                 <div key={ sensor.id } className="flex-row" style={ { alignItems: 'center' } }>
                   <i className="fas fa-fw fa-rss"></i>
                   <div style={ { flexGrow: 0, margin: '0 10px' } }>{ sensor.pin }</div>
                   <div style={ { flexGrow: 0 } }>{ sensor.env }</div>
                   <div style={ { flexGrow: 0, margin: '0 10px' } }>{ sensor.id }</div>
-                </div>
+                </div>,
               )
             }
             {
-              controller.actuators.map(actuator =>
+              controller.actuators.map((actuator) =>
                 <div key={ actuator.id } className="flex-row" style={ { alignItems: 'center' } }>
                   <i className="fas fa-fw fa-cogs"></i>
                   <div style={ { flexGrow: 0, margin: '0 10px' } }>{ actuator.pin }</div>
                   <div style={ { flexGrow: 0 } }>{ actuator.env }</div>
                   <div style={ { flexGrow: 0, margin: '0 10px' } }>{ actuator.id }</div>
-                </div>
+                </div>,
               )
             }
           </div>
@@ -173,7 +173,7 @@ export class DiagnosticsComponent extends Component<Props, State> {
               <Button
                 className='pt-small pt-intent-danger'
                 onClick={ this.onResetClick.bind(this, controller) }>Reset
-                            </Button>
+              </Button>
           }
         </td>
         <td style={ { textAlign: 'center', verticalAlign: 'middle' } }>
@@ -196,11 +196,11 @@ export class DiagnosticsComponent extends Component<Props, State> {
           { this.renderControllerStateCell(controller) }
         </td>
       </tr>
-    )
+    );
   }
 
   private renderRegulatorControllerRow(controller: Controller) {
-    const [regulator] = controller.regulators
+    const [regulator] = controller.regulators;
     return (
       <tr key={ controller.id }>
         <td>
@@ -209,13 +209,13 @@ export class DiagnosticsComponent extends Component<Props, State> {
           </div>
           <div style={ { margin: '5px 10px 0px 10px' } }>
             {
-              controller.regulators.map(regulator =>
+              controller.regulators.map((regulator) =>
                 <div key={ regulator.id } className="flex-row" style={ { alignItems: 'center' } }>
                   <i className="fas fa-fw fa-power-off"></i>
                   <div style={ { flexGrow: 0, margin: '0 10px' } }>{ regulator.pin }</div>
                   <div style={ { flexGrow: 0 } }>{ regulator.env }</div>
                   <div style={ { flexGrow: 0, margin: '0 10px' } }>{ regulator.id }</div>
-                </div>
+                </div>,
               )
             }
           </div>
@@ -226,7 +226,7 @@ export class DiagnosticsComponent extends Component<Props, State> {
               <Button
                 className='pt-small pt-intent-danger'
                 onClick={ this.onResetClick.bind(this, controller) }>Reset
-                            </Button>
+              </Button>
           }
         </td>
         <td></td>
@@ -235,7 +235,7 @@ export class DiagnosticsComponent extends Component<Props, State> {
           { this.renderControllerStateCell(controller) }
         </td>
       </tr>
-    )
+    );
   }
 
   private renderControllerStateCell(controller: Controller) {
@@ -247,7 +247,7 @@ export class DiagnosticsComponent extends Component<Props, State> {
         checked={ controller.active }
         onChange={ () => this.onToggleController(controller) } />
 
-    )
+    );
   }
 
   private renderSensorDataRow(data: any) {
@@ -265,7 +265,7 @@ export class DiagnosticsComponent extends Component<Props, State> {
           <div>{ data.value }</div>
         </td>
       </tr>
-    )
+    );
   }
 
   private renderCameraDataRow(data: any) {
@@ -283,10 +283,10 @@ export class DiagnosticsComponent extends Component<Props, State> {
           <div>{ data.pictureSize }</div>
         </td>
       </tr>
-    )
+    );
   }
 
-  render() {
+  public render() {
     return (
       <div className='content'>
         <h4>Diagnostics</h4>
@@ -304,8 +304,8 @@ export class DiagnosticsComponent extends Component<Props, State> {
               </thead>
               <tbody>
                 {
-                  this.state.controllers.map(controller =>
-                    this.renderControllerRow(controller)
+                  this.state.controllers.map((controller) =>
+                    this.renderControllerRow(controller),
                   )
                 }
               </tbody>
@@ -322,8 +322,8 @@ export class DiagnosticsComponent extends Component<Props, State> {
               </thead>
               <tbody>
                 {
-                  this.state.sensorData.map(data =>
-                    this.renderSensorDataRow(data)
+                  this.state.sensorData.map((data) =>
+                    this.renderSensorDataRow(data),
                   )
                 }
               </tbody>
@@ -338,8 +338,8 @@ export class DiagnosticsComponent extends Component<Props, State> {
               </thead>
               <tbody>
                 {
-                  this.state.cameraData.map(data =>
-                    this.renderCameraDataRow(data)
+                  this.state.cameraData.map((data) =>
+                    this.renderCameraDataRow(data),
                   )
                 }
               </tbody>
@@ -347,7 +347,6 @@ export class DiagnosticsComponent extends Component<Props, State> {
           </div>
         </div>
       </div>
-    )
+    );
   }
-
 }

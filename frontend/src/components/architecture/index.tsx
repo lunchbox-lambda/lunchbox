@@ -1,88 +1,89 @@
-import './style.scss'
-import app from 'lib/app'
-import * as React from 'react'
-import { Component } from 'components/common'
-import * as ReactMarkdown from 'react-markdown'
-import { Dictionary } from 'lodash'
-import { Computer, Fixture, FixtureType } from '@lunchbox-lambda/client'
-import { Button } from '@blueprintjs/core'
-import { Toaster } from 'lib/toaster'
-import { Observable } from 'rxjs'
+import './style.scss';
+import app from 'lib/app';
+import * as React from 'react';
+import { Component } from 'components/common';
+import * as ReactMarkdown from 'react-markdown';
+import { Dictionary } from 'lodash';
+import { Computer, Fixture, FixtureType } from '@lunchbox-lambda/client';
+import { Button } from '@blueprintjs/core';
+import { Toaster } from 'lib/toaster';
+import { Observable } from 'rxjs';
 
-const imageArduinoUno = require('assets/board_arduino_uno.svg')
-const imageArduinoMega = require('assets/board_arduino_mega.svg')
-const markdownArchitecture = require('assets/docs/architecture.md')
+const imageArduinoUno = require('assets/board_arduino_uno.svg');
+const imageArduinoMega = require('assets/board_arduino_mega.svg');
+const markdownArchitecture = require('assets/docs/architecture.md');
 
 interface Props { }
 
 interface State {
-  isEditing: boolean
-  computer: Computer
-  description: string
-  fixtureTypes: Dictionary<FixtureType>
+  isEditing: boolean;
+  computer: Computer;
+  description: string;
+  fixtureTypes: Dictionary<FixtureType>;
 }
 
 export class ArchitectureComponent extends Component<Props, State> {
-
   private textArea: HTMLTextAreaElement
 
-  constructor(props: Props) {
-    super(props)
+  public constructor(props: Props) {
+    super(props);
 
     this.state = {
       isEditing: false,
       computer: null,
       description: '',
-      fixtureTypes: null
-    }
+      fixtureTypes: null,
+    };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.handleSubscriptions([
 
       app.services.computer.get()
-        .subscribe(computer => this.setState({ computer })),
+        .subscribe((computer) => this.setState({ computer })),
 
       app.services.fixtureTypes.query()
-        .subscribe(fixtureTypes => this.setState(
-          { fixtureTypes: fixtureTypes.reduce((r, v) => (r[v.id] = v, r), {}) }
-        )),
+        .subscribe((fixtureTypes) => this.setState({
+          fixtureTypes: fixtureTypes.reduce((acc, value) => {
+            acc[value.id] = value;
+            return acc;
+          }, {}),
+        })),
 
       Observable.fromPromise(
         fetch(markdownArchitecture)
-          .then(response => response.text())
-      ).subscribe(description => this.setState({ description }))
+          .then((response) => response.text()),
+      ).subscribe((description) => this.setState({ description })),
 
-    ])
+    ]);
   }
 
   private onEditClick() {
-    this.setState({ isEditing: true })
+    this.setState({ isEditing: true });
   }
 
   private onCancelClick() {
-    this.setState({ isEditing: false })
+    this.setState({ isEditing: false });
   }
 
   private onSaveClick() {
     try {
-      const fixtures = JSON.parse(this.textArea.value)
+      const fixtures = JSON.parse(this.textArea.value);
 
       this.handleSubscriptions([
         app.services.computer.updateComputerFixtures(fixtures)
           .subscribe(() => {
-            const computer = this.state.computer
-            computer.fixtures = fixtures
-            this.setState({ isEditing: false, computer })
-            Toaster.success('Fixtures updated successfuly.')
-          }, Toaster.error)
-      ])
-
-    } catch (error) { Toaster.error(error) }
+            const { computer } = this.state;
+            computer.fixtures = fixtures;
+            this.setState({ isEditing: false, computer });
+            Toaster.success('Fixtures updated successfuly.');
+          }, Toaster.error),
+      ]);
+    } catch (error) { Toaster.error(error); }
   }
 
-  render() {
-    const isReady = this.state.computer && this.state.fixtureTypes
+  public render() {
+    const isReady = this.state.computer && this.state.fixtureTypes;
 
     return (
       <div className='content content-architecture'>
@@ -105,7 +106,7 @@ export class ArchitectureComponent extends Component<Props, State> {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   private renderActionBar() {
@@ -123,16 +124,19 @@ export class ArchitectureComponent extends Component<Props, State> {
             </div>
         }
       </div>
-    )
+    );
   }
 
   private renderFixturesTable() {
-    const { fixtures } = this.state.computer
-    const fixturesByEnv = fixtures.reduce((r, v, i, a, k = v.env) =>
-      ((r[k] || (r[k] = [])).push(v), r), {})
+    const { fixtures } = this.state.computer;
+    const fixturesByEnv = fixtures.reduce((acc, value) => {
+      const { env } = value;
+      (acc[env] || (acc[env] = [])).push(value);
+      return acc;
+    }, {});
 
     return (
-      Object.keys(fixturesByEnv).sort().map(key =>
+      Object.keys(fixturesByEnv).sort().map((key) =>
         <div key={ key } className='environment-section'>
           <h6>Environment - { key }</h6>
           <table className='pt-table pt-condensed pt-striped'>
@@ -145,21 +149,21 @@ export class ArchitectureComponent extends Component<Props, State> {
               </tr>
             </thead>
             <tbody>
-              { fixturesByEnv[key].map(fixture => this.renderFixtureRow(fixture)) }
+              { fixturesByEnv[key].map((fixture) => this.renderFixtureRow(fixture)) }
             </tbody>
           </table>
-        </div>
+        </div>,
       )
-    )
+    );
   }
 
   private renderFixtureRow(fixture: Fixture) {
-    const fixtureType = this.state.fixtureTypes[fixture.type]
-    if (!fixtureType) return null
+    const fixtureType = this.state.fixtureTypes[fixture.type];
+    if (!fixtureType) return null;
 
-    const inputs = fixtureType.inputs
-    const outputs = fixtureType.outputs
-    const params = fixture.params
+    const { inputs } = fixtureType;
+    const { outputs } = fixtureType;
+    const { params } = fixture;
 
     return (
       <tr key={ fixture.id } className={ fixture.disabled ? 'disabled' : null }>
@@ -185,37 +189,37 @@ export class ArchitectureComponent extends Component<Props, State> {
         </td>
         <td>
           {
-            !inputs ? null : inputs.map(input =>
-              <div key={ input }>{ `${fixture.env}::${input}` }</div>
+            !inputs ? null : inputs.map((input) =>
+              <div key={ input }>{ `${fixture.env}::${input}` }</div>,
             )
           }
           {
-            !outputs ? null : outputs.map(output =>
-              <div key={ output }>{ `${fixture.env}::${output}` }</div>
+            !outputs ? null : outputs.map((output) =>
+              <div key={ output }>{ `${fixture.env}::${output}` }</div>,
             )
           }
           {
-            !params ? null : Object.keys(params).map(key =>
-              <div key={ key }>{ `${key}: ${params[key]}` }</div>
+            !params ? null : Object.keys(params).map((key) =>
+              <div key={ key }>{ `${key}: ${params[key]}` }</div>,
             )
           }
         </td>
       </tr>
-    )
+    );
   }
 
   private renderTextArea() {
-    const { fixtures } = this.state.computer
+    const { fixtures } = this.state.computer;
 
     return (
       <textarea
-        ref={ textarea => { this.textArea = textarea } }
+        ref={ (textarea) => { this.textArea = textarea; } }
         className='pt-input pt-fill'
         defaultValue={ JSON.stringify(fixtures, null, '    ') }
         rows={ 10 }
         spellCheck={ false }>
       </textarea>
-    )
+    );
   }
 
   private renderDescription() {
@@ -223,21 +227,20 @@ export class ArchitectureComponent extends Component<Props, State> {
       <div className='description-container'>
         <ReactMarkdown source={ this.state.description } />
       </div>
-    )
+    );
   }
 
   private renderBoardImage() {
-    const { boardType } = this.state.computer
+    const { boardType } = this.state.computer;
 
-    let boardImage
-    if (boardType === 'megaatmega2560') boardImage = imageArduinoMega
-    if (boardType === 'uno') boardImage = imageArduinoUno
+    let boardImage;
+    if (boardType === 'megaatmega2560') boardImage = imageArduinoMega;
+    if (boardType === 'uno') boardImage = imageArduinoUno;
 
     return (
       <div className='board-image-container'>
         <img src={ boardImage } />
       </div>
-    )
+    );
   }
-
 }

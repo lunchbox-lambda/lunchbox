@@ -1,37 +1,36 @@
-import app from 'lib/app'
-import * as React from 'react'
-import * as ReactMarkdown from 'react-markdown'
-import { Component } from 'components/common'
-import { FixtureType } from '@lunchbox-lambda/client'
+import app from 'lib/app';
+import * as React from 'react';
+import * as ReactMarkdown from 'react-markdown';
+import { Component } from 'components/common';
+import { FixtureType } from '@lunchbox-lambda/client';
 
 interface Props { }
 
 interface State {
-  fixtureTypes: FixtureType[]
+  fixtureTypes: FixtureType[];
 }
 
 export class FixtureTypeListComponent extends Component<Props, State> {
-
-  constructor(props: Props) {
-    super(props)
+  public constructor(props: Props) {
+    super(props);
 
     this.state = {
-      fixtureTypes: []
-    }
+      fixtureTypes: [],
+    };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.handleSubscriptions([
 
       app.services.fixtureTypes.query()
-        .subscribe(fixtureTypes => {
-          fixtureTypes.sort((a, b) => a.name.localeCompare(b.name))
-          this.setState({ fixtureTypes })
-        })
-    ])
+        .subscribe((fixtureTypes) => {
+          fixtureTypes.sort((a, b) => a.name.localeCompare(b.name));
+          this.setState({ fixtureTypes });
+        }),
+    ]);
   }
 
-  render() {
+  public render() {
     return (
       <div className='content'>
         <h4>Fixture Types</h4>
@@ -46,20 +45,19 @@ export class FixtureTypeListComponent extends Component<Props, State> {
           </thead>
           <tbody>
             {
-              this.state.fixtureTypes.map(fixtureType =>
-                this.renderFixtureTypeRow(fixtureType)
+              this.state.fixtureTypes.map((fixtureType) =>
+                this.renderFixtureTypeRow(fixtureType),
               )
             }
           </tbody>
         </table>
       </div>
-    )
+    );
   }
 
   private renderFixtureTypeRow(fixtureType: FixtureType) {
-
-    const inputs = fixtureType.inputs
-    const outputs = fixtureType.outputs
+    const { inputs } = fixtureType;
+    const { outputs } = fixtureType;
 
     return (
       <tr key={ fixtureType.id }>
@@ -81,18 +79,17 @@ export class FixtureTypeListComponent extends Component<Props, State> {
         </td>
         <td>
           {
-            !inputs ? null : inputs.map(input =>
-              <div key={ input }>{ input }</div>
+            !inputs ? null : inputs.map((input) =>
+              <div key={ input }>{ input }</div>,
             )
           }
           {
-            !outputs ? null : outputs.map(output =>
-              <div key={ output }>{ output }</div>
+            !outputs ? null : outputs.map((output) =>
+              <div key={ output }>{ output }</div>,
             )
           }
         </td>
       </tr>
-    )
+    );
   }
-
 }

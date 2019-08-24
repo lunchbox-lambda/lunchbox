@@ -1,37 +1,36 @@
-import app from 'lib/app'
-import * as React from 'react'
-import * as ReactMarkdown from 'react-markdown'
-import { Component } from 'components/common'
-import { Variable } from '@lunchbox-lambda/client'
+import app from 'lib/app';
+import * as React from 'react';
+import * as ReactMarkdown from 'react-markdown';
+import { Component } from 'components/common';
+import { Variable } from '@lunchbox-lambda/client';
 
 interface Props { }
 
 interface State {
-  variables: Variable[]
+  variables: Variable[];
 }
 
 export class VariableListComponent extends Component<Props, State> {
-
-  constructor(props: Props) {
-    super(props)
+  public constructor(props: Props) {
+    super(props);
 
     this.state = {
-      variables: []
-    }
+      variables: [],
+    };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.handleSubscriptions([
 
       app.services.variables.query()
-        .subscribe(variables => {
-          variables.sort((a, b) => a.name.localeCompare(b.name))
-          this.setState({ variables })
-        })
-    ])
+        .subscribe((variables) => {
+          variables.sort((a, b) => a.name.localeCompare(b.name));
+          this.setState({ variables });
+        }),
+    ]);
   }
 
-  render() {
+  public render() {
     return (
       <div className='content'>
         <h4>Variables</h4>
@@ -44,7 +43,7 @@ export class VariableListComponent extends Component<Props, State> {
             </tr>
           </thead>
           <tbody>
-            { this.state.variables.map(variable =>
+            { this.state.variables.map((variable) =>
               <tr key={ variable.id }>
                 <td style={ { textAlign: 'center', verticalAlign: 'middle' } }>
                   <div style={ { fontSize: '1.25em' } }>{ variable.unit }</div>
@@ -56,12 +55,11 @@ export class VariableListComponent extends Component<Props, State> {
                 <td>
                   <ReactMarkdown source={ variable.description } />
                 </td>
-              </tr>
+              </tr>,
             ) }
           </tbody>
         </table>
       </div>
-    )
+    );
   }
-
 }

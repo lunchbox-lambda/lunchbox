@@ -1,44 +1,43 @@
-import './style.scss'
-import app from 'lib/app'
-import * as React from 'react'
-import { Component } from 'components/common'
-import { Button } from '@blueprintjs/core'
-import { Toaster } from 'lib/toaster'
+import './style.scss';
+import app from 'lib/app';
+import * as React from 'react';
+import { Component } from 'components/common';
+import { Button } from '@blueprintjs/core';
+import { Toaster } from 'lib/toaster';
 
 interface Props { }
 
 interface State {
-  data: string
+  data: string;
 }
 
 export class ConsoleOutputComponent extends Component<Props, State> {
-
   private textArea: HTMLTextAreaElement
 
-  constructor(props: Props) {
-    super(props)
+  public constructor(props: Props) {
+    super(props);
 
     this.state = {
-      data: ''
-    }
+      data: '',
+    };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.handleSubscriptions([
 
       app.services.diagnostics.getConsoleOutput()
-        .subscribe(data => this.setState({ data }))
-    ])
+        .subscribe((data) => this.setState({ data })),
+    ]);
   }
 
   private onCopyClick(event) {
-    this.textArea.select()
-    document.execCommand('copy')
-    event.target.focus()
-    Toaster.success('Copied!')
+    this.textArea.select();
+    document.execCommand('copy');
+    event.target.focus();
+    Toaster.success('Copied!');
   }
 
-  render() {
+  public render() {
     return (
       <div className='content content-console-output'>
         <div className='flex-row' style={ { flex: '0 0 auto' } }>
@@ -47,14 +46,14 @@ export class ConsoleOutputComponent extends Component<Props, State> {
         </div >
         <div className='flex-row'>
           <textarea
-            ref={ textarea => { this.textArea = textarea } }
+            ref={ (textarea) => { this.textArea = textarea; } }
             value={ this.state.data }
             spellCheck={ false }
             readOnly={ true }
           ></textarea>
         </div>
       </div >
-    )
+    );
   }
 
   private renderActionBar() {
@@ -64,7 +63,6 @@ export class ConsoleOutputComponent extends Component<Props, State> {
           Copy to clipboard
         </Button>
       </div>
-    )
+    );
   }
-
 }

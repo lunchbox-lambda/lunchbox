@@ -1,37 +1,36 @@
-import './style.scss'
-import app from 'lib/app'
-import * as React from 'react'
-import { Computer } from '@lunchbox-lambda/client'
-import { Component } from 'components/common'
-import { ConnectivityIconsComponent } from 'components/common'
+import './style.scss';
+import app from 'lib/app';
+import * as React from 'react';
+import { Computer } from '@lunchbox-lambda/client';
+import { Component } from 'components/common';
+import { ConnectivityIconsComponent } from 'components/common';
 
 interface Props { }
 
 interface State {
-  computer: Computer
+  computer: Computer;
 }
 
-const logo = require('assets/logo_white.svg')
+const logo = require('assets/logo_white.svg');
 
 export class Navbar extends Component<Props, State> {
-
-  constructor(props: Props) {
-    super(props)
+  public constructor(props: Props) {
+    super(props);
 
     this.state = {
-      computer: null
-    }
+      computer: null,
+    };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.handleSubscriptions([
 
       app.store.getComputer()
-        .subscribe(computer => this.setState({ computer }))
-    ])
+        .subscribe((computer) => this.setState({ computer })),
+    ]);
   }
 
-  render() {
+  public render() {
     return <nav className="pt-navbar pt-dark">
       <div className="pt-navbar-group pt-align-left">
         <div className="pt-navbar-heading" style={ { margin: '0px' } }>
@@ -53,7 +52,6 @@ export class Navbar extends Component<Props, State> {
       <div className="pt-navbar-group pt-align-right">
         <ConnectivityIconsComponent />
       </div>
-    </nav>
+    </nav>;
   }
-
 }

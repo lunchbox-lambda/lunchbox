@@ -1,9 +1,9 @@
-import client from '@lunchbox-lambda/client'
+import client from '@lunchbox-lambda/client';
 
 const config = {
-  serverHost: location.origin
-}
+  serverHost: window.location.origin,
+};
 
-const app = client(config)
+const app = client(config);
 
-export default app
+export default app;

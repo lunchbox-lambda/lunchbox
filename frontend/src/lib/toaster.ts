@@ -1,37 +1,35 @@
-import { Intent, Position, Toaster as _Toaster } from '@blueprintjs/core'
+import { Intent, Position, Toaster as _Toaster } from '@blueprintjs/core';
 
 export class Toaster {
-
-  static _toaster = _Toaster.create({
-    position: Position.TOP_RIGHT
+  public static _toaster = _Toaster.create({
+    position: Position.TOP_RIGHT,
   })
 
-  static info(message: string) {
+  public static info(message: string) {
     Toaster._toaster.show({
       message,
-      intent: Intent.PRIMARY
-    })
+      intent: Intent.PRIMARY,
+    });
   }
 
-  static success(message: string) {
+  public static success(message: string) {
     Toaster._toaster.show({
       message,
-      intent: Intent.SUCCESS
-    })
+      intent: Intent.SUCCESS,
+    });
   }
 
-  static warning(message: string) {
+  public static warning(message: string) {
     Toaster._toaster.show({
       message,
-      intent: Intent.WARNING
-    })
+      intent: Intent.WARNING,
+    });
   }
 
-  static error(error: Error) {
+  public static error(error: Error) {
     Toaster._toaster.show({
       message: error.message,
-      intent: Intent.DANGER
-    })
+      intent: Intent.DANGER,
+    });
   }
-
 }
