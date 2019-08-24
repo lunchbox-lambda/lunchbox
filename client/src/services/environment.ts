@@ -10,8 +10,6 @@ export class EnvironmentService implements IEnvironmentService {
   @inject(TYPES.Http)
   protected http: IHttp
 
-  public constructor() { }
-
   public query(offset: number): Observable<any> {
     return this.http.get(`${this.url}/${offset}`);
   }

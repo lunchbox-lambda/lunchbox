@@ -65,10 +65,12 @@ export enum RecipeDaypart {
 }
 
 export class RecipePhase {
+  // eslint-disable-next-line no-useless-constructor
   public constructor(public name: string) { }
 }
 
 export class RecipePoint {
+  // eslint-disable-next-line no-useless-constructor
   public constructor(
     public offset: number,
     public recipePhase: RecipePhase,

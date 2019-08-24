@@ -10,6 +10,7 @@ export abstract class EntityService<T extends Entity> implements IEntityService<
   @inject(TYPES.Http)
   protected http: IHttp
 
+  // eslint-disable-next-line no-useless-constructor
   public constructor(
     @unmanaged() private ctor: { new(): T },
     @unmanaged() protected url: string) { }

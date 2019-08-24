@@ -38,5 +38,6 @@ export abstract class Actuator<T> {
 }
 
 export class ActuatorState {
+  // eslint-disable-next-line no-useless-constructor
   public constructor(public state: 'on' | 'off') { }
 }

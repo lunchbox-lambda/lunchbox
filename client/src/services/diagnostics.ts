@@ -11,8 +11,6 @@ export class DiagnosticsService implements IDiagnosticsService {
   @inject(TYPES.Http)
   protected http: IHttp
 
-  public constructor() { }
-
   private observable: Observable<Diagnostics> =
   Observable
     .timer(0, 1000)

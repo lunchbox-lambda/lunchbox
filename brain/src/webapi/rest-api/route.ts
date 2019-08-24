@@ -28,6 +28,7 @@ export class Route {
     return route.handler;
   }
 
+  // eslint-disable-next-line no-useless-constructor
   private constructor(
     /* eslint-disable no-empty-pattern */
     private authorize = ({ }) => Promise.resolve<Error>(null),

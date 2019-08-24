@@ -16,6 +16,7 @@ export enum RecipeEventType {
 export class RecipeEvent {
   public timestamp: Date = new Date()
 
+  // eslint-disable-next-line no-useless-constructor
   public constructor(
     public context: RecipeContext,
     public eventType: RecipeEventType,

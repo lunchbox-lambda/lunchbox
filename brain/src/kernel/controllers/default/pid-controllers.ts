@@ -9,6 +9,7 @@ import { Controller } from './controller';
 const log = logger('kernel:controllers');
 
 export class PIDControllers {
+  // eslint-disable-next-line no-useless-constructor
   public constructor(
     private peripherals: Peripherals,
     private environment: Environment,

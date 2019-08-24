@@ -49,6 +49,7 @@ export abstract class Sensor<T> {
 export class SensorEvent {
   public timestamp: Date = new Date()
 
+  // eslint-disable-next-line no-useless-constructor
   public constructor(
     public sensorId: string,
     public variable: string,

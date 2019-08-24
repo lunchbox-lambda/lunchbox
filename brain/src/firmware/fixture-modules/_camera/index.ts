@@ -65,6 +65,7 @@ export abstract class Camera<T> {
 export class CameraEvent {
   public timestamp: Date = new Date()
 
+  // eslint-disable-next-line no-useless-constructor
   public constructor(
     public cameraId: string,
     public variable: string,

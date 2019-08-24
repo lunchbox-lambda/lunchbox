@@ -10,8 +10,6 @@ export class CameraService implements ICameraService {
   @inject(TYPES.Http)
   protected http: IHttp
 
-  public constructor() { }
-
   public getCameraPicture(): Observable<Buffer> {
     return this.http.get(`${this.url}/image_general`);
     //     .map<any, string>(res => res.text())

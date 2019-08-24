@@ -43,5 +43,6 @@ export abstract class Regulator<T> {
 }
 
 export class RegulatorState {
+  // eslint-disable-next-line no-useless-constructor
   public constructor(public state: 'on' | 'off') { }
 }

@@ -11,6 +11,7 @@ import { Controller } from './controller';
 const log = logger('kernel:controllers');
 
 export class RegulatorControllers {
+  // eslint-disable-next-line no-useless-constructor
   public constructor(
     private peripherals: Peripherals,
     private scheduler: Scheduler,

@@ -10,10 +10,6 @@ interface Props { }
 interface State { }
 
 export class ControlRoomComponent extends Component<Props, State> {
-  public constructor(props: Props) {
-    super(props);
-  }
-
   public componentDidMount() {
 
   }

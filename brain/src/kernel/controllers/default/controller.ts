@@ -6,6 +6,7 @@ export abstract class Controller {
   public state: ControllerState = ControllerState.AUTOMATIC
   public active: boolean = false
 
+  // eslint-disable-next-line no-useless-constructor
   public constructor(public type: 'pid' | 'regulator') { }
 
   abstract spin()

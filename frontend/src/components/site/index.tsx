@@ -21,10 +21,6 @@ interface Props { }
 interface State { }
 
 export class Site extends Component<Props, State> {
-  public constructor(props: Props) {
-    super(props);
-  }
-
   public componentDidMount() {
 
   }

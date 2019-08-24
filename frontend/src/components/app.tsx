@@ -7,10 +7,6 @@ interface Props { }
 interface State { }
 
 export class App extends React.Component<Props, State> {
-  public constructor(props: Props) {
-    super(props);
-  }
-
   public componentDidMount() {
 
   }
