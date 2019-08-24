@@ -8,7 +8,7 @@
     "node-red-contrib"
   ],
   "scripts": {
-    "eslint": "eslint \"brain/**/*.ts\""
+    "eslint": "eslint \"**/*.{js,ts,tsx}\""
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^1.12.0",
@@ -16,6 +16,7 @@
     "eslint": "^6.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-react": "^7.14.3",
     "typescript": "^3.5.3"
   }
 }
