@@ -39,7 +39,6 @@ export class DefaultFirmware implements Firmware {
       logBoard('init skipped');
     } else {
       logBoard(`init ${config.board.port}`);
-      /* eslint-disable-next-line no-async-promise-executor */
       return new Promise<void>(async (resolve) => {
         try {
           await this.initPlatformio();

@@ -1,7 +1,9 @@
 export interface IConfig {
-  serverHost: string
+  serverHost: string;
 }
 
-export default {
-  serverHost: null
-} as IConfig
+const config: IConfig = {
+  serverHost: null,
+};
+
+export default config;

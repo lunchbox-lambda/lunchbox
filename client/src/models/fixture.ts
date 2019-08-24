@@ -1,14 +1,14 @@
-import { Entity } from './entity'
+import { Entity } from './entity';
 
 export class Fixture extends Entity {
-  type: string
-  pin?: number | string
-  dev?: string
-  env: string
-  disabled?: boolean
-  params?: {
-    cron?: string
-    duration?: string
-    always?: 'on' | 'off'
+  public type: string
+  public pin?: number | string
+  public dev?: string
+  public env: string
+  public disabled?: boolean
+  public params?: {
+    cron?: string;
+    duration?: string;
+    always?: 'on' | 'off';
   }
 }

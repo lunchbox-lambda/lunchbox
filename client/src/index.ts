@@ -1,11 +1,10 @@
-import 'reflect-metadata'
-import './inversify.config'
-import configDefault, { IConfig } from './config'
-import { container } from './inversify.config'
-import { TYPES } from './lib/inversify'
-
-import { IStore } from './lib/redux'
-import { ISocket } from './lib/socket'
+import 'reflect-metadata';
+import './inversify.config';
+import configDefault, { IConfig } from './config';
+import { container } from './inversify.config';
+import { TYPES } from './lib/inversify';
+import { IStore } from './lib/redux';
+import { ISocket } from './lib/socket';
 
 import {
   IVariableService,
@@ -13,16 +12,15 @@ import {
   IRecipeService,
   IComputerService,
   IDiagnosticsService,
-  IEnvironmentService
-} from './services'
+  IEnvironmentService,
+} from './services';
 
-export * from './models'
+export * from './models';
 
 export default function client(config: IConfig) {
+  configDefault.serverHost = config.serverHost;
 
-  configDefault.serverHost = config.serverHost
-
-  const socket = container.get<ISocket>(TYPES.Socket)
+  container.get<ISocket>(TYPES.Socket);
 
   return {
     store: container.get<IStore>(TYPES.Store),
@@ -32,9 +30,8 @@ export default function client(config: IConfig) {
       recipes: container.get<IRecipeService>(TYPES.RecipeService),
       computer: container.get<IComputerService>(TYPES.ComputerService),
       diagnostics: container.get<IDiagnosticsService>(TYPES.DiagnosticsService),
-      environment: container.get<IEnvironmentService>(TYPES.EnvironmentService)
+      environment: container.get<IEnvironmentService>(TYPES.EnvironmentService),
 
-    }
-  }
-
+    },
+  };
 }

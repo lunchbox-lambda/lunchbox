@@ -1,5 +1,5 @@
 
-let TYPES = {
+const TYPES = {
 
   Http: Symbol('Http'),
   Store: Symbol('Store'),
@@ -9,8 +9,8 @@ let TYPES = {
   RecipeService: Symbol('RecipeService'),
   ComputerService: Symbol('ComputerService'),
   DiagnosticsService: Symbol('DiagnosticsService'),
-  EnvironmentService: Symbol('EnvironmentService')
+  EnvironmentService: Symbol('EnvironmentService'),
 
-}
+};
 
-export { TYPES }
+export { TYPES };

@@ -1,15 +1,15 @@
-import { Entity } from './entity'
+import { Entity } from './entity';
 
 export class Controller extends Entity {
-  type: string
-  state: ControllerState
-  active: boolean
-  variable?: string
-  sensors?: any[]
-  actuators?: any[]
-  regulators?: any[]
-  currentValue?: Map<string, number>
-  desiredValue?: Map<string, number>
+  public type: string
+  public state: ControllerState
+  public active: boolean
+  public variable?: string
+  public sensors?: any[]
+  public actuators?: any[]
+  public regulators?: any[]
+  public currentValue?: Map<string, number>
+  public desiredValue?: Map<string, number>
 }
 
 export enum ControllerState {

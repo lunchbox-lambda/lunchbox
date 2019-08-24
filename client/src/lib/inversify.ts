@@ -1,4 +1,4 @@
-import { TYPES } from '../lib/types'
+import { TYPES } from '../lib/types';
 
-export { TYPES }
-export { inject, injectable, unmanaged } from 'inversify'
+export { TYPES };
+export { inject, injectable, unmanaged } from 'inversify';

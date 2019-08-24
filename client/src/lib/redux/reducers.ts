@@ -1,85 +1,80 @@
-import { combineReducers, Action, AnyAction } from 'redux'
-import { IStoreState } from './store'
+import { combineReducers, AnyAction } from 'redux';
+import { IStoreState } from './store';
 
 import {
   Connectivity,
   Computer,
   Environment,
-  RecipeContext
-} from '../../models'
+  RecipeContext,
+} from '../../models';
 
 import {
   SET_CONNECTIVITY,
   SET_COMPUTER,
   SET_ENVIRONMENT_LIST,
   SET_ENVIRONMENT,
-  SET_RECIPE_CONTEXT
-} from './actions'
+  SET_RECIPE_CONTEXT,
+} from './actions';
 
-function connectivity(state = { broker: null, board: null, socket: null }, action: Action) {
+function connectivity(state = { broker: null, board: null, socket: null }, action: AnyAction) {
   switch (action.type) {
-
     case SET_CONNECTIVITY: {
-      const connectivity = action['value'] as Connectivity
-      return Object.assign({}, state, connectivity)
+      const connectivity = action.value as Connectivity;
+      return { ...state, ...connectivity };
     }
 
     default:
-      return state
+      return state;
   }
 }
 
-function computer(state = null, action: Action) {
+function computer(state = null, action: AnyAction) {
   switch (action.type) {
-
     case SET_COMPUTER: {
-      const computer = action['value'] as Computer
-      return Object.assign({}, state, computer)
+      const computer = action.value as Computer;
+      return { ...state, ...computer };
     }
 
     default:
-      return state
+      return state;
   }
 }
 
-function environmentList(state = null, action: Action) {
+function environmentList(state = null, action: AnyAction) {
   switch (action.type) {
-
     case SET_ENVIRONMENT_LIST: {
-      const environments = action['value'] as string[]
-      return [...environments]
+      const environments = action.value as string[];
+      return [...environments];
     }
 
     default:
-      return state
+      return state;
   }
 }
 
-function environments(state = null, action: Action) {
+function environments(state = null, action: AnyAction) {
   switch (action.type) {
-
     case SET_ENVIRONMENT: {
-      const env = action['value'] as Environment
-      const environment = env.environment
-      return Object.assign({}, state, { [environment]: env })
+      const env = action.value as Environment;
+      const { environment } = env;
+      return { ...state, [environment]: env };
     }
 
     default:
-      return state
+      return state;
   }
 }
 
-function recipeContexts(state = null, action: Action) {
+function recipeContexts(state = null, action: AnyAction) {
   switch (action.type) {
-
     case SET_RECIPE_CONTEXT: {
-      const recipeContext = action['value'] as RecipeContext
-      const environment = recipeContext.environment
-      return Object.assign({}, state, { [environment]: recipeContext })
+      const recipeContext = action.value as RecipeContext;
+      const { environment } = recipeContext;
+      return { ...state, [environment]: recipeContext };
     }
 
     default:
-      return state
+      return state;
   }
 }
 
@@ -88,7 +83,7 @@ const reducers = combineReducers<IStoreState>({
   computer,
   environmentList,
   environments,
-  recipeContexts
-})
+  recipeContexts,
+});
 
-export default reducers
+export default reducers;

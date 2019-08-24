@@ -1,9 +1,10 @@
 export class Diagnostics {
-  peripherals: {
-    sensors: Array<any>
-    actuators: Array<any>,
-    regulators: Array<any>,
-    cameras: Array<any>
+  public peripherals: {
+    sensors: any[];
+    actuators: any[];
+    regulators: any[];
+    cameras: any[];
   }
-  controllers: Array<any>
+
+  public controllers: any[]
 }

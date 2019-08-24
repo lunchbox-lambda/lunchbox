@@ -1,33 +1,25 @@
-import { Container } from 'inversify'
-import { TYPES } from './lib/types'
+import { Container } from 'inversify';
+import { TYPES } from './lib/types';
+import { IHttp, Http } from './lib/http';
+import { IStore, ReduxStore } from './lib/redux';
+import { ISocket, Socket } from './lib/socket';
+import { IVariableService, VariableService } from './services';
+import { IFixtureTypeService, FixtureTypeService } from './services';
+import { IRecipeService, RecipeService } from './services';
+import { IComputerService, ComputerService } from './services';
+import { IDiagnosticsService, DiagnosticsService } from './services';
+import { IEnvironmentService, EnvironmentService } from './services';
 
-const container = new Container({ defaultScope: 'Singleton' })
+const container = new Container({ defaultScope: 'Singleton' });
 
-import { IHttp, Http } from './lib/http'
-container.bind<IHttp>(TYPES.Http).to(Http)
+container.bind<IHttp>(TYPES.Http).to(Http);
+container.bind<IStore>(TYPES.Store).to(ReduxStore);
+container.bind<ISocket>(TYPES.Socket).to(Socket);
+container.bind<IVariableService>(TYPES.VariableService).to(VariableService);
+container.bind<IFixtureTypeService>(TYPES.FixtureTypeService).to(FixtureTypeService);
+container.bind<IRecipeService>(TYPES.RecipeService).to(RecipeService);
+container.bind<IComputerService>(TYPES.ComputerService).to(ComputerService);
+container.bind<IDiagnosticsService>(TYPES.DiagnosticsService).to(DiagnosticsService);
+container.bind<IEnvironmentService>(TYPES.EnvironmentService).to(EnvironmentService);
 
-import { IStore, ReduxStore } from './lib/redux'
-container.bind<IStore>(TYPES.Store).to(ReduxStore)
-
-import { ISocket, Socket } from './lib/socket'
-container.bind<ISocket>(TYPES.Socket).to(Socket)
-
-import { IVariableService, VariableService } from './services'
-container.bind<IVariableService>(TYPES.VariableService).to(VariableService)
-
-import { IFixtureTypeService, FixtureTypeService } from './services'
-container.bind<IFixtureTypeService>(TYPES.FixtureTypeService).to(FixtureTypeService)
-
-import { IRecipeService, RecipeService } from './services'
-container.bind<IRecipeService>(TYPES.RecipeService).to(RecipeService)
-
-import { IComputerService, ComputerService } from './services'
-container.bind<IComputerService>(TYPES.ComputerService).to(ComputerService)
-
-import { IDiagnosticsService, DiagnosticsService } from './services'
-container.bind<IDiagnosticsService>(TYPES.DiagnosticsService).to(DiagnosticsService)
-
-import { IEnvironmentService, EnvironmentService } from './services'
-container.bind<IEnvironmentService>(TYPES.EnvironmentService).to(EnvironmentService)
-
-export { container }
+export { container };
