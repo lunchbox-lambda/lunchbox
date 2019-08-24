@@ -7,9 +7,7 @@ interface Props { }
 interface State { }
 
 export class App extends React.Component<Props, State> {
-  public componentDidMount() {
-
-  }
+  public componentDidMount() { }
 
   public render() {
     FocusStyleManager.onlyShowFocusOnTabs();

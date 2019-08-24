@@ -10,9 +10,7 @@ interface Props { }
 interface State { }
 
 export class ControlRoomComponent extends Component<Props, State> {
-  public componentDidMount() {
-
-  }
+  public componentDidMount() { }
 
   private onRestartClick() {
     if (!window.confirm('Are you sure?')) return;

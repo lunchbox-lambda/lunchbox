@@ -21,9 +21,7 @@ interface Props { }
 interface State { }
 
 export class Site extends Component<Props, State> {
-  public componentDidMount() {
-
-  }
+  public componentDidMount() { }
 
   public render() {
     return (

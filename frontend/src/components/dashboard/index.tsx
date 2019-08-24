@@ -7,9 +7,7 @@ interface Props { }
 interface State { }
 
 export class DashboardComponent extends Component<Props, State> {
-  public componentDidMount() {
-
-  }
+  public componentDidMount() { }
 
   public render() {
     return (
