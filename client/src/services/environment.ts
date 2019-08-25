@@ -4,7 +4,7 @@ import { IHttp } from '../lib/http';
 import { IEnvironmentService } from '../services';
 
 @injectable()
-export class EnvironmentService implements IEnvironmentService {
+export default class EnvironmentService implements IEnvironmentService {
   private url: string = 'api/v1/environment'
 
   @inject(TYPES.Http)

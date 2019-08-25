@@ -15,7 +15,7 @@ store.subscribe(() => {
 });
 
 @injectable()
-export class ReduxStore implements IStore {
+export default class ReduxStore implements IStore {
   public dispatch(action: Action) {
     store.dispatch(action);
   }

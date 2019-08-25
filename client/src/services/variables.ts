@@ -1,9 +1,10 @@
 import { injectable } from '../lib/inversify';
-import { IVariableService, EntityService } from '../services';
-import { Variable } from '../models';
+import EntityService from '../services/entity';
+import { IVariableService } from '../services';
+import Variable from '../models/variable';
 
 @injectable()
-export class VariableService extends EntityService<Variable> implements IVariableService {
+export default class VariableService extends EntityService<Variable> implements IVariableService {
   public constructor() {
     super(Variable, 'api/v1/variables');
   }

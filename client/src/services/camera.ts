@@ -4,7 +4,7 @@ import { IHttp } from '../lib/http';
 import { ICameraService } from '../services';
 
 @injectable()
-export class CameraService implements ICameraService {
+export default class CameraService implements ICameraService {
   private url: string = 'api/v1/cameras'
 
   @inject(TYPES.Http)

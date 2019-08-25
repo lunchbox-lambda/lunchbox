@@ -1,12 +1,9 @@
 import { combineReducers, AnyAction } from 'redux';
 import { IStoreState } from './store';
-
-import {
-  Connectivity,
-  Computer,
-  Environment,
-  RecipeContext,
-} from '../../models';
+import Computer from '../../models/computer';
+import Connectivity from '../../models/connectivity';
+import Environment from '../../models/environment';
+import { RecipeContext } from '../../models/recipe';
 
 import {
   SET_CONNECTIVITY,

@@ -1,6 +1,6 @@
-import { Entity, EntityOption } from './entity';
+import Entity, { EntityOption } from './entity';
 
-export class Recipe extends Entity {
+export default class Recipe extends Entity {
   public name: string
   public description?: string
   public phases: {

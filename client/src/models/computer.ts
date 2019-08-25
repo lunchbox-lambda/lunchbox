@@ -1,7 +1,7 @@
-import { Entity } from './entity';
-import { Fixture } from './fixture';
+import Entity from './entity';
+import Fixture from './fixture';
 
-export class Computer extends Entity {
+export default class Computer extends Entity {
   public createdAt: Date
   public updatedAt: Date
   public name: string

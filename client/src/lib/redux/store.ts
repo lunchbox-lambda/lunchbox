@@ -1,11 +1,9 @@
 import { Action } from 'redux';
 import { Observable } from 'rxjs';
-import {
-  Connectivity,
-  Computer,
-  Environment,
-  RecipeContext,
-} from '../../models';
+import Computer from '../../models/computer';
+import Connectivity from '../../models/connectivity';
+import Environment from '../../models/environment';
+import { RecipeContext } from '../../models/recipe';
 
 export interface IStore {
   dispatch(action: Action);

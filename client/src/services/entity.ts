@@ -3,10 +3,10 @@ import { Observable } from 'rxjs';
 import { TYPES, inject, injectable, unmanaged } from '../lib/inversify';
 import { IHttp } from '../lib/http';
 import { IEntityService } from '../services';
-import { Entity, EntityOption } from '../models';
+import Entity, { EntityOption } from '../models/entity';
 
 @injectable()
-export abstract class EntityService<T extends Entity> implements IEntityService<T> {
+export default abstract class EntityService<T extends Entity> implements IEntityService<T> {
   @inject(TYPES.Http)
   protected http: IHttp
 

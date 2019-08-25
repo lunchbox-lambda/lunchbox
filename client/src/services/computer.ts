@@ -1,10 +1,12 @@
 import { Observable } from 'rxjs';
 import { injectable } from '../lib/inversify';
-import { IComputerService, EntityService } from '../services';
-import { Computer, Fixture } from '../models';
+import EntityService from '../services/entity';
+import { IComputerService } from '../services';
+import Computer from '../models/computer';
+import Fixture from '../models/fixture';
 
 @injectable()
-export class ComputerService extends EntityService<Computer> implements IComputerService {
+export default class ComputerService extends EntityService<Computer> implements IComputerService {
   public constructor() {
     super(Computer, 'api/v1/computer');
   }

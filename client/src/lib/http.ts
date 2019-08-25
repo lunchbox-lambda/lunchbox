@@ -9,7 +9,7 @@ export interface IHttp {
 }
 
 @injectable()
-export class Http implements IHttp {
+export default class Http implements IHttp {
   public get(url: string): Observable<any> {
     return Observable.fromPromise(
       fetch(url, {

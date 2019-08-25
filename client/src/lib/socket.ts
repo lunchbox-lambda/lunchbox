@@ -8,7 +8,7 @@ export interface ISocket {
 }
 
 @injectable()
-export class Socket implements ISocket {
+export default class Socket implements ISocket {
   private socket: SocketIOClient.Socket
 
   @inject(TYPES.Store)

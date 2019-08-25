@@ -1,9 +1,7 @@
-import {
-  Connectivity,
-  Computer,
-  Environment,
-  RecipeContext,
-} from '../../models';
+import Computer from '../../models/computer';
+import Connectivity from '../../models/connectivity';
+import Environment from '../../models/environment';
+import { RecipeContext } from '../../models/recipe';
 
 // Action Types
 export const SET_CONNECTIVITY = 'SET_CONNECTIVITY';

@@ -1,6 +1,6 @@
-import { Entity } from './entity';
+import Entity from './entity';
 
-export class Fixture extends Entity {
+export default class Fixture extends Entity {
   public type: string
   public pin?: number | string
   public dev?: string

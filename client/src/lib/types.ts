@@ -1,4 +1,3 @@
-
 const TYPES = {
 
   Http: Symbol('Http'),
@@ -13,4 +12,4 @@ const TYPES = {
 
 };
 
-export { TYPES };
+export default TYPES;

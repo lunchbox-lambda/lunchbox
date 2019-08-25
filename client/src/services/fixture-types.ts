@@ -1,9 +1,10 @@
 import { injectable } from '../lib/inversify';
-import { IFixtureTypeService, EntityService } from '../services';
-import { FixtureType } from '../models';
+import EntityService from '../services/entity';
+import { IFixtureTypeService } from '../services';
+import FixtureType from '../models/fixture-type';
 
 @injectable()
-export class FixtureTypeService extends EntityService<FixtureType> implements IFixtureTypeService {
+export default class FixtureTypeService extends EntityService<FixtureType> implements IFixtureTypeService {
   public constructor() {
     super(FixtureType, 'api/v1/fixture-types');
   }

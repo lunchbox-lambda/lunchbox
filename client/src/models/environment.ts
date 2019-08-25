@@ -1,4 +1,4 @@
-export class Environment {
+export default class Environment {
   public environment: string
   public sensorReadings: object
   public cameraPictures: object

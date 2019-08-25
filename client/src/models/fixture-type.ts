@@ -1,6 +1,6 @@
-import { Entity } from './entity';
+import Entity from './entity';
 
-export class FixtureType extends Entity {
+export default class FixtureType extends Entity {
   public name: string
   public type: 'sensor' | 'actuator' | 'regulator' | 'camera'
   public description?: string

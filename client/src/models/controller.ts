@@ -1,6 +1,6 @@
-import { Entity } from './entity';
+import Entity from './entity';
 
-export class Controller extends Entity {
+export default class Controller extends Entity {
   public type: string
   public state: ControllerState
   public active: boolean

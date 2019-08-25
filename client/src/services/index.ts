@@ -1,14 +1,12 @@
 import { Observable } from 'rxjs';
 
-import {
-  Entity,
-  Variable,
-  FixtureType,
-  Recipe,
-  Computer,
-  Fixture,
-  Diagnostics,
-} from '../models';
+import Entity from '../models/entity';
+import Variable from '../models/variable';
+import FixtureType from '../models/fixture-type';
+import Recipe from '../models/recipe';
+import Computer from '../models/computer';
+import Fixture from '../models/fixture';
+import Diagnostics from '../models/diagnostics';
 
 export interface IEntityService<T extends Entity> {
   query(): Observable<T[]>;
@@ -55,12 +53,3 @@ export interface IEnvironmentService {
   resumeRecipe(environment: string): Observable<void>;
   ejectRecipe(environment: string): Observable<void>;
 }
-
-export * from './entity';
-export * from './variables';
-export * from './fixture-types';
-export * from './recipes';
-export * from './computer';
-export * from './diagnostics';
-export * from './camera';
-export * from './environment';

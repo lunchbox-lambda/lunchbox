@@ -1,9 +1,10 @@
 import { injectable } from '../lib/inversify';
-import { IRecipeService, EntityService } from '../services';
-import { Recipe } from '../models';
+import EntityService from '../services/entity';
+import { IRecipeService } from '../services';
+import Recipe from '../models/recipe';
 
 @injectable()
-export class RecipeService extends EntityService<Recipe> implements IRecipeService {
+export default class RecipeService extends EntityService<Recipe> implements IRecipeService {
   public constructor() {
     super(Recipe, 'api/v1/recipes');
   }

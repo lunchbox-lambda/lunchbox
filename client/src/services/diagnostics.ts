@@ -2,17 +2,16 @@ import { Observable } from 'rxjs';
 import { TYPES, inject, injectable } from '../lib/inversify';
 import { IHttp } from '../lib/http';
 import { IDiagnosticsService } from '../services';
-import { Diagnostics } from '../models';
+import Diagnostics from '../models/diagnostics';
 
 @injectable()
-export class DiagnosticsService implements IDiagnosticsService {
+export default class DiagnosticsService implements IDiagnosticsService {
   private url: string = 'api/v1/diagnostics'
 
   @inject(TYPES.Http)
   protected http: IHttp
 
-  private observable: Observable<Diagnostics> =
-  Observable
+  private observable: Observable<Diagnostics> = Observable
     .timer(0, 1000)
     .flatMap(() => this.http.get(`${this.url}`))
 

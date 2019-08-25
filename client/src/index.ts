@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import './inversify.config';
 import configDefault, { IConfig } from './config';
-import { container } from './inversify.config';
+import container from './inversify.config';
 import { TYPES } from './lib/inversify';
 import { IStore } from './lib/redux';
 import { ISocket } from './lib/socket';
@@ -15,7 +15,15 @@ import {
   IEnvironmentService,
 } from './services';
 
-export * from './models';
+import Computer from './models/computer';
+import Connectivity from './models/connectivity';
+import Controller from './models/controller';
+import Diagnostics from './models/diagnostics';
+import Environment from './models/environment';
+import FixtureType from './models/fixture-type';
+import Fixture from './models/fixture';
+import Variable from './models/variable';
+import Recipe, { RecipeOption, RecipeContext, RecipeCommand, RecipeStatus } from './models/recipe';
 
 export default function client(config: IConfig) {
   configDefault.serverHost = config.serverHost;
@@ -35,3 +43,9 @@ export default function client(config: IConfig) {
     },
   };
 }
+
+export {
+  Computer, Connectivity, Controller, Diagnostics,
+  Environment, FixtureType, Fixture, Variable,
+  Recipe, RecipeOption, RecipeContext, RecipeCommand, RecipeStatus,
+};
