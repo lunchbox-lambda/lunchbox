@@ -38,17 +38,14 @@ interface IConfig {
   };
 }
 
-let _config: IConfig;
-const config = {};
+let config: IConfig;
 
 if (process.env.NODE_ENV === 'production') {
-  _config = configProduction;
+  config = configProduction;
 }
 
 if (process.env.NODE_ENV === 'development') {
-  _config = configDevelopment;
+  config = configDevelopment;
 }
 
-Object.assign(config, _config);
-
-export default config as IConfig;
+export default { ...config };
