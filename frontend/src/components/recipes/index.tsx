@@ -1,6 +1,6 @@
 import app from 'lib/app';
 import * as React from 'react';
-import { Component } from 'components/common';
+import Component from 'components/common/component';
 import { Recipe } from '@lunchbox-lambda/client';
 
 interface Props { }
@@ -9,7 +9,7 @@ interface State {
   recipes: Recipe[];
 }
 
-export class RecipeBookComponent extends Component<Props, State> {
+export default class RecipeBookComponent extends Component<Props, State> {
   public constructor(props: Props) {
     super(props);
 

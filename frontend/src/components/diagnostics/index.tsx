@@ -1,6 +1,6 @@
 import app from 'lib/app';
 import * as React from 'react';
-import { Component } from 'components/common';
+import Component from 'components/common/component';
 import { Observable } from 'rxjs';
 import { Button, Switch } from '@blueprintjs/core';
 import { Controller } from '@lunchbox-lambda/client';
@@ -15,7 +15,7 @@ interface State {
   cameraData: any[];
 }
 
-export class DiagnosticsComponent extends Component<Props, State> {
+export default class DiagnosticsComponent extends Component<Props, State> {
   public constructor(props: Props) {
     super(props);
 

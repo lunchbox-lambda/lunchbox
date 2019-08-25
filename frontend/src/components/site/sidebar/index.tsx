@@ -1,6 +1,6 @@
 import './style.scss';
 import * as React from 'react';
-import { Component } from 'components/common';
+import Component from 'components/common/component';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@blueprintjs/core';
 
@@ -8,7 +8,7 @@ interface Props { }
 
 interface State { }
 
-export class Siderbar extends Component<Props, State> {
+export default class Siderbar extends Component<Props, State> {
   public render() {
     return (
       <div className="sidebar">

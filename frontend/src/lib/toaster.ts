@@ -1,6 +1,6 @@
 import { Intent, Position, Toaster as _Toaster } from '@blueprintjs/core';
 
-export class Toaster {
+export default class Toaster {
   public static _toaster = _Toaster.create({
     position: Position.TOP_RIGHT,
   })

@@ -2,8 +2,8 @@ import './style.scss';
 import app from 'lib/app';
 import * as React from 'react';
 import { Computer } from '@lunchbox-lambda/client';
-import { Component } from 'components/common';
-import { ConnectivityIconsComponent } from 'components/common';
+import Component from 'components/common/component';
+import ConnectivityIconsComponent from 'components/common/connectivity-icons';
 
 interface Props { }
 
@@ -13,7 +13,7 @@ interface State {
 
 const logo = require('assets/logo_white.svg');
 
-export class Navbar extends Component<Props, State> {
+export default class Navbar extends Component<Props, State> {
   public constructor(props: Props) {
     super(props);
 

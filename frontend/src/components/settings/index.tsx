@@ -1,8 +1,8 @@
 import app from 'lib/app';
 import * as React from 'react';
-import { Component } from 'components/common';
+import Component from 'components/common/component';
 import { Button } from '@blueprintjs/core';
-import { Toaster } from 'lib/toaster';
+import Toaster from 'lib/toaster';
 
 interface Props { }
 
@@ -11,7 +11,7 @@ interface State {
   settings: object;
 }
 
-export class SettingsComponent extends Component<Props, State> {
+export default class SettingsComponent extends Component<Props, State> {
   private textArea: HTMLTextAreaElement
 
   public constructor(props: Props) {

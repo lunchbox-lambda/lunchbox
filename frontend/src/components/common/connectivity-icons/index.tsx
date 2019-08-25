@@ -1,7 +1,7 @@
 import './style.scss';
 import app from 'lib/app';
 import * as React from 'react';
-import { Component } from 'components/common';
+import Component from 'components/common/component';
 import { Connectivity } from '@lunchbox-lambda/client';
 
 interface Props { }
@@ -10,7 +10,7 @@ interface State {
   connectivity: Connectivity;
 }
 
-export class ConnectivityIconsComponent extends Component<Props, State> {
+export default class ConnectivityIconsComponent extends Component<Props, State> {
   private items = {
     broker: { icon: 'fa-database' },
     board: { icon: 'fa-microchip' },

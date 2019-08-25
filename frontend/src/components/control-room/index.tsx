@@ -1,15 +1,15 @@
 import './style.scss';
 import app from 'lib/app';
 import * as React from 'react';
-import { Component } from 'components/common';
+import Component from 'components/common/component';
 import { Button } from '@blueprintjs/core';
-import { RecipeControlsComponent } from 'components/recipe-controls';
+import RecipeControlsComponent from 'components/recipe-controls';
 
 interface Props { }
 
 interface State { }
 
-export class ControlRoomComponent extends Component<Props, State> {
+export default class ControlRoomComponent extends Component<Props, State> {
   public componentDidMount() { }
 
   private onRestartClick() {

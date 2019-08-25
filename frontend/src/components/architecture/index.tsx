@@ -1,12 +1,12 @@
 import './style.scss';
 import app from 'lib/app';
 import * as React from 'react';
-import { Component } from 'components/common';
+import Component from 'components/common/component';
 import * as ReactMarkdown from 'react-markdown';
 import { Dictionary } from 'lodash';
 import { Computer, Fixture, FixtureType } from '@lunchbox-lambda/client';
 import { Button } from '@blueprintjs/core';
-import { Toaster } from 'lib/toaster';
+import Toaster from 'lib/toaster';
 import { Observable } from 'rxjs';
 
 const imageArduinoUno = require('assets/board_arduino_uno.svg');
@@ -22,7 +22,7 @@ interface State {
   fixtureTypes: Dictionary<FixtureType>;
 }
 
-export class ArchitectureComponent extends Component<Props, State> {
+export default class ArchitectureComponent extends Component<Props, State> {
   private textArea: HTMLTextAreaElement
 
   public constructor(props: Props) {

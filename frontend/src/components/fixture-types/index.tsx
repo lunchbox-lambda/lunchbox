@@ -1,7 +1,7 @@
 import app from 'lib/app';
 import * as React from 'react';
 import * as ReactMarkdown from 'react-markdown';
-import { Component } from 'components/common';
+import Component from 'components/common/component';
 import { FixtureType } from '@lunchbox-lambda/client';
 
 interface Props { }
@@ -10,7 +10,7 @@ interface State {
   fixtureTypes: FixtureType[];
 }
 
-export class FixtureTypeListComponent extends Component<Props, State> {
+export default class FixtureTypeListComponent extends Component<Props, State> {
   public constructor(props: Props) {
     super(props);
 

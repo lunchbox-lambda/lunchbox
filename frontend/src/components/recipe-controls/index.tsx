@@ -1,7 +1,7 @@
 import './style.scss';
 import app from 'lib/app';
 import * as React from 'react';
-import { Component } from 'components/common';
+import Component from 'components/common/component';
 import { Button, Tag, Intent } from '@blueprintjs/core';
 import { RecipeOption, RecipeContext, RecipeCommand, RecipeStatus } from '@lunchbox-lambda/client';
 
@@ -14,7 +14,7 @@ interface State {
   recipeContexts: { [environment: string]: RecipeContext };
 }
 
-export class RecipeControlsComponent extends Component<Props, State> {
+export default class RecipeControlsComponent extends Component<Props, State> {
   public constructor(props: Props) {
     super(props);
 
