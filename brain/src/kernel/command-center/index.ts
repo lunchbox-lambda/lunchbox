@@ -1,5 +1,6 @@
 import { Component } from 'lib/component';
-import { RecipeCommand, ControllerCommand } from 'models';
+import { RecipeCommand } from 'models/recipe';
+import { ControllerCommand } from 'models/controller';
 
 export interface CommandCenter extends Component {
   restartComputer();

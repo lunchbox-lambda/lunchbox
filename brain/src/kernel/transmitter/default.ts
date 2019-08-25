@@ -9,7 +9,7 @@ import { Scheduler } from 'lib/scheduler';
 const log = logger('kernel:transmitter');
 
 @injectable()
-export class DefaultTransmitter implements Transmitter {
+export default class DefaultTransmitter implements Transmitter {
   @inject(TYPES.Scheduler) private scheduler: Scheduler
   @inject(TYPES.Broadcaster) private broadcaster: Broadcaster
   @inject(TYPES.Environment) private environment: Environment

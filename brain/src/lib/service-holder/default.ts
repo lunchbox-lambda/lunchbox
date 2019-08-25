@@ -10,7 +10,7 @@ import { RecipeService } from 'services/recipes';
 import { VariableService } from 'services/variables';
 
 @injectable()
-export class DefaultServiceHolder implements ServiceHolder {
+export default class DefaultServiceHolder implements ServiceHolder {
   @inject(TYPES.CameraService) public cameras: CameraService
   @inject(TYPES.ComputerService) public computers: ComputerService
   @inject(TYPES.DiagnosticsService) public diagnostics: DiagnosticsService

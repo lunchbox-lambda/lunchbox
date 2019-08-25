@@ -10,7 +10,7 @@ import { JSONValidator } from 'lib/json-validator';
 const log = logger('lib:json-validator');
 
 @injectable()
-export class DefaultJSONValidator implements JSONValidator {
+export default class DefaultJSONValidator implements JSONValidator {
   private ajv = new Ajv()
 
   public constructor() {

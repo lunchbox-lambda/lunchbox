@@ -1,14 +1,14 @@
 import logger from 'lib/logger';
-import { ControllerState } from 'models';
+import { ControllerState } from 'models/controller';
 import { Peripherals } from 'kernel/peripherals';
 import { Environment } from 'kernel/environment';
 import { Sensor } from 'firmware/fixture-modules/_sensor';
 import { Actuator, ActuatorState } from 'firmware/fixture-modules/_actuator';
-import { Controller } from './controller';
+import Controller from './controller';
 
 const log = logger('kernel:controllers');
 
-export class PIDControllers {
+export default class PIDControllers {
   // eslint-disable-next-line no-useless-constructor
   public constructor(
     private peripherals: Peripherals,

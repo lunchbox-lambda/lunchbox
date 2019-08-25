@@ -5,17 +5,16 @@ import { RecipeEventType } from 'kernel/recipe-manager/recipe-event';
 import { Repository } from 'lib/repository';
 import { Peripherals } from 'kernel/peripherals';
 import { RecipeManager } from 'kernel/recipe-manager';
-import {
-  Computer, Variable,
-  Environment as EnvironmentModel,
-} from 'models';
+import Computer from 'models/computer';
+import Variable from 'models/variable';
+import EnvironmentModel from 'models/environment';
 import { Scheduler } from 'lib/scheduler';
 import { checkVariable, resolveVariable } from 'lib/tools';
 
 const log = logger('kernel:environment');
 
 @injectable()
-export class DefaultEnvironment implements Environment {
+export default class DefaultEnvironment implements Environment {
   @inject(TYPES.Scheduler) private scheduler: Scheduler
   @inject(TYPES.Repository) private repository: Repository
   @inject(TYPES.Peripherals) private peripherals: Peripherals

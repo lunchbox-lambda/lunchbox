@@ -21,7 +21,7 @@ interface RouteProps {
   body: any;
 }
 
-export class Route {
+export default class Route {
   public static create(args: RouteArgs): RequestHandler {
     const { authorize, validate, response } = args;
     const route = new Route(authorize, validate, response);

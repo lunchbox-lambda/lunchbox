@@ -1,7 +1,7 @@
 import * as uuid from 'uuid';
-import { ControllerState } from 'models';
+import { ControllerState } from 'models/controller';
 
-export abstract class Controller {
+export default abstract class Controller {
   public id: string = uuid.v4()
   public state: ControllerState = ControllerState.AUTOMATIC
   public active: boolean = false

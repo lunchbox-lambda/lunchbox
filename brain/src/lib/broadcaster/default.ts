@@ -8,7 +8,7 @@ interface Broadcast {
 }
 
 @injectable()
-export class DefaultBroadcaster implements Broadcaster {
+export default class DefaultBroadcaster implements Broadcaster {
   @inject(TYPES.Socket) private socket: Socket
   private broadcasts: Map<BroadcastEvent, Broadcast> = new Map()
 

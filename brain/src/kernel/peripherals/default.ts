@@ -2,7 +2,8 @@ import logger from 'lib/logger';
 import { TYPES, inject, injectable } from 'lib/inversify';
 import { Peripherals } from 'kernel/peripherals';
 import { Subject, Observable } from 'rxjs';
-import { Computer, FixtureType } from 'models';
+import Computer from 'models/computer';
+import FixtureType from 'models/fixture-type';
 import { Firmware } from 'firmware';
 import { Regulator } from 'firmware/fixture-modules/_regulator';
 import { Actuator } from 'firmware/fixture-modules/_actuator';
@@ -13,7 +14,7 @@ import { Repository } from 'lib/repository';
 const log = logger('kernel:peripherals');
 
 @injectable()
-export class DefaultPeripherals implements Peripherals {
+export default class DefaultPeripherals implements Peripherals {
   @inject(TYPES.Firmware) private firmware: Firmware
   @inject(TYPES.Repository) private repository: Repository
 

@@ -1,4 +1,4 @@
-import { Route, RouteDeps } from '../route';
+import Route, { RouteDeps } from '../route';
 
 export = ({ router, services }: RouteDeps) => {
   router.get('/recipes', Route.create({

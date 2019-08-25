@@ -1,5 +1,5 @@
 import { Component } from 'lib/component';
-import { Computer } from 'models';
+import Computer from 'models/computer';
 
 export interface Environment extends Component {
   computer: Computer;

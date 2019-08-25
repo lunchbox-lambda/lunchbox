@@ -3,12 +3,12 @@ import * as uuid from 'uuid-1345';
 import { TYPES, inject, injectable } from 'lib/inversify';
 import { ComputerInit } from 'lib/computer-init';
 import { Repository } from 'lib/repository';
-import { Computer } from 'models';
+import Computer from 'models/computer';
 
 const log = logger('lib:computer-init');
 
 @injectable()
-export class DefaultComputerInit implements ComputerInit {
+export default class DefaultComputerInit implements ComputerInit {
   @inject(TYPES.Repository) private repository: Repository
 
   public async init() {

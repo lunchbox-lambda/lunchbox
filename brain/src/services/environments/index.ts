@@ -1,5 +1,5 @@
 import { Component } from 'lib/component';
-import { Environment } from 'models';
+import Environment from 'models/environment';
 
 export interface EnvironmentService extends Component {
   getEnvironmentData(offset: number): Promise<Environment[]>;

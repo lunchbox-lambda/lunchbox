@@ -9,7 +9,7 @@ import { Socket, SocketNode } from 'lib/socket';
 const log = logger('webapi:socket-io');
 
 @injectable()
-export class SocketIO implements Socket {
+export default class SocketIO implements Socket {
   private io: SocketIO.Server
   private subject = new Subject<SocketNode>()
   private observable = this.subject.asObservable()

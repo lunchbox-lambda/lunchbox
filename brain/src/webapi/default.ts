@@ -14,7 +14,7 @@ import { Broadcaster } from 'lib/broadcaster';
 const log = logger('webapi:server');
 
 @injectable()
-export class DefaultWebApi implements WebApi {
+export default class DefaultWebApi implements WebApi {
   @inject(TYPES.Router) private router: Router
   @inject(TYPES.Socket) private socket: Socket
   @inject(TYPES.NodeRed) private nodeRed: NodeRed

@@ -7,10 +7,10 @@ import { Peripherals } from 'kernel/peripherals';
 import { Controllers } from 'kernel/controllers';
 import { DiagnosticsService } from 'services/diagnostics';
 import { Broadcaster } from 'lib/broadcaster';
-import { Service } from '../service';
+import Service from '../service';
 
 @injectable()
-export class DefaultDiagnosticsService extends Service implements DiagnosticsService {
+export default class DefaultDiagnosticsService extends Service implements DiagnosticsService {
   @inject(TYPES.Firmware) private firmware: Firmware
   @inject(TYPES.Peripherals) private peripherals: Peripherals
   @inject(TYPES.Controllers) private controllers: Controllers

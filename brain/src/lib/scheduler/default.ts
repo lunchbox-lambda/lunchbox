@@ -9,7 +9,7 @@ const log = logger('lib:scheduler');
 const INTERVAL = 1000;
 
 @injectable()
-export class DefaultScheduler implements Scheduler {
+export default class DefaultScheduler implements Scheduler {
   private subject = new Subject()
   private expected: number
 

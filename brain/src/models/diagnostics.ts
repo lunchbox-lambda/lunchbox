@@ -1,4 +1,4 @@
-export class Diagnostics {
+export default class Diagnostics {
   public peripherals: {
     sensors: any[];
     actuators: any[];

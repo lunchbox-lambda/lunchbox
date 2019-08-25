@@ -20,7 +20,7 @@ interface PlatformioEnv {
 }
 
 @injectable()
-export class DefaultFirmware implements Firmware {
+export default class DefaultFirmware implements Firmware {
   public board: Board = null
   private _status: boolean = null
   @inject(TYPES.Broadcaster) private broadcaster: Broadcaster

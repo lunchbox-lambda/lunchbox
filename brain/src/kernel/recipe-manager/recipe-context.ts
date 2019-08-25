@@ -2,14 +2,14 @@ import { Subject } from 'rxjs';
 import {
   RecipeStatus, RecipeCommand,
   RecipeContext as RecipeContextModel,
-} from 'models';
+} from 'models/recipe';
 import { Repository } from 'lib/repository';
 import { Scheduler } from 'lib/scheduler';
 import { RecipeEvent, RecipeEventType } from './recipe-event';
 import { RecipeState } from './recipe-machine';
 import { RecipeInstance } from './recipe-instance';
 
-export class RecipeContext extends RecipeContextModel {
+export default class RecipeContext extends RecipeContextModel {
   public recipeInstance: RecipeInstance
   private _eventSubject: Subject<RecipeEvent>
   private _recipeState: RecipeState

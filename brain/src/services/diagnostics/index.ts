@@ -1,5 +1,6 @@
 import { Component } from 'lib/component';
-import { Connectivity, Diagnostics } from 'models';
+import Diagnostics from 'models/diagnostics';
+import { Connectivity } from 'models/connectivity';
 
 export interface DiagnosticsService extends Component {
   getDiagnostics(): Promise<Diagnostics>;

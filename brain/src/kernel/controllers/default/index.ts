@@ -4,14 +4,14 @@ import { TYPES, inject, injectable } from 'lib/inversify';
 import { Scheduler } from 'lib/scheduler';
 import { Peripherals } from 'kernel/peripherals';
 import { Environment } from 'kernel/environment';
-import { Controller } from './controller';
-import { PIDControllers } from './pid-controllers';
-import { RegulatorControllers } from './regulator-controllers';
+import Controller from './controller';
+import PIDControllers from './pid-controllers';
+import RegulatorControllers from './regulator-controllers';
 
 const log = logger('kernel:controllers');
 
 @injectable()
-export class DefaultControllers implements Controllers {
+export default class DefaultControllers implements Controllers {
   @inject(TYPES.Peripherals) private peripherals: Peripherals
   @inject(TYPES.Environment) private environment: Environment
   @inject(TYPES.Scheduler) private scheduler: Scheduler

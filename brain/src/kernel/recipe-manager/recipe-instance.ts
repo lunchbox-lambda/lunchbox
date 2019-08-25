@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { Recipe } from 'models';
+import { Recipe } from 'models/recipe';
 
 export class RecipeInstance {
   public name: string

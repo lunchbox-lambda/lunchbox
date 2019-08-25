@@ -2,15 +2,15 @@ import logger from 'lib/logger';
 import * as moment from 'moment';
 import * as parser from 'cron-parser';
 import { Subscription } from 'rxjs';
-import { ControllerState } from 'models';
+import { ControllerState } from 'models/controller';
 import { Scheduler } from 'lib/scheduler';
 import { Peripherals } from 'kernel/peripherals';
 import { Regulator, RegulatorState } from 'firmware/fixture-modules/_regulator';
-import { Controller } from './controller';
+import Controller from './controller';
 
 const log = logger('kernel:controllers');
 
-export class RegulatorControllers {
+export default class RegulatorControllers {
   // eslint-disable-next-line no-useless-constructor
   public constructor(
     private peripherals: Peripherals,

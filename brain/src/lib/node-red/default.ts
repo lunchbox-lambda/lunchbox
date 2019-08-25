@@ -10,7 +10,7 @@ const log = logger('lib:node-red');
 const settings = config.nodered;
 
 @injectable()
-export class DefaultNodeRed implements NodeRed {
+export default class DefaultNodeRed implements NodeRed {
   public async start(server: Server, app: Express) {
     log('init');
 

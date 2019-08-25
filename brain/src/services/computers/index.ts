@@ -1,5 +1,6 @@
 import { Component } from 'lib/component';
-import { Computer, Fixture } from 'models';
+import Computer from 'models/computer';
+import Fixture from 'models/fixture';
 
 export interface ComputerService extends Component {
   getComputer(): Promise<Computer>;

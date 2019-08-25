@@ -17,7 +17,7 @@ interface SyncItem {
 }
 
 @injectable()
-export class DefaultDataSync implements DataSync {
+export default class DefaultDataSync implements DataSync {
   @inject(TYPES.Repository) private repository: Repository
   @inject(TYPES.JSONValidator) private validator: JSONValidator
 

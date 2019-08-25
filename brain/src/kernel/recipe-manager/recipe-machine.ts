@@ -1,10 +1,10 @@
 import * as uuid from 'uuid';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
-import { RecipeStatus } from 'models';
+import { RecipeStatus } from 'models/recipe';
 import { synthesizeVariable } from 'lib/tools';
 import { RecipeEventType } from './recipe-event';
-import { RecipeContext } from './recipe-context';
+import RecipeContext from './recipe-context';
 
 export class RecipeMachine {
   public async start(context: RecipeContext) {

@@ -1,9 +1,9 @@
 import { injectable } from 'lib/inversify';
 import { FixtureTypeService } from 'services/fixture-types';
-import { Service } from '../service';
+import Service from '../service';
 
 @injectable()
-export class DefaultFixtureTypeService extends Service implements FixtureTypeService {
+export default class DefaultFixtureTypeService extends Service implements FixtureTypeService {
   public async getFixtureTypes() {
     return this.repository.getFixtureTypes();
   }

@@ -2,10 +2,12 @@ import config from 'config';
 import logger from 'lib/logger';
 import { injectable } from 'inversify';
 import { Repository } from 'lib/repository';
-import {
-  Computer, Fixture, FixtureType,
-  Variable, Recipe, RecipeContext,
-} from 'models';
+import Computer from 'models/computer';
+import Fixture from 'models/fixture';
+import FixtureType from 'models/fixture-type';
+import Variable from 'models/variable';
+import { Recipe } from 'models/recipe';
+import { RecipeContext } from 'models/recipe';
 
 const level = require('level');
 
@@ -18,7 +20,7 @@ const FIXTURE_TYPES = 'fixture-types';
 const RECIPE_CONTEXT = 'recipe-context';
 
 @injectable()
-export class LevelDB implements Repository {
+export default class LevelDB implements Repository {
   private db: any
 
   public async init() {

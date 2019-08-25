@@ -1,19 +1,19 @@
 import logger from 'lib/logger';
 import { TYPES, inject, injectable } from 'lib/inversify';
 import { Subject } from 'rxjs';
-import { RecipeCommand } from 'models';
+import { RecipeCommand } from 'models/recipe';
 import { Scheduler } from 'lib/scheduler';
 import { Repository } from 'lib/repository';
 import { Broadcaster } from 'lib/broadcaster';
 import { RecipeManager } from 'kernel/recipe-manager';
 import { RecipeMachine } from '../recipe-machine';
-import { RecipeContext } from '../recipe-context';
+import RecipeContext from '../recipe-context';
 import { RecipeEvent, RecipeEventType } from '../recipe-event';
 
 const log = logger('kernel:recipe-manager');
 
 @injectable()
-export class DefaultRecipeManager implements RecipeManager {
+export default class DefaultRecipeManager implements RecipeManager {
   @inject(TYPES.Scheduler) private scheduler: Scheduler
   @inject(TYPES.Repository) private repository: Repository
   @inject(TYPES.Broadcaster) private broadcaster: Broadcaster

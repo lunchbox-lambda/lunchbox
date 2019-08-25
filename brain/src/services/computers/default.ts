@@ -4,12 +4,13 @@ import config from 'config';
 import settings from 'lib/settings';
 import { TYPES, inject, injectable } from 'lib/inversify';
 import { ComputerService } from 'services/computers';
-import { Fixture, ControllerCommand } from 'models';
+import Fixture from 'models/fixture';
+import { ControllerCommand } from 'models/controller';
 import { CommandCenter } from 'kernel/command-center';
-import { Service } from '../service';
+import Service from '../service';
 
 @injectable()
-export class DefaultComputerService extends Service implements ComputerService {
+export default class DefaultComputerService extends Service implements ComputerService {
   @inject(TYPES.CommandCenter) private commandCenter: CommandCenter
 
   public async getComputer() {

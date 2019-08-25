@@ -8,10 +8,10 @@ import { RouteDeps } from 'webapi/rest-api/route';
 import { ServiceHolder } from 'lib/service-holder';
 import { JSONValidator } from 'lib/json-validator';
 import { TYPES, inject, injectable } from 'lib/inversify';
-import { apiVersioning } from 'webapi/middleware/api-versioning';
+import apiVersioning from 'webapi/middleware/api-versioning';
 
 @injectable()
-export class DefaultRouter implements Router {
+export default class DefaultRouter implements Router {
   @inject(TYPES.ServiceHolder) private services: ServiceHolder
   @inject(TYPES.JSONValidator) private validator: JSONValidator
 

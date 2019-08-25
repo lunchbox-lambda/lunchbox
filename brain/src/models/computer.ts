@@ -1,8 +1,8 @@
 import { Entity } from './entity';
-import { Fixture } from './fixture';
+import Fixture from './fixture';
 import { ISerializable } from './serializable';
 
-export class Computer extends Entity implements ISerializable {
+export default class Computer extends Entity implements ISerializable {
   public createdAt: Date
   public updatedAt: Date
   public name: string

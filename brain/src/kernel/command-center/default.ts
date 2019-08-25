@@ -1,14 +1,15 @@
 import logger from 'lib/logger';
 import { TYPES, inject, injectable } from 'lib/inversify';
 import { CommandCenter } from 'kernel/command-center';
-import { RecipeCommand, ControllerCommand } from 'models';
+import { RecipeCommand } from 'models/recipe';
+import { ControllerCommand } from 'models/controller';
 import { Controllers } from 'kernel/controllers';
 import { RecipeManager } from 'kernel/recipe-manager';
 
 const log = logger('kernel:command-center');
 
 @injectable()
-export class DefaultCommandCenter implements CommandCenter {
+export default class DefaultCommandCenter implements CommandCenter {
   @inject(TYPES.Controllers) private controllers: Controllers
   @inject(TYPES.RecipeManager) private recipeManager: RecipeManager
 

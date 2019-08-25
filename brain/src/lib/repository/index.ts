@@ -1,9 +1,10 @@
 import { Component } from 'lib/component';
-import {
-  Computer, Fixture, FixtureType,
-  Variable, Recipe,
-  RecipeContext,
-} from 'models';
+import Computer from 'models/computer';
+import Fixture from 'models/fixture';
+import FixtureType from 'models/fixture-type';
+import Variable from 'models/variable';
+import { Recipe } from 'models/recipe';
+import { RecipeContext } from 'models/recipe';
 
 export interface Repository extends Component {
 

@@ -1,11 +1,11 @@
 import { TYPES, inject, injectable } from 'lib/inversify';
 import { EnvironmentService } from 'services/environments';
 import { CommandCenter } from 'kernel/command-center';
-import { RecipeCommand } from 'models';
-import { Service } from '../service';
+import { RecipeCommand } from 'models/recipe';
+import Service from '../service';
 
 @injectable()
-export class DefaultEnvironmentService extends Service implements EnvironmentService {
+export default class DefaultEnvironmentService extends Service implements EnvironmentService {
   @inject(TYPES.CommandCenter) private commandCenter: CommandCenter
 
   public async getEnvironmentData() {
