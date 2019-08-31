@@ -42,7 +42,7 @@ RUN tar zxf lunchbox-lambda-brain-v1.0.0.tgz && mv package brain && \
 
 RUN rm *.tgz
 
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 VOLUME /data
 
