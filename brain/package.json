@@ -35,7 +35,7 @@
     "node-red": "^0.20.7",
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.5.2",
-    "socket.io": "^2.0.4",
+    "socket.io": "^2.4.0",
     "uuid": "^3.1.0",
     "uuid-1345": "^0.99.6"
   },
