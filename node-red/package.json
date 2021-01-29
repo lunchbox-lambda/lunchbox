@@ -18,6 +18,6 @@
   },
   "dependencies": {
     "node-red-contrib-lunchbox": "",
-    "node-red-dashboard": "^2.13.2"
+    "node-red-dashboard": "^2.26.2"
   }
 }
