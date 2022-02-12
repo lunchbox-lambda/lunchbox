@@ -18,7 +18,7 @@
     "build": "yarn clean && tsc && yarn copy"
   },
   "dependencies": {
-    "ajv": "^5.5.0",
+    "ajv": "^6.12.3",
     "amqplib": "^0.5.2",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
