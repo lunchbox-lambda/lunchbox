@@ -23,7 +23,7 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@lunchbox-lambda/client": "",
     "lodash": "^4.17.14",
-    "moment": "^2.21.0",
+    "moment": "^2.29.2",
     "react": "^16.4.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.4.0",
